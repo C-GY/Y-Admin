@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单列表</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/common.css">
+    
+
+    <link rel="stylesheet" href="/layui/extend/dtree.css">
+    <link rel="stylesheet" href="/layui/extend/font/dtreefont.css">
+</head>
+<body>
+
+    <div style="height: 100%">
+        <div style="height: 100%">
+            <div style="padding: 20px; background-color: #F2F2F2;height:100%;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md3">
+                        <div class="layui-card">
+                            <div class="layui-card-header">菜单树</div>
+                            <div class="layui-card-body" id="toolbarDiv">
+                                <ul id="menuTree" class="dtree" data-id="0"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md9">
+                        <div class="layui-card">
+                            <div class="layui-card-header" id="card-header">菜单列表</div>
+                            <div class="layui-card-body">
+                                <table class="layui-hide" id="menu-table"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="toolbar">
+        <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">
+            <i class="yadmin-icon yadmin-icon-xinzeng yadmin-oper-area"></i>
+            新增
+        </button>
+    </script>
+
+    <script type="text/html" id="column-toolbar">
+        <a lay-event="edit">
+            <i class="yadmin-icon yadmin-icon-edit-square yadmin-oper-area yadmin-blue" title="编辑"></i>
+        </a>
+
+        <a lay-event="del">
+            <i class="yadmin-icon yadmin-icon-delete yadmin-oper-area yadmin-red" title="删除"></i>
+        </a>
+    </script>
+
+    <script type="text/html" id="column-toolbar-sort">
+        <i class="yadmin-icon yadmin-icon-shangyimian yadmin-oper-area yadmin-blue" lay-event="up" title="上移"></i>
+
+        <i class="yadmin-icon yadmin-icon-xiayimian yadmin-oper-area yadmin-blue" lay-event="down" title="下移"></i>
+
+        <i class="yadmin-icon yadmin-icon-zhidingmian yadmin-oper-area yadmin-blue" lay-event="top" title="置顶"></i>
+
+        <i class="yadmin-icon yadmin-icon-zhidimian yadmin-oper-area yadmin-blue" lay-event="bottom" title="置底"></i>
+    </script>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/layui/layui.js"></script>
+    <script src="/js/common.js"></script>
+
+    <script>
+
+        var parentMenuId = 0;
+
+        // 获取有没有删除, 更新, 和新增的权限.
+        var hasMenuDelete = true;
+        var hasMenuUpdate = true;
+        var hasMenuAdd = true;
+
+
+        layui.config({
+            base: '/layui/extend/'
+        }).use(['jquery', 'dtree', 'layer', 'table', 'element', 'tablePlug'], function () {
+            var dtree = layui.dtree;
+            var layer = layui.layer;
+            var table = layui.table;
+            var tablePlug = layui.tablePlug;
+
+            tablePlug.smartReload.enable(true);
+
+            var DTree = dtree.render({
+                elem: "#menuTree",
+                url: "/data/menu/tree.json",
+                dataStyle: "layuiStyle",
+                initLevel: 5,   // 初始打开节点级别
+                method: "GET",
+                dot: false,     // 圆点是否显示
+                toolbar: true,  // 右键工具栏
+                menubar: true,  // 树上方工具栏, 展开、收缩、刷新、搜索等
+                toolbarShow: [],
+                toolbarScroll: "#toolbarDiv",
+                toolbarExt: [
+                    {
+                        toolbarId: "add",
+                        icon: "dtree-icon-roundadd",
+                        title: "添加子菜单",
+                        handler: function (node, $div) {
+                            add(node.nodeId);
+                        }
+                    },
+                    {
+                        toolbarId: "edit",
+                        icon: "dtree-icon-bianji",
+                        title: "编辑",
+                        handler: function (node, $div) {
+                            edit(node.nodeId);
+                        }
+                    },
+                    {
+                        toolbarId: "remove",
+                        icon: "dtree-icon-roundclose",
+                        title: "删除",
+                        handler: function (node, $div) {
+                            del(node.nodeId);
+                        }
+                    }
+                ],
+                response: {
+                    statusCode: 0,
+                    message: "msg",
+                    treeId: "id",
+                    parentId: "parentId",
+                    title: "name"
+                },
+                toolbarFun:{
+                    loadToolbarBefore: function(buttons, param, $div) {
+                        if(param.level === "1") { // 如果是顶级节点, 则取消编辑和删除功能.
+                            buttons.edit = "";
+                            buttons.remove = "";
+                        }
+                        if (!hasMenuAdd) {
+                            buttons.add = "";
+                        }
+                        if (!hasMenuDelete) {
+                            buttons.remove = "";
+                        }
+                        if (!hasMenuUpdate) {
+                            buttons.edit = "";
+                        }
+                        return buttons;
+                    }
+                }
+            });
+
+            table.render({
+                elem: '#menu-table'
+                , url: '/data/menu/list.json'
+                , where: {
+                    parentId: 0
+                }
+                , cellMinWidth: 80
+                , toolbar: '#toolbar'
+                , smartReloadModel: true
+                , cols: [
+                    [
+                        {type: 'numbers', title: 'ID', width: "5%"}
+                        , {field: 'id', title: 'ID', hide: true}
+                        , {field: 'name', title: '页面名称', width: "15%"}
+                        , {field: 'url', title: 'URL', width: "25%"}
+                        , {field: 'perms', title: '权限标识符', width: "15%"}
+                        , {title: '排序', fixed: 'right', width: "15%", align: 'center', toolbar: '#column-toolbar-sort'}
+                        , {title: '操作', align: 'center', toolbar: '#column-toolbar'}
+                    ]
+                ]
+            });
+
+            dtree.on("node('menuTree')", function (obj) {
+                table.reload('menu-table', {
+                    where: {
+                        parentId: obj.param.nodeId
+                    }
+                });
+                parentMenuId = obj.param.nodeId;
+                $("#card-header").html("[" + obj.param.context + "]的子菜单");
+            });
+
+            table.on('toolbar', function (obj) {
+                var event = obj.event;
+                if (event === 'add') {
+                    add(parentMenuId);
+                }
+            });
+
+            table.on('tool', function (obj) {
+                var data = obj.data;
+                var swapId;
+                var currentId;
+                if (obj.event === 'edit') {
+                    edit(data.id);
+                } else if (obj.event === 'del') {
+                    del(data.id);
+                } else if (obj.event === "up") {
+                    swapId = $(obj.tr).prev().find("td[data-field='id'] div").html();
+                    currentId = data.id;
+                    if (typeof swapId == 'undefined') {
+                        layer.msg("已是第一层");
+                        return;
+                    }
+                    swapSort(currentId, swapId);
+                } else if (obj.event === "down") {
+                    swapId = $(obj.tr).next().find("td[data-field='id'] div").html();
+                    currentId = data.id;
+                    if (typeof swapId == 'undefined') {
+                        layer.msg("已是最后一层");
+                        return;
+                    }
+                    swapSort(currentId, swapId);
+                } else if (obj.event === "top") {
+                    swapId = $("tr[data-index='0']").first().parent().children().first().find("td[data-field='id'] div").html();
+                    currentId = data.id;
+                    swapSort(currentId, swapId);
+                } else if (obj.event === "bottom") {
+                    swapId = $("tr[data-index='0']").first().parent().children().last().find("td[data-field='id'] div").html();
+                    currentId = data.id;
+                    swapSort(currentId, swapId);
+                }
+            });
+
+            function swapSort(currentId, swapId) {
+                layer.msg("交换成功");
+            }
+
+            function del(id) {
+                layer.confirm("你确定删除数据吗？如果存在下级节点则一并删除！", {icon: 3, title: '提示'},
+                    function (index) {
+                        layer.msg("删除成功", {icon: 6});
+                        layer.close(index);
+                    }, function (index) {
+                        layer.close(index);
+                    }
+                );
+            }
+
+            function refresh() {
+                table.reload("menu-table");
+                DTree.menubarMethod().refreshTree();
+            }
+
+            function add(parentId) {
+                layer.open({
+                    content: "/view/menu/menu-add.html?parentId=" + parentId,
+                    title: "添加子菜单",
+                    area: ['40%', '85%'],
+                    type: 2,
+                    maxmin: true,
+                    shadeClose: true,
+                    end: function () {
+                        refresh();
+                    }
+                });
+                layer.msg("为 ID = " + parentId + " 添加子菜单", {icon: 6});
+
+            }
+
+            function edit(id) {
+                layer.msg("编辑:" + id, {icon: 6});
+            }
+        });
+    </script>
+</body>
+</html>

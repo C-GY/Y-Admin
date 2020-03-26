@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加菜单</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/common.css">
+    
+
+    <link rel="stylesheet" href="/layui/extend/dtree.css">
+    <link rel="stylesheet" href="/layui/extend/font/dtreefont.css">
+    <link rel="stylesheet" href="/layui/extend/autocomplete.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1179208_6sxekl4z8m7.css">
+</head>
+<body>
+    <div class="yadmin-body animated fadeIn">
+        <form action="" method="post" class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+                <label for="menuName" class="layui-form-label">
+                    页面名称
+                </label>
+                <div class="layui-input-block">
+                    <input type="text" id="menuName" name="menuName" value=""
+                           lay-verify="required" lay-vertype="tips"
+                           autocomplete="off" placeholder="请输入页面名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="url" class="layui-form-label">
+                    URL
+                </label>
+                <div class="layui-input-block">
+                    <input type="text" id="url" value="" name="url"
+                           lay-verify="required" lay-vertype="tips"
+                           autocomplete="off" class="layui-input" placeholder="请输入需要授权的 URL">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="url" class="layui-form-label">
+                    图标
+                </label>
+                <div class="layui-input-block">
+                    <div>
+                        <input type="text" id="icon" value="" name="icon"
+                               lay-vertype="tips"
+                               lay-filter="iconPicker"
+                               class="layui-input" style="float: left">
+                        <div class="layui-form-mid layui-word-aux" style="float: right;">注：仅对一级菜单生效</div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="perms" class="layui-form-label">
+                    权限标识
+                </label>
+                <div class="layui-input-block">
+                    <input type="text" id="perms" value="" name="perms"
+                           lay-verify="required" lay-vertype="tips"
+                           autocomplete="off" class="layui-input" placeholder="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    上级菜单
+                </label>
+                <div class="layui-input-block">
+                    <div class="layui-unselect layui-form-select" id="parentNameDiv">
+                        <div class="layui-select-title">
+                            <input type="text" id="parentName"
+                                   placeholder="请选择" class="layui-input layui-unselect" readonly>
+                            <input type="hidden" name="parentId" id="parentId">
+                            <i class="layui-edge"></i>
+                        </div>
+                    </div>
+                    <div class="layui-card dtree-select" id="parentTreeDiv">
+                        <div class="layui-card-body">
+                            <div id="toolbarDiv">
+                                <ul id="parentTree" class="dtree" data-id="0" style="width: 100%;"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <fieldset class="layui-elem-field">
+                <legend>备注</legend>
+                <div class="layui-field-box">
+                    <div class="layui-form-mid layui-word-aux">
+                        URL 支持 ?, *, ** 通配符。<br>
+                        外部链接以 http(s):// 开头。
+                    </div>
+                </div>
+            </fieldset>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left:0;text-align:center;">
+                    <input type="hidden" name="menuId" value="">
+                    <input type="hidden" name="orderNum" value="">
+                    <button class="layui-btn layui-btn-blue" lay-submit="" lay-filter="add">增加</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="/layui/layui.js"></script>
+    <script src="/js/common.js"></script>
+
+    <script>
+        layui.config({
+            base: '/layui/extend/'
+        }).use(['form', 'layer', 'autocomplete', 'dtree', 'iconPicker'], function () {
+            var $ = layui.jquery,
+                form = layui.form,
+                layer = layui.layer,
+                autocomplete = layui.autocomplete,
+                dtree = layui.dtree,
+                iconPicker = layui.iconPicker;
+
+            iconPicker.render({
+                // 选择器，推荐使用input
+                elem: '#icon',
+                // 数据类型：fontClass/unicode，推荐使用fontClass
+                type: 'fontClass',
+                // 是否开启搜索：true/false，默认true
+                search: true,
+                // 是否开启分页：true/false，默认true
+                page: true,
+                // 每页显示数量，默认12
+                limit: 16,
+                // 点击回调
+                click: function (data) {
+                    console.log(data);
+                },
+                // 渲染成功后的回调
+                success: function(d) {
+                    console.log(d);
+                }
+            });
+
+            autocomplete.render({
+                elem: $('#url'),
+                url: '/data/system/urls.json',
+                template_val: '{{d.url}}',
+                template_txt: '{{d.url}} \
+                        {{#  layui.each(d.method.split(","), function(index, item){ }} \
+                            <span class="layui-badge layui-bg-gray">{{item}}</span>  \
+                        {{#  }); }} \
+                            <div style="float: right;"><span class="layui-badge layui-bg-cyan">{{d.type}}</span></div>  \
+                    ',
+                onselect: function (resp) {
+                    console.log(resp);
+                }
+            });
+
+            var MenuDTree = dtree.render({
+                elem: "#parentTree",
+                url: "/data/menu/tree.json",
+                dataStyle: "layuiStyle",
+                method: "GET",
+                dot: false,     // 圆点是否显示
+                accordion: true,
+                menubar: true,
+                response: {
+                    statusCode: 0,
+                    message: "msg",
+                    treeId: "id",
+                    parentId: "parentId",
+                    title: "name"
+                },
+                done: function (response, obj) {
+                    var urlSearchParam = new URLSearchParams(location.search.slice(1));
+                    var parentId = urlSearchParam.get('parentId') ? urlSearchParam.get('parentId') : null;
+                    var parent = MenuDTree.getParam(parentId);
+                    if (parent) {
+                        $("#parentName").val(parent.context);
+                        $("#parentId").val(parent.nodeId);
+                    }
+                }
+            });
+
+            $("#parentName").on("click",function(){
+                $(this).toggleClass("layui-form-selected");
+                $("#parentTreeDiv").toggleClass("layui-show layui-anim layui-anim-upbit");
+            });
+
+            dtree.on("node(parentTree)", function(obj){
+                console.log(obj);
+                $("#parentName").val(obj.param.context);
+                $("#parentId").val(obj.param.nodeId);
+                $("#parentNameDiv").toggleClass("layui-form-selected");
+                $("#parentTreeDiv").toggleClass("layui-show layui-anim layui-anim-upbit");
+            });
+
+            //监听提交
+            form.on('submit(add)', function (form) {
+                $.post('/menu', form.field, function (result) {
+                    handlerResult(result, addDone);
+                });
+                return false;
+            });
+
+            //监听提交
+            form.on('submit(edit)', function (form) {
+                form.field._method = 'PUT';
+                $.post('/menu', form.field, function (result) {
+                    handlerResult(result, editDone);
+                });
+                return false;
+            });
+
+
+            function addDone(data) {
+                console.log("add result id : ", data);
+                layer.msg("添加成功", {icon: 6});
+            }
+
+            function editDone(data) {
+                console.log("edit result id : ", data);
+                layer.msg("修改成功", {icon: 6});
+            }
+        });
+    </script>
+
+</body>
+</html>

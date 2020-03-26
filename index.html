@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Y-Admin</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+    <!-- layui样式 -->
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <!-- Y-Admin核心样式 -->
+    <link rel="stylesheet" href="css/yadmin.css">
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="css/common.css">
+    <!-- 图标 -->
+    <link rel="stylesheet" href="./static/CaoMei/style.css">
+    <!-- 首页样式（只为此页面使用） -->
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body class="layui-layout-body">
+
+    <div class="layui-layout layui-layout-admin">
+
+        <div class="layui-header">
+            <!-- logo 区域 -->
+            <div class="layui-logo">
+                <img src="images/security.png" alt="logo" style="margin-left: -5px;" />
+                <cite>
+                    Y-Admin&emsp;
+                </cite>
+            </div>
+
+            <!-- 头部区域 -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item" lay-unselect>
+                    <a lay-event="flexible" title="侧边伸缩">
+                        <i class="layui-icon layui-icon-shrink-right"></i>
+                    </a>
+                </li>
+                <!-- 面包屑 -->
+                <span class="layui-breadcrumb layui-anim layui-anim-up">
+                    <a><cite>首页</cite></a>
+                </span>
+            </ul>
+
+            <!-- 头像区域 -->
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a lay-event="github" title="Github 地址">
+                        <i class="czs-github"></i>
+                    </a>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a lay-event="website" title="前台">
+                        <i class="czs-earth-l"></i>
+                    </a>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a lay-event="clear" title="清理标签缓存"><i class="czs-brush-l"></i></a>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a lay-event="tag" title="便签"><i class="czs-tag-l"></i></a>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a id="screenFull" lay-event="screenFull" title="全屏">
+                        <i style="font-size: 18px;" class="layui-icon layui-icon-screen-full"></i>
+                    </a>
+                    <a id="screenRestore" lay-event="screenRestore" title="退出全屏" style="display: none;">
+                        <i style="font-size: 18px;" class="layui-icon layui-icon-screen-restore"></i>
+                    </a>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a>
+                        <img src="images/avatar.png" class="layui-nav-img" alt="头像">
+                        <cite>管理员</cite>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd lay-unselect>
+                            <a href="#">个人中心</a>
+                        </dd>
+                        <dd lay-unselect>
+                            <a href="#">修改密码</a>
+                        </dd>
+                        <hr>
+                        <dd lay-unselect>
+                            <a href="#">退出</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 左侧导航区域 -->
+        <div class="layui-side ">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree" lay-filter="lay-nav" lay-accordion="true">
+                    <li class="layui-nav-item">
+                        <a lay-url="/view/home/index.html" lay-id="home">
+                            <i class="czs-home-l"></i>&emsp;<cite>首页</cite>
+                        </a>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a lay-id="#" lay-url="#">
+                            <i class="czs-shield-l"></i>&emsp;<cite>权限管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a lay-id="/user/index" lay-url="view/user/user-list.html">
+                                    <cite>用户管理</cite>
+                                </a>
+                            </dd>
+                            <dd>
+                                <a lay-id="/role/index" lay-url="view/role/role-list.html">
+                                    <cite>角色管理</cite>
+                                </a>
+                            </dd>
+                            <dd>
+                                <a lay-id="/menu/index" lay-url="view/menu/menu-list.html">
+                                    <cite>菜单权限</cite>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a>
+                            <i class="czs-paper-l"></i>&emsp;<cite>多级菜单</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a>
+                                    <cite>二级菜单</cite>
+                                </a>
+                                <dl class="layui-nav-child">
+                                    <dd>
+                                        <a>
+                                            <cite>三级菜单</cite>
+                                        </a>
+                                        <dl class="layui-nav-child">
+                                            <dd>
+                                                <a>
+                                                    <cite>四级菜单</cite>
+                                                </a>
+                                                <dl class="layui-nav-child">
+                                                    <dd>
+                                                        <a href="#" lay-id="111" lay-url="https://www.baidu.com">
+                                                            <cite>百度</cite>
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a lay-id="一级菜单" lay-url="https://www.baidu.com">
+                            <i class="czs-servers"></i>&emsp;<cite>一级菜单</cite>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a lay-id="图标" lay-url="http://chuangzaoshi.com/icon/">
+                            <i class="czs-image-l"></i>&emsp;<cite>图标</cite>
+                        </a>
+                    </li>
+                </ul>
+
+                <div id="note">
+                    <div class="notification-box">
+                        <span class="notification-count">
+                            <!-- 此处可写数字 -->
+                        </span>
+                        <div class="notification-bell">
+                            <span class="bell-top"></span>
+                            <span class="bell-middle"></span>
+                            <span class="bell-bottom"></span>
+                            <span class="bell-rad"></span>
+                        </div>
+                    </div>
+                    <h3>消息通知</h3>
+                    <p>春已至,花已开,一切美好都将到来!</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <div class="layui-pagetabs">
+                <div class="layui-icon admin-tabs-control layui-icon-refresh-3" lay-event="refresh"></div>
+                <div class="layui-tab" lay-unauto lay-allowclose="true" lay-filter="lay-tab">
+                    <ul class="layui-tab-title">
+                        <li lay-id="home" lay-url="/view/home/index.html" class="layui-this"><i
+                                class="layui-icon layui-icon-home"></i></li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <iframe src="/view/home/index.html" class="layui-iframe"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部固定区域 -->
+        <div class="layui-footer">
+            copyright © 2020 Y-Admin all rights reserved.
+        </div>
+
+        <!-- 移动端遮罩 -->
+        <div class="site-mobile-shade"></div>
+    </div>
+    <!-- layui JS -->
+    <script src="layui/layui.js"></script>
+    <!-- jQuery JS -->
+    <script src="js/jquery.js"></script>
+    <!-- 公共JS -->
+    <script src="js/common.js"></script>
+
+</body>
+
+</html>

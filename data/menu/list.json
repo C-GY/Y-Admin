@@ -1,0 +1,33 @@
+{
+  "msg": "操作成功",
+  "code": 0,
+  "data": [
+    {
+      "parentId": 0,
+      "url": "#",
+      "perms": "#",
+      "orderNum": 0,
+      "checkArr": "0",
+      "id": 1,
+      "name": "权限管理"
+    },
+    {
+      "parentId": 0,
+      "url": "#",
+      "perms": "#",
+      "orderNum": 5,
+      "checkArr": "0",
+      "id": 11,
+      "name": "系统监控"
+    },
+    {
+      "parentId": 0,
+      "url": "/oauth2/index",
+      "perms": "oauth2:index",
+      "orderNum": 8,
+      "checkArr": "0",
+      "id": 30,
+      "name": "账号关联"
+    }
+  ]
+}

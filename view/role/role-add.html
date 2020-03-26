@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加角色</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/common.css">
+    
+</head>
+<body>
+    <div class="yadmin-body animated fadeIn">
+        <form action="" method="post" class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+                <label for="roleName" class="layui-form-label">
+                    角色名称
+                </label>
+                <div class="layui-input-block">
+                    <input type="text" id="roleName" name="roleName"
+                           lay-verify="required" lay-vertype="tips"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="remark" class="layui-form-label">
+                    角色描述
+                </label>
+                <div class="layui-input-block">
+                    <input type="text" id="remark" name="remark"
+                           lay-verify="required" lay-vertype="tips"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left:0;text-align:center;">
+                    <input type="hidden" name="roleId">
+                    <button class="layui-btn layui-btn-normal" type="button" lay-submit="" lay-filter="add">添加</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="/layui/layui.js"></script>
+    <script src="/js/common.js"></script>
+
+    <script>
+        layui.use(['form', 'layer'], function () {
+            $ = layui.jquery;
+            var form = layui.form
+                , layer = layui.layer;
+
+            // 监听提交
+            form.on('submit(add)', function (form) {
+                layer.msg("添加成功", {icon: 6});
+                return false;
+            });
+
+        });
+    </script>
+</body>
+</html>

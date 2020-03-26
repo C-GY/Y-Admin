@@ -1,0 +1,72 @@
+{
+  "msg": "操作成功",
+  "code": 0,
+  "data": [
+    {
+      "parentId": 0,
+      "orderNum": 1,
+      "children": [
+        {
+          "parentId": 1,
+          "orderNum": 4,
+          "id": 4,
+          "name": "开发一组"
+        },
+        {
+          "parentId": 1,
+          "orderNum": 5,
+          "id": 5,
+          "name": "开发二组"
+        }
+      ],
+      "id": 1,
+      "name": "开发部"
+    },
+    {
+      "parentId": 0,
+      "orderNum": 2,
+      "children": [
+        {
+          "parentId": 2,
+          "orderNum": 6,
+          "id": 6,
+          "name": "测试一组"
+        },
+        {
+          "parentId": 2,
+          "orderNum": 7,
+          "id": 7,
+          "name": "测试二组"
+        }
+      ],
+      "id": 2,
+      "name": "测试部"
+    },
+    {
+      "parentId": 0,
+      "orderNum": 3,
+      "children": [
+        {
+          "parentId": 3,
+          "orderNum": 8,
+          "id": 8,
+          "name": "运维一组"
+        },
+        {
+          "parentId": 3,
+          "orderNum": 9,
+          "id": 9,
+          "name": "运维二组"
+        },
+        {
+          "parentId": 3,
+          "orderNum": 10,
+          "id": 10,
+          "name": "运维三组"
+        }
+      ],
+      "id": 3,
+      "name": "运维部"
+    }
+  ]
+}

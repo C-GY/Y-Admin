@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/common.css">
+    
+
+    <link rel="stylesheet" href="/layui/extend/dtree.css">
+    <link rel="stylesheet" href="/layui/extend/font/dtreefont.css">
+</head>
+
+<body>
+
+    <div class="yadmin-body animated fadeIn">
+        <form class="layui-form yadmin-search-area input">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="username" class="layui-form-label">用户名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="username" autocomplete="off"
+                               id="username" class="layui-input">
+                    </div>
+
+                    <label for="email" class="layui-form-label">邮箱</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" autocomplete="off"
+                               id="email" class="layui-input">
+                    </div>
+
+                    <label for="deptTree" class="layui-form-label">部门</label>
+                    <div class="layui-input-inline">
+                        <ul id="deptTree" class="dtree" data-id="0" data-value="请选择"></ul>
+                        <input type="hidden" id="deptId" name="deptId">
+                    </div>
+
+                    <label for="status" class="layui-form-label">状态</label>
+                    <div class="layui-input-inline">
+                        <select name="status" id="status">
+                            <option value="">请选择</option>
+                            <option value="1">正常</option>
+                            <option value="0">锁定</option>
+                        </select>
+                    </div>
+
+                    <button lay-submit="" lay-filter="search" class="layui-btn layui-btn-sm layui-btn-primary table-action">
+                        <i class="yadmin-icon yadmin-icon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <table class="layui-hide" id="user-table"></table>
+    </div>
+
+    <script type="text/html" id="toolbar">
+
+        <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">
+            <i class="yadmin-icon yadmin-icon-xinzeng yadmin-oper-area"></i>
+            新增
+        </button>
+
+    </script>
+
+    <script type="text/html" id="column-toolbar">
+
+        <a lay-event="edit">
+            <i class="yadmin-icon yadmin-icon-edit-square yadmin-oper-area yadmin-blue" title="编辑"></i>
+        </a>
+
+        <a lay-event="del">
+            <i class="yadmin-icon yadmin-icon-delete yadmin-oper-area yadmin-red" title="删除"></i>
+        </a>
+
+    </script>
+
+    <script type="text/html" id="statusTpl">
+        <input type="checkbox" name="status" value="{{d.userId}}" lay-skin="switch" lay-text="正常|锁定" lay-filter="status" {{ d.status == '1' ? 'checked' : '' }}>
+    </script>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/layui/layui.js"></script>
+    <script src="/js/common.js"></script>
+
+    <script>
+        layui.config({
+            base: '/layui/extend/'
+        }).use(['table', 'element', 'form', 'dtree', 'tablePlug'], function () {
+            var table = layui.table;
+            var $ = layui.$;
+            var form = layui.form;
+            var dtree = layui.dtree;
+            var tablePlug = layui.tablePlug;
+
+            tablePlug.smartReload.enable(true);
+
+            dtree.renderSelect({
+                elem: "#deptTree",
+                url: "/data/dept/tree.json",
+                dataStyle: "layuiStyle",
+                width: "100%",
+                method: "GET",
+                dot: false,
+                menubar: true,
+                response: {
+                    statusCode: 0,
+                    message: "msg",
+                    treeId: "id",
+                    parentId: "parentId",
+                    title: "name"
+                }
+            });
+
+            dtree.on("node('deptTree')" ,function(obj) {
+                var typeDom = layui.$('#deptId');
+                console.log(typeDom.val() , obj.param.nodeId);
+                console.log(typeDom.val() === obj.param.nodeId);
+                if (typeDom.val() === obj.param.nodeId) {
+                    typeDom.val('');
+                    layui.$("input[dtree-id='deptTree']").val('请选择');
+                } else {
+                    typeDom.val(obj.param.nodeId)
+                }
+            });
+
+            table.render({
+                elem: '#user-table'
+                , url: '/data/user/list.json'
+                , page: true
+                , toolbar: '#toolbar'
+                , smartReloadModel: true
+                , cols: [
+                    [
+                        {type:'checkbox'}
+                        , {type: 'numbers', title: '序号', width: "5%"}
+                        , {field: 'userId', title: 'ID', width: "10%", hide: true}
+                        , {field: 'username', title: '用户名', width: "15%"}
+                        , {field: 'deptName', title: '部门', width: "12%"}
+                        , {field: 'email', title: '邮箱', width: "12%"}
+                        , {field: 'createTime', title: '创建时间', width: "12%"}
+                        , {field: 'lastLoginTime', title: '最后登陆时间', width: "12%"}
+                        , {field: 'status', title: '状态', templet: "#statusTpl", width: "12%"}
+                        , {title: '操作', fixed: 'right', align: 'center', toolbar: '#column-toolbar'}
+                    ]
+                ]
+            });
+
+            // 账号状态(正常/锁定)点击事件
+            form.on('switch(status)', function(data){
+                if (data.elem.checked) {
+                    parent.layer.msg("激活成功", {icon: 6});
+                } else {
+                    parent.layer.msg("禁用成功", {icon: 6});
+
+                }
+            });
+
+            // 工具条点击事件
+            table.on('toolbar', function (obj) {
+                var data = obj.data;
+                var event = obj.event;
+
+                if (event === 'add') {
+                    layer.open({
+                        content: "/view/user/user-add.html",
+                        title: "新增用户",
+                        area: ['40%', '85%'],
+                        type: 2,
+                        maxmin: true,
+                        shadeClose: true
+                    });
+                }
+            });
+
+            // 行点击事件 重置密码
+            table.on('tool', function (obj) {
+                var data = obj.data;
+                var event = obj.event;
+                if (event === 'edit') {
+                    edit(data.userId);
+                } else if (event === 'del') {
+                    layer.confirm("确定删除用户吗?", {icon: 3, title: '提示'},
+                        function (index) {
+                            obj.del();
+                            layer.close(index);
+                            parent.layer.msg("删除成功", {icon: 6});
+                        }, function (index) {
+                            layer.close(index);
+                        }
+                    );
+                }
+            });
+
+
+            function edit(id) {
+                layer.open({
+                    content: '/user/' + id,
+                    title: "编辑",
+                    area: ['40%', '85%'],
+                    type: 2,
+                    maxmin: true,
+                    shadeClose: true,
+                    end: function () {
+                        table.reload('user-table');
+                    }
+                });
+            }
+
+            form.on('submit(search)', function (form) {
+                table.reload('user-table', {
+                    where: form.field
+                });
+                return false;
+            });
+
+        });
+    </script>
+</body>
+</html>

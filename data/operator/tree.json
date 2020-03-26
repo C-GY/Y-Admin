@@ -1,0 +1,330 @@
+{
+  "msg": "操作成功",
+  "code": 0,
+  "data": [
+    {
+      "parentId": 0,
+      "url": "#",
+      "perms": "#",
+      "orderNum": 0,
+      "children": [
+        {
+          "parentId": 1,
+          "url": "/user/index",
+          "perms": "user:list",
+          "orderNum": 1,
+          "children": [
+            {
+              "parentId": 2,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10001,
+              "name": "删除用户"
+            },
+            {
+              "parentId": 2,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10002,
+              "name": "添加用户"
+            },
+            {
+              "parentId": 2,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10003,
+              "name": "授予角色"
+            },
+            {
+              "parentId": 2,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10004,
+              "name": "重置密码"
+            },
+            {
+              "parentId": 2,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10018,
+              "name": "修改用户"
+            }
+          ],
+          "icon": "layui-icon-username",
+          "id": 2,
+          "name": "用户管理"
+        },
+        {
+          "parentId": 1,
+          "url": "/role/index",
+          "perms": "role:list",
+          "orderNum": 2,
+          "children": [
+            {
+              "parentId": 3,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10005,
+              "name": "新增角色"
+            },
+            {
+              "parentId": 3,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10006,
+              "name": "删除角色"
+            },
+            {
+              "parentId": 3,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10007,
+              "name": "授予菜单"
+            },
+            {
+              "parentId": 3,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10008,
+              "name": "授予功能"
+            },
+            {
+              "parentId": 3,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10009,
+              "name": "修改角色"
+            }
+          ],
+          "icon": "layui-icon-group",
+          "id": 3,
+          "name": "角色管理"
+        },
+        {
+          "parentId": 1,
+          "url": "/menu/index",
+          "perms": "menu:list",
+          "orderNum": 3,
+          "children": [
+            {
+              "parentId": 4,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10010,
+              "name": "新增菜单"
+            },
+            {
+              "parentId": 4,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10011,
+              "name": "修改菜单"
+            },
+            {
+              "parentId": 4,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10012,
+              "name": "删除菜单"
+            }
+          ],
+          "icon": "layui-icon-list",
+          "id": 4,
+          "name": "菜单权限"
+        },
+        {
+          "parentId": 1,
+          "url": "/operator/index",
+          "perms": "operator:list",
+          "orderNum": 4,
+          "children": [
+            {
+              "parentId": 27,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10013,
+              "name": "新增操作点"
+            },
+            {
+              "parentId": 27,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10014,
+              "name": "删除操作点"
+            },
+            {
+              "parentId": 27,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10015,
+              "name": "修改操作点"
+            }
+          ],
+          "icon": null,
+          "id": 27,
+          "name": "操作权限"
+        },
+        {
+          "parentId": 1,
+          "url": "/dept/index",
+          "perms": "dept:list",
+          "orderNum": 6,
+          "children": [
+            {
+              "parentId": 28,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10016,
+              "name": "新增部门"
+            },
+            {
+              "parentId": 28,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10017,
+              "name": "删除部门"
+            },
+            {
+              "parentId": 28,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10019,
+              "name": "修改部门"
+            }
+          ],
+          "icon": null,
+          "id": 28,
+          "name": "部门管理"
+        }
+      ],
+      "icon": "layui-icon-picker-securityscan",
+      "id": 1,
+      "name": "权限管理"
+    },
+    {
+      "parentId": 0,
+      "url": "#",
+      "perms": "#",
+      "orderNum": 5,
+      "children": [
+        {
+          "parentId": 11,
+          "url": "/log/login/index",
+          "perms": "login:log:list",
+          "orderNum": 1,
+          "icon": null,
+          "id": 12,
+          "name": "登录日志"
+        },
+        {
+          "parentId": 11,
+          "url": "/online/index",
+          "perms": "user:online",
+          "orderNum": 3,
+          "children": [
+            {
+              "parentId": 20,
+              "url": null,
+              "perms": null,
+              "orderNum": null,
+              "checkArr": "0",
+              "icon": null,
+              "id": 10020,
+              "name": "踢出用户"
+            }
+          ],
+          "icon": null,
+          "id": 20,
+          "name": "在线用户"
+        },
+        {
+          "parentId": 11,
+          "url": "/log/sys/index",
+          "perms": "sys:log:list",
+          "orderNum": 4,
+          "icon": null,
+          "id": 19,
+          "name": "操作日志"
+        },
+        {
+          "parentId": 11,
+          "url": "/system/index",
+          "perms": "system:index",
+          "orderNum": 7,
+          "icon": null,
+          "id": 29,
+          "name": "系统管理"
+        }
+      ],
+      "icon": "layui-icon-picker-control",
+      "id": 11,
+      "name": "系统监控"
+    },
+    {
+      "parentId": 0,
+      "url": "/oauth2/index",
+      "perms": "oauth2:index",
+      "orderNum": 8,
+      "icon": "layui-icon-picker-insertrowabove",
+      "id": 30,
+      "name": "账号关联"
+    }
+  ]
+}

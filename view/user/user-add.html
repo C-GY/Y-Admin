@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/common.css">
+    
+
+    <link rel="stylesheet" href="/layui/extend/dtree.css">
+    <link rel="stylesheet" href="/layui/extend/font/dtreefont.css">
+    <link rel="stylesheet" href="/layui/extend/formSelects-v4.css">
+</head>
+<body>
+    <div class="yadmin-body animated fadeIn">
+        <form action="" method="post" class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+                <label for="username" class="layui-form-label">
+                    用户名
+                </label>
+                <div class="layui-input-block">
+                    <input type="text" id="username" name="username" value=""
+                           lay-verify="required" lay-vertype="tips"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="email" class="layui-form-label">
+                    邮箱
+                </label>
+                <div class="layui-input-block">
+                    <input type="text" id="email" name="email"  value=""
+                           lay-verify="required|email" lay-vertype="tips"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!-- 编辑时不显示密码框 -->
+            <div class="layui-form-item">
+                <label for="password" class="layui-form-label">
+                    用户密码
+                </label>
+                <div class="layui-input-block">
+                    <input type="password" id="password" name="password"
+                           lay-verify="required" lay-vertype="tips"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" pane="">
+                <label class="layui-form-label">
+                    状态
+                </label>
+                <div class="layui-input-block">
+                    <input type="radio" name="status" value="1" title="正常" checked="checked">
+                    <input type="radio" name="status" value="0" title="锁定">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    角色
+                </label>
+                <div class="layui-input-block">
+                    <select name="role" xm-select="role-select"
+                            lay-verify="required"
+                            lay-vertype="tips">
+                        <option value="">请选择角色</option>
+                        <option value="1">管理员</option>
+                        <option value="2">普通用户</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    部门
+                </label>
+                <div class="layui-input-block">
+                    <ul id="deptTree" class="dtree" data-id="0" data-value="请选择部门"></ul>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left:0;text-align:center;">
+                    <input type="hidden" id="deptId" name="deptId" value="">
+                    <input type="hidden" id="userId" name="userId" value="">
+                    <button class="layui-btn layui-btn-normal btn-w100" lay-submit="" lay-filter="add">增加</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="/layui/layui.js"></script>
+    <script src="/js/common.js"></script>
+
+    <script>
+        layui.config({
+            base: '/layui/extend/'
+        }).extend({
+            formSelects: 'formSelects-v4'
+        }).use(['form', 'layer', 'formSelects', 'dtree'], function () {
+            $ = layui.jquery;
+            var form = layui.form
+                , layer = layui.layer
+                , formSelects = layui.formSelects
+                , dtree = layui.dtree;
+
+            dtree.renderSelect({
+                elem: "#deptTree",
+                url: "/data/dept/tree.json",
+                dataStyle: "layuiStyle",
+                width: "100%",
+                method: "GET",
+                dot: false,
+                accordion: true,
+                menubar: true,
+                response: {
+                    statusCode: 0,
+                    message: "msg",
+                    treeId: "id",
+                    parentId: "parentId",
+                    title: "name"
+                }
+            });
+
+            dtree.on("node('deptTree')" ,function(obj){
+                $("#deptId").val(obj.param.nodeId);
+            });
+
+            form.on('submit(add)', function (form) {
+                form.field.role = formSelects.value('role-select', 'val');
+                layer.msg("添加成功", {icon: 6});
+                return false;
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "count": 30,
+  "code": 0,
+  "data": [
+    {
+      "userId": 1,
+      "username": "张三",
+      "email": "root@zhaojun.im",
+      "status": "1",
+      "lastLoginTime": "2019-07-06 18:40:34",
+      "createTime": "2018-12-02 07:30:52",
+      "deptId": 1,
+      "deptName": "开发部"
+    },
+    {
+      "userId": 2,
+      "username": "李四",
+      "email": "user@qq.com",
+      "status": "0",
+      "lastLoginTime": "2019-06-05 21:24:23",
+      "createTime": "2019-06-05 20:50:26",
+      "deptId": 1,
+      "deptName": "开发部"
+    },
+    {
+      "userId": 3,
+      "username": "王五",
+      "email": "user@qq.com",
+      "status": "0",
+      "lastLoginTime": "2019-06-05 21:24:23",
+      "createTime": "2019-06-05 20:50:26",
+      "deptId": 1,
+      "deptName": "开发部"
+    },
+    {
+      "userId": 4,
+      "username": "小明",
+      "email": "user@qq.com",
+      "status": "1",
+      "lastLoginTime": "2019-06-05 21:24:23",
+      "createTime": "2019-06-05 20:50:26",
+      "deptId": 1,
+      "deptName": "开发部"
+    }
+  ]
+}

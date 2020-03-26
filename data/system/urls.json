@@ -1,0 +1,426 @@
+{
+  "msg": "操作成功",
+  "code": 0,
+  "data": [
+    {
+      "url": "/error",
+      "method": "ALL",
+      "type": "json"
+    },
+    {
+      "url": "/role/{roleId}/own/menu",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/user/list",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/role/{roleId}/own/operator",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/operator/{operatorId}",
+      "method": "DELETE",
+      "type": "json"
+    },
+    {
+      "url": "/log/login/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/menu",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/log/login/list",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/user",
+      "method": "PUT",
+      "type": "json"
+    },
+    {
+      "url": "/dept/{deptId}",
+      "method": "DELETE",
+      "type": "json"
+    },
+    {
+      "url": "/dept/tree/root",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/500",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/welcome",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/menu/list",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/oauth2/list",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/user/{userId}",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/user/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/login",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/active/{token}",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/menu/tree/root",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/oauth2/render/gitee",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/online/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/dept",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/operator",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/403",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/main",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/dept/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/menu/tree/root/operator",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/online/kickout",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/captcha",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/oauth2/error",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/menu",
+      "method": "PUT",
+      "type": "json"
+    },
+    {
+      "url": "/error",
+      "method": "ALL",
+      "type": "view"
+    },
+    {
+      "url": "/logout",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/user/{userId:\\d+}/disable",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/system/urls",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/menu/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/role/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/user/{userId}",
+      "method": "DELETE",
+      "type": "json"
+    },
+    {
+      "url": "/",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/role/{roleId}",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/user/{userId}/reset",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/operator/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/dept",
+      "method": "PUT",
+      "type": "json"
+    },
+    {
+      "url": "/role/{roleId}/grant/operator",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/menu/{menuId}",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/dept/list",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/role",
+      "method": "PUT",
+      "type": "json"
+    },
+    {
+      "url": "/operator/list",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/log/sys/list",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/oauth2/success",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/operator",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/dept",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/role/list",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/oauth2/render/github",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/register",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/menu",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/login",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/role",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/register",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/user",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/menu/{menuId}",
+      "method": "DELETE",
+      "type": "json"
+    },
+    {
+      "url": "/operator/{operatorId}",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/role/{roleId}",
+      "method": "DELETE",
+      "type": "json"
+    },
+    {
+      "url": "/404",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/weekLoginCount",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/user/{userId}/enable",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/log/sys/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/role/{roleId}/grant/menu",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/online/list",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/security/hasPermission/{perms}",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/dept/{deptId}",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/user",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/operator/tree",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/dept/tree",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/oauth2/revoke/github",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/dept/swap",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/role",
+      "method": "POST",
+      "type": "json"
+    },
+    {
+      "url": "/system/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/user/{userId}/reset",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/menu/tree",
+      "method": "GET",
+      "type": "json"
+    },
+    {
+      "url": "/operator",
+      "method": "PUT",
+      "type": "json"
+    },
+    {
+      "url": "/oauth2/index",
+      "method": "GET",
+      "type": "view"
+    },
+    {
+      "url": "/menu/swap",
+      "method": "POST",
+      "type": "json"
+    }
+  ]
+}

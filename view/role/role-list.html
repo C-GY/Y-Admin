@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/common.css">
+    
+
+    <link rel="stylesheet" href="/layui/extend/dtree.css">
+    <link rel="stylesheet" href="/layui/extend/font/dtreefont.css">
+</head>
+<body>
+    <div class="yadmin-body animated fadeIn">
+
+        <form class="layui-form yadmin-search-area input">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="roleName" class="layui-form-label">名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="roleName" autocomplete="off"
+                               id="roleName" class="layui-input">
+                    </div>
+
+                    <button lay-submit="" lay-filter="search" class="layui-btn layui-btn-sm layui-btn-primary table-action">
+                        <i class="yadmin-icon yadmin-icon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <table class="layui-hide" id="role-table"></table>
+    </div>
+
+    <script type="text/html" id="toolbar">
+
+        <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">
+            <i class="yadmin-icon yadmin-icon-xinzeng yadmin-oper-area"></i>
+            新增
+        </button>
+
+    </script>
+
+    <script type="text/html" id="auth-toolbar">
+
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="grant-menu">授权菜单</a>
+
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="grant-operator">授权功能</a>
+
+    </script>
+
+    <script type="text/html" id="column-toolbar">
+
+        <a lay-event="edit">
+            <i class="yadmin-icon yadmin-icon-edit-square yadmin-oper-area yadmin-blue" title="编辑"></i>
+        </a>
+
+        <a lay-event="del">
+            <i class="yadmin-icon yadmin-icon-delete yadmin-oper-area yadmin-red" title="删除"></i>
+        </a>
+
+    </script>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/layui/layui.js"></script>
+    <script src="/js/common.js"></script>
+
+    <script>
+        layui.config({
+            base: '/layui/extend/'
+        }).use(['table', 'element', 'dtree', 'form', 'tablePlug'], function () {
+            var table = layui.table;
+            var $ = layui.$;
+            var dtree = layui.dtree;
+            var form = layui.form;
+            var tablePlug = layui.tablePlug;
+
+            tablePlug.smartReload.enable(true);
+
+            form.on('submit(search)', function (form) {
+                table.reload('role-table', {
+                    where: form.field
+                });
+                return false;
+            });
+
+            table.render({
+                elem: '#role-table'
+                , url: '/data/role/list.json'
+                , cellMinWidth: 80
+                , page: true
+                , toolbar: '#toolbar'
+                , smartReloadModel: true
+                , cols: [
+                    [
+                        {type: 'numbers', title: '序号', width: "5%"}
+                        , {field: 'roleId', title: 'ID', hide: true}
+                        , {field: 'roleName', title: '角色名称'}
+                        , {field: 'remark', title: '描述'}
+                        , {title: '授权', align: 'center', toolbar: '#auth-toolbar'}
+                        , {title: '操作', fixed: 'right', align: 'center', toolbar: '#column-toolbar'}
+                    ]
+                ]
+            });
+
+            table.on('toolbar', function (obj) {
+                var event = obj.event;
+                if (event === 'add') {
+                    add();
+                }
+            });
+
+            table.on('tool', function (obj) {
+                var data = obj.data;
+                var event = obj.event;
+
+                if (event === 'edit') {
+                    edit(data.roleId);
+                } else if (event === 'grant-menu') {
+                    layer.open({
+                        type: 1,
+                        title: "授权菜单",
+                        area: ["350px", "85%"],
+                        shadeClose: true,
+                        content: '<ul id="menuTree" class="dtree" data-id="0"></ul>',
+                        btn: ['确认选择'],
+                        success: function(layero, index){
+                            dtree.render({
+                                obj: $(layero).find("#menuTree"),
+                                url: "/data/menu/tree.json",
+                                dataStyle: "layuiStyle",
+                                method: "GET",
+                                dot: false,
+                                checkbar: true, // 开启复选框
+                                menubar: true,
+                                response: {
+                                    statusCode: 0,
+                                    message: "msg",
+                                    treeId: "id",
+                                    parentId: "parentId",
+                                    title: "name"
+                                }
+                            });
+                        },
+                        yes: function(index, layero) {
+                            var flag = true;
+                            var nodes = dtree.getCheckbarNodesParam("menuTree"); // 获取选中值
+                            var ids = [];
+                            for (var key in nodes) {
+                                var node = nodes[key];
+                                ids.push(node.nodeId);
+                            }
+                            console.log("授权菜单 ID: " + ids);
+                            layer.msg("授权成功", {icon: 6});
+                            layer.close(index);
+
+                        }
+                    });
+                } else if (event === 'grant-operator') {
+                    layer.open({
+                        type: 1,
+                        title: "授权功能",
+                        area: ["350px", "85%"],
+                        shadeClose: true,
+                        content: '<ul id="operatorTree" class="dtree" data-id="0"></ul>',
+                        btn: ['确认选择'],
+                        success: function(layero, index){
+                            dtree.render({
+                                obj: $(layero).find("#operatorTree"),
+                                url: "/data/operator/tree.json",
+                                dataStyle: "layuiStyle",
+                                initLevel: 5,   // 初始打开节点级别
+                                method: "GET",
+                                dot: false,
+                                checkbar: true, // 开启复选框
+                                menubar: true,
+                                response: {
+                                    statusCode: 0,
+                                    message: "msg",
+                                    treeId: "id",
+                                    parentId: "parentId",
+                                    title: "name"
+                                }
+                            });
+                        },
+                        yes: function(index, layero) {
+                            var flag = true;
+                            var nodes = dtree.getCheckbarNodesParam("operatorTree"); // 获取选中值
+                            var ids = [];
+                            for (var key in nodes) {
+                                var node = nodes[key];
+                                ids.push(node.nodeId);
+                            }
+                            console.log("授权功能 ID: " + ids);
+                            layer.msg("授权成功", {icon: 6});
+                            layer.close(index);
+                        }
+                    });
+                } else if (event === 'del') {
+                    layer.confirm("确定删除角色吗?", {icon: 3, title: '提示'},
+                        function (index) {// 确定回调
+                            obj.del();
+                            parent.layer.msg("删除成功", {icon: 6});
+                            layer.close(index);
+                        }, function (index) {//取消回调
+                            layer.close(index);
+                        }
+                    );
+                }
+            });
+
+            function add() {
+                layer.open({
+                    content: "/view/role/role-add.html",
+                    title: "新增角色",
+                    area: ['40%', '85%'],
+                    type: 2,
+                    maxmin: true,
+                    shadeClose: true,
+                    end: function () {
+                        table.reload('role-table');
+                    }
+                });
+            }
+
+            function edit(id) {
+                layer.open({
+                    content: "/role/" + id,
+                    title: "编辑角色",
+                    area: ['40%', '85%'],
+                    type: 2,
+                    maxmin: true,
+                    shadeClose: true,
+                    end: function () {
+                        table.reload('role-table');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
