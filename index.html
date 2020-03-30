@@ -47,27 +47,31 @@
 
             <!-- 头像区域 -->
             <ul class="layui-nav layui-layout-right">
-                <li class="layui-nav-item">
+                <li class="layui-nav-item feature-items">
                     <a lay-event="github" title="Github 地址">
                         <i class="czs-github"></i>
                     </a>
                 </li>
 
-                <li class="layui-nav-item">
+                <li class="layui-nav-item feature-items">
                     <a lay-event="website" title="前台">
                         <i class="czs-earth-l"></i>
                     </a>
                 </li>
 
-                <li class="layui-nav-item">
+                <li class="layui-nav-item feature-items">
                     <a lay-event="clear" title="清理标签缓存"><i class="czs-brush-l"></i></a>
                 </li>
 
-                <li class="layui-nav-item">
+                <li class="layui-nav-item feature-items">
                     <a lay-event="tag" title="便签"><i class="czs-tag-l"></i></a>
                 </li>
 
-                <li class="layui-nav-item">
+                <li class="layui-nav-item feature-items">
+                    <a lay-event="todo" title="待处理任务"><i class="czs-list-clipboard"></i></a>
+                </li>
+
+                <li class="layui-nav-item feature-items">
                     <a id="screenFull" lay-event="screenFull" title="全屏">
                         <i style="font-size: 18px;" class="layui-icon layui-icon-screen-full"></i>
                     </a>
@@ -176,8 +180,8 @@
                     </li>
                 </ul>
 
-                <div id="note">
-                    <div class="notification-box">
+                <div id="message">
+                    <div class="notification-box" lay-event="notification">
                         <span class="notification-count">
                             <!-- 此处可写数字 -->
                         </span>

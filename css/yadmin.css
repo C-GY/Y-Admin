@@ -539,6 +539,10 @@
         display: none;
     }
 
+    .layui-header .layui-nav .feature-items {
+        display: none !important;
+    }
+
 }
 
 
@@ -549,7 +553,7 @@
 /* ----- 底部样式 ----- */
 
 .layui-layout-admin .layui-footer {
-    left: 200px;
+    /* left: 200px; */
     background: #fff;
     transition: all .3s;
     color: #666;

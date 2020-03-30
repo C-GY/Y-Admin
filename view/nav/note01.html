@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        #screen {
+            border-radius: 6px;
+            height: 400px;
+            width: 600px;
+            background-color: #ffffff;
+        }
+
+        #menubar {
+            height: 10%;
+            width: 100%;
+            background-color: #2A373A;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .mac-btn {
+            position: absolute;
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            margin-top: 15.5px;
+        }
+
+        #mac-btn-one {
+            background-color: #FC6767;
+            margin-left: 15.5px;
+        }
+
+        #mac-btn-two {
+            background-color: #FDD973;
+            margin-left: 31px;
+        }
+
+        #mac-btn-three {
+            background-color: #B3E07A;
+            margin-left: 47px;
+        }
+
+        #title {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: aliceblue;
+        }
+
+        #content {
+            width: 570px;
+            height: 330px;
+            border: none;
+            outline: none;
+            resize: none;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="screen">
+        <div id="menubar">
+            <div class="mac-btn" id="mac-btn-one"></div>
+            <div class="mac-btn" id="mac-btn-two"></div>
+            <div class="mac-btn" id="mac-btn-three"></div>
+            <div id="title">便签</div>
+        </div>
+        <div id="filler">
+            <textarea id="content" >欢迎━(*｀∀´*)ノ亻!</textarea>
+        </div>
+    </div>
+</body>
+
+</html>

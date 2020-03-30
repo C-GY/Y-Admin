@@ -145,6 +145,9 @@
             font-size: 20px;
             color: var(--main-text-color);
             margin-left: 30px;
+            box-shadow: 0 1px 0 0 rgba(0, 0, 0, .05);
+            height: 40px;
+            margin-right: 30px;
         }
 
         .top-part {
@@ -247,12 +250,13 @@
             display: flex;
             flex-direction: column;
             flex: 1;
-            padding: 30px 20px 0 20px;
+            padding: 20px 20px 0 20px;
         }
 
         .page-content .header {
             font-size: 26px;
             color: var(--main-color);
+            box-shadow: 0 1px 0 0 rgba(0, 0, 0, .05);
         }
 
         .content-categories {
@@ -425,6 +429,144 @@
             font-size: 22px;
             font-weight: 300;
         }
+
+
+        .sites {
+            color: inherit;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            flex-flow: row wrap;
+            align-content: space-between;
+            -webkit-box-pack: center;
+            justify-content: center;
+        }
+
+        .sites a {
+            color: inherit;
+            font-size: 1.3rem;
+            background: black;
+            border-radius: 4px;
+            width: 188px;
+            height: 120px;
+            margin: 1rem;
+            line-height: 120px;
+            text-align: center;
+            color: #4584ee;
+            box-sizing: border-box;
+            display: block;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.28);
+            -webkit-transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-appearance: none;
+        }
+
+        .sites a:hover,
+        .sites a:focus,
+        .sites a:active {
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .sites a span:nth-child(1) {
+            font-family: Material-Icons;
+            padding-right: 0;
+            font-size: 55px;
+        }
+
+        .sites a span#title {
+            opacity: 0;
+            position: absolute;
+            font-size: 16px;
+            font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            font-weight: 400;
+            text-rendering: optimizeLegibility;
+            -webkit-transition: all ease-in-out 150ms;
+            transition: all ease-in-out 150ms;
+            position: absolute;
+            top: 77px;
+            left: 0;
+            color: #bbb;
+            width: 188px;
+            height: 1rem;
+            text-align: center;
+            text-shadow: none;
+        }
+
+        .sites a:hover span#title {
+            opacity: 1;
+        }
+
+        .sites a img {
+            width: 55px;
+        }
+
+        .sites a:nth-child(3n) {
+            page-break-after: always;
+        }
+
+        .sites a:hover,
+        .sites a:focus,
+        .sites a:active {
+            -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+            text-decoration: none;
+            color: #4584ee;
+        }
+
+        #GitHub {
+            background: #25292e;
+        }
+
+        #GitHub img {
+            -webkit-filter: invert(1);
+            filter: invert(1);
+        }
+
+        #Inbox {
+            background: #4285F4;
+        }
+
+        #Inbox img {
+            -webkit-filter: invert(0);
+            filter: invert(0);
+        }
+
+        #Reddit {
+            background: #ff4500;
+        }
+
+        #Reddit img {
+            -webkit-filter: invert(1);
+            filter: invert(1);
+        }
+
+        #Spotify {
+            background: #2ebd59;
+        }
+
+        #Spotify img {
+            -webkit-filter: invert(1);
+            filter: invert(1);
+        }
+
+        #Keep {
+            background: #ffbb00;
+        }
+
+        #Keep img {
+            -webkit-filter: invert(0);
+            filter: invert(0);
+        }
+
+        #Messenger {
+            background: #0084ff;
+        }
+
+        #Messenger img {
+            -webkit-filter: invert(0);
+            filter: invert(0);
+        }
     </style>
 </head>
 
@@ -432,7 +574,29 @@
 
     <div class="task-manager">
         <div class="page-content">
-            <div class="header">今天任务</div>
+            <div class="header">
+                <div class="sites">
+                    <a id="GitHub" href="https://github.com" target="_blank">
+                        <img src="../../images/home_index/logo--github.svg">
+                    </a>
+                    <a id="Inbox" href="https://inbox.google.com" target="_blank">
+                        <img src="../../images/home_index/logo--inbox.svg">
+                    </a>
+                    <a id="Reddit" href="https://reddit.com" target="_blank">
+                        <img src="../../images/home_index/logo--reddit.svg">
+                    </a>
+                    <a id="Spotify" href="https://open.spotify.com" target="_blank">
+                        <img src="../../images/home_index/logo--spotify.svg">
+                    </a>
+                    <a id="Keep" href="https://keep.google.com" target="_blank">
+                        <img src="../../images/home_index/logo--keep.svg">
+                    </a>
+                    <a id="Messenger" href="https://messenger.com" target="_blank">
+                        <img src="../../images/home_index/logo--messenger.svg">
+                    </a>
+                </div>
+
+            </div>
             <div class="tasks-wrapper">
                 <div class="task">
                     <div id="echarts" style="width: 100%;height:400px;"></div>
@@ -459,7 +623,7 @@
             </div>
         </div>
         <div class="right-bar">
-            <div class="header">时间安排</div>
+            <div class="header">📘 时间安排</div>
             <div class="right-content">
                 <div class="task-box yellow">
                     <div class="description-task">
@@ -468,14 +632,10 @@
                     </div>
                     <div class="more-button"></div>
                     <div class="members">
-                        <img src="../../images/13229601055312870.jpeg"
-                            alt="member">
-                        <img src="../../images/13229601083232827.jpeg"
-                            alt="member-2">
-                        <img src="../../images/13229601090599982.jpeg"
-                            alt="member-3">
-                        <img src="../../images/13229601096150399.jpeg"
-                            alt="member-4">
+                        <img src="../../images/home_index/13229601055312870.jpeg" alt="member">
+                        <img src="../../images/home_index/13229601083232827.jpeg" alt="member-2">
+                        <img src="../../images/home_index/13229601090599982.jpeg" alt="member-3">
+                        <img src="../../images/home_index/13229601096150399.jpeg" alt="member-4">
                     </div>
                 </div>
                 <div class="task-box blue">
@@ -485,12 +645,9 @@
                     </div>
                     <div class="more-button"></div>
                     <div class="members">
-                        <img src="../../images/13229601100940884.jpeg"
-                            alt="member">
-                        <img src="../../images/13229601106030438.jpeg"
-                            alt="member-2">
-                        <img src="../../images/13229601110561620.jpeg"
-                            alt="member-3">
+                        <img src="../../images/home_index/13229601100940884.jpeg" alt="member">
+                        <img src="../../images/home_index/13229601106030438.jpeg" alt="member-2">
+                        <img src="../../images/home_index/13229601110561620.jpeg" alt="member-3">
                     </div>
                 </div>
                 <div class="task-box red">
@@ -500,14 +657,10 @@
                     </div>
                     <div class="more-button"></div>
                     <div class="members">
-                        <img src="../../images/13229601116740342.jpeg"
-                            alt="member">
-                        <img src="../../images/13229601121691898.jpeg"
-                            alt="member-2">
-                        <img src="../../images/13229601126541856.jpeg"
-                            alt="member-3">
-                        <img src="../../images/13229601131469331.jpeg"
-                            alt="member-4">
+                        <img src="../../images/home_index/13229601116740342.jpeg" alt="member">
+                        <img src="../../images/home_index/13229601121691898.jpeg" alt="member-2">
+                        <img src="../../images/home_index/13229601126541856.jpeg" alt="member-3">
+                        <img src="../../images/home_index/13229601131469331.jpeg" alt="member-4">
                     </div>
                 </div>
                 <div class="task-box green">
@@ -517,16 +670,11 @@
                     </div>
                     <div class="more-button"></div>
                     <div class="members">
-                        <img src="../../images/13229601136640072.jpeg"
-                            alt="member">
-                        <img src="../../images/13229601141576473.jpeg"
-                            alt="member-2">
-                        <img src="../../images/13229601146097705.jpeg"
-                            alt="member-3">
-                        <img src="../../images/13229601150827945.jpeg"
-                            alt="member-4">
-                        <img src="../../images/13229601155784851.jpeg"
-                            alt="member-5">
+                        <img src="../../images/home_index/13229601136640072.jpeg" alt="member">
+                        <img src="../../images/home_index/13229601141576473.jpeg" alt="member-2">
+                        <img src="../../images/home_index/13229601146097705.jpeg" alt="member-3">
+                        <img src="../../images/home_index/13229601150827945.jpeg" alt="member-4">
+                        <img src="../../images/home_index/13229601155784851.jpeg" alt="member-5">
                     </div>
                 </div>
                 <div class="task-box blue">
@@ -536,16 +684,11 @@
                     </div>
                     <div class="more-button"></div>
                     <div class="members">
-                        <img src="../../images/13229601160186764.jpeg"
-                            alt="member">
-                        <img src="../../images/13229601165433684.jpeg"
-                            alt="member-2">
-                        <img src="../../images/13229601170013443.jpeg"
-                            alt="member-3">
-                        <img src="../../images/13229601174745662.jpeg"
-                            alt="member-4">
-                        <img src="../../images/13229601179371919.jpeg"
-                            alt="member-5">
+                        <img src="../../images/home_index/13229601160186764.jpeg" alt="member">
+                        <img src="../../images/home_index/13229601165433684.jpeg" alt="member-2">
+                        <img src="../../images/home_index/13229601170013443.jpeg" alt="member-3">
+                        <img src="../../images/home_index/13229601174745662.jpeg" alt="member-4">
+                        <img src="../../images/home_index/13229601179371919.jpeg" alt="member-5">
                     </div>
                 </div>
                 <div class="task-box yellow">
@@ -555,14 +698,10 @@
                     </div>
                     <div class="more-button"></div>
                     <div class="members">
-                        <img src="../../images/13229601183928270.jpeg"
-                            alt="member">
-                        <img src="../../images/13229601160186764.jpeg"
-                            alt="member-2">
-                        <img src="../../images/13229601090599982.jpeg"
-                            alt="member-3">
-                        <img src="../../images/13229601136640072.jpeg"
-                            alt="member-4">
+                        <img src="../../images/home_index/13229601183928270.jpeg" alt="member">
+                        <img src="../../images/home_index/13229601160186764.jpeg" alt="member-2">
+                        <img src="../../images/home_index/13229601090599982.jpeg" alt="member-3">
+                        <img src="../../images/home_index/13229601136640072.jpeg" alt="member-4">
                     </div>
                 </div>
                 <div class="task-box red">
@@ -572,14 +711,10 @@
                     </div>
                     <div class="more-button"></div>
                     <div class="members">
-                        <img src="../../images/13229601055312870.jpeg"
-                            alt="member">
-                        <img src="../../images/13229601083232827.jpeg"
-                            alt="member-2">
-                        <img src="../../images/13229601096150399.jpeg"
-                            alt="member-3">
-                        <img src="../../images/13229601100940884.jpeg"
-                            alt="member-4">
+                        <img src="../../images/home_index/13229601055312870.jpeg" alt="member">
+                        <img src="../../images/home_index/13229601083232827.jpeg" alt="member-2">
+                        <img src="../../images/home_index/13229601096150399.jpeg" alt="member-3">
+                        <img src="../../images/home_index/13229601100940884.jpeg" alt="member-4">
                     </div>
                 </div>
             </div>

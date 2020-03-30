@@ -49,9 +49,9 @@ layui.define(["element", "layer"], function (exports) {
             return isExist;
         },
         flexible: function () {
-            if(window.lock){
-                $("#note").show();
-                window.lock=false;
+            if (window.lock) {
+                $("#message").show();
+                window.lock = false;
                 return;
             }
             var elem = $(".layui-layout-admin");
@@ -60,7 +60,7 @@ layui.define(["element", "layer"], function (exports) {
                 $(".layui-nav-item i").css("left", 25)
                 elem.removeClass("admin-nav-mini");
             } else {
-                $("#note").hide();
+                $("#message").hide();
                 $(".layui-nav-item i").css("left", 20)
                 elem.addClass("admin-nav-mini");
             }
@@ -90,7 +90,35 @@ layui.define(["element", "layer"], function (exports) {
         },
         //便签
         tag: function () {
-            layer.msg("这是便签点击事件！");  
+            var X = $(this).offset().top;  //获取当前元素x坐标
+            var Y = $(this).offset().left; //获取当前元素y坐标
+            layer.open({
+                title: '便签',
+                type: 2,
+                area: ['600px', '400px'],
+                anim: 2,
+                resize: false,
+                maxmin: true,
+                offset: [X + 50, Y - 350],
+                closeBtn: 1,
+                shadeClose: true,
+                content: '../view/nav/note.html'
+            });
+        },
+        //待处理按钮
+        todo: function () {
+            var X = $(this).offset().top;  //获取当前元素x坐标
+            var Y = $(this).offset().left; //获取当前元素y坐标
+            layer.open({
+                type: 2,
+                title: 'TODO',
+                closeBtn: 0,
+                area: ['400px', 'calc(100% - 50px)'],
+                offset: [X + 50, Y - 190], 
+                shadeClose: true,
+                skin: 'yourclass',
+                content: '../view/nav/todo.html'
+            });
         },
         //全屏
         screenFull: function () {
@@ -128,6 +156,22 @@ layui.define(["element", "layer"], function (exports) {
             }
             document.querySelector("#screenRestore").style.display = "none";
             document.querySelector("#screenFull").style.display = "block";
+        },
+        //消息通知（左下角通知铃事件）
+        notification: function () {
+            var X = $(this).offset().top;  //获取当前元素x坐标
+            var Y = $(this).offset().left; //获取当前元素y坐标
+            layer.open({
+                type: 2,
+                title: '消息',
+                closeBtn: 1,
+                resize:false,
+                anim: 2,
+                area: ['890px', '710px'],
+                offset: [X - 595, Y + 180], 
+                shadeClose: true,
+                content: '../view/nav/messaging.html'
+            });
         },
         buildBreadcrumb: function (obj, isLast, html) {
             obj = obj ? obj : $(".layui-side-scroll .layui-this a[lay-url]");
@@ -243,7 +287,7 @@ layui.define(["element", "layer"], function (exports) {
 
     // 移动端模式下, 点击遮罩收缩导航.
     $(".site-mobile-shade").click(function () {
-    yadmin.flexible();
+        yadmin.flexible();
     });
 
     exports('yadmin', yadmin);
