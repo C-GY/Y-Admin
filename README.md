@@ -1,8 +1,5 @@
-::: hljs-center
 
-![](http://pic.yijianku.com/Foc7vtEhdiEeZQNrgXkoTf8m18p2)
-
-:::
+<div align=center>![](http://pic.yijianku.com/Foc7vtEhdiEeZQNrgXkoTf8m18p2)</div>
 
 ## Y-Admin是基于 layui 实现后台管理模板
 
