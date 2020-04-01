@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="/layui/css/layui.css">
     <link rel="stylesheet" href="/css/common.css">
     
-
     <link rel="stylesheet" href="/layui/extend/dtree.css">
     <link rel="stylesheet" href="/layui/extend/font/dtreefont.css">
+
+    <!-- 图标 -->
+    <link rel="stylesheet" href="../../static/CaoMei/style.css">
 </head>
 <body>
 
@@ -40,19 +42,23 @@
 
     <script type="text/html" id="toolbar">
         <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">
-            <i class="yadmin-icon yadmin-icon-xinzeng yadmin-oper-area"></i>
+            <i class="layui-icon layui-icon-addition"></i>
             新增
         </button>
     </script>
 
     <script type="text/html" id="column-toolbar">
-        <a lay-event="edit">
-            <i class="yadmin-icon yadmin-icon-edit-square yadmin-oper-area yadmin-blue" title="编辑"></i>
-        </a>
 
-        <a lay-event="del">
-            <i class="yadmin-icon yadmin-icon-delete yadmin-oper-area yadmin-red" title="删除"></i>
-        </a>
+        <button type="button" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
+            <i class="layui-icon layui-icon-edit" title="编辑"></i>
+            编辑
+        </button>
+
+        <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+            <i class="layui-icon layui-icon-delete" title="删除"></i>
+            删除
+        </button>
+
     </script>
 
     <script type="text/html" id="column-toolbar-sort">
@@ -154,23 +160,23 @@
             });
 
             table.render({
-                elem: '#menu-table'
-                , url: '/data/menu/list.json'
-                , where: {
+                elem: '#menu-table',
+                url: '/data/menu/list.json',
+                where: {
                     parentId: 0
-                }
-                , cellMinWidth: 80
-                , toolbar: '#toolbar'
-                , smartReloadModel: true
-                , cols: [
+                },
+                cellMinWidth: 80,
+                toolbar: '#toolbar',
+                smartReloadModel: true,
+                cols: [
                     [
-                        {type: 'numbers', title: 'ID', width: "5%"}
-                        , {field: 'id', title: 'ID', hide: true}
-                        , {field: 'name', title: '页面名称', width: "15%"}
-                        , {field: 'url', title: 'URL', width: "25%"}
-                        , {field: 'perms', title: '权限标识符', width: "15%"}
-                        , {title: '排序', fixed: 'right', width: "15%", align: 'center', toolbar: '#column-toolbar-sort'}
-                        , {title: '操作', align: 'center', toolbar: '#column-toolbar'}
+                        {title: 'ID', type: 'numbers', width: 60},
+                        {title: 'ID', field: 'id', hide: true},
+                        {title: '页面名称', field: 'name', width: 100, align: 'center'},
+                        {title: 'URL', field: 'url', minWidth: 200},
+                        {title: '权限标识符', field: 'perms', width: 140},
+                        {title: '排序', field: 'orderNum', width: 80, align: 'center', edit:'text', sort: true},
+                        {title: '操作', align: 'center', width: 200, toolbar: '#column-toolbar'}
                     ]
                 ]
             });

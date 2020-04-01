@@ -6,10 +6,12 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
     <link rel="stylesheet" href="/layui/css/layui.css">
     <link rel="stylesheet" href="/css/common.css">
-    
 
     <link rel="stylesheet" href="/layui/extend/dtree.css">
     <link rel="stylesheet" href="/layui/extend/font/dtreefont.css">
+
+    <!-- 图标 -->
+    <link rel="stylesheet" href="../../static/CaoMei/style.css">
 </head>
 
 <body>
@@ -46,7 +48,7 @@
                     </div>
 
                     <button lay-submit="" lay-filter="search" class="layui-btn layui-btn-sm layui-btn-primary table-action">
-                        <i class="yadmin-icon yadmin-icon-search"></i>
+                        <i class="layui-icon layui-icon-search"></i>
                     </button>
                 </div>
             </div>
@@ -58,7 +60,7 @@
     <script type="text/html" id="toolbar">
 
         <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">
-            <i class="yadmin-icon yadmin-icon-xinzeng yadmin-oper-area"></i>
+            <i class="layui-icon layui-icon-addition"></i>
             新增
         </button>
 
@@ -66,13 +68,16 @@
 
     <script type="text/html" id="column-toolbar">
 
-        <a lay-event="edit">
-            <i class="yadmin-icon yadmin-icon-edit-square yadmin-oper-area yadmin-blue" title="编辑"></i>
-        </a>
+        <button type="button" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
+            <i class="layui-icon layui-icon-edit" title="编辑"></i>
+            编辑
+        </button>
 
-        <a lay-event="del">
-            <i class="yadmin-icon yadmin-icon-delete yadmin-oper-area yadmin-red" title="删除"></i>
-        </a>
+        <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+            <i class="layui-icon layui-icon-delete" title="删除"></i>
+            删除
+        </button>
+
 
     </script>
 
@@ -126,23 +131,23 @@
             });
 
             table.render({
-                elem: '#user-table'
-                , url: '/data/user/list.json'
-                , page: true
-                , toolbar: '#toolbar'
-                , smartReloadModel: true
-                , cols: [
+                elem: '#user-table',
+                url: '/data/user/list.json',
+                page: true,
+                toolbar: '#toolbar',
+                smartReloadModel: true,
+                cols: [
                     [
-                        {type:'checkbox'}
-                        , {type: 'numbers', title: '序号', width: "5%"}
-                        , {field: 'userId', title: 'ID', width: "10%", hide: true}
-                        , {field: 'username', title: '用户名', width: "15%"}
-                        , {field: 'deptName', title: '部门', width: "12%"}
-                        , {field: 'email', title: '邮箱', width: "12%"}
-                        , {field: 'createTime', title: '创建时间', width: "12%"}
-                        , {field: 'lastLoginTime', title: '最后登陆时间', width: "12%"}
-                        , {field: 'status', title: '状态', templet: "#statusTpl", width: "12%"}
-                        , {title: '操作', fixed: 'right', align: 'center', toolbar: '#column-toolbar'}
+                        {type:'checkbox'},
+                        {type: 'numbers', title: '序号', width: 60},
+                        {field: 'userId', title: 'ID', hide: true},
+                        {field: 'username', title: '用户名', minWidth: 160},
+                        {field: 'deptName', title: '部门', minWidth: 160},
+                        {field: 'email', title: '邮箱', minWidth: 160},
+                        {field: 'createTime', title: '创建时间', align: 'center', width: 180},
+                        {field: 'lastLoginTime', title: '最后登陆时间',align: 'center', width: 180},
+                        {field: 'status', title: '状态', align: 'center', templet: "#statusTpl", width: 100},
+                        {title: '操作', fixed: 'right', align: 'center', toolbar: '#column-toolbar'}
                     ]
                 ]
             });

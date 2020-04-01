@@ -6,10 +6,10 @@
     font-style: inherit;
 }
 
-body .layui-layer .layui-layer-title {
+/* body .layui-layer .layui-layer-title {
     background-color: #20222A !important;
     color: #FFF;
-}
+} */
 
 #message {
     width: calc(100% - 40px);

@@ -40,10 +40,6 @@
     margin: 30px;
 }
 
-.yadmin-icon {
-    cursor: pointer;
-}
-
 .yadmin-search-area input {
     height: 32px;
 }
@@ -111,4 +107,12 @@
 
 .layui-breadcrumb a:hover {
     color: #02a7f0 !important;
+}
+
+.layui-btn .layui-icon {
+    margin-right: 0px !important;
+}
+
+.layui-form-label {
+    padding: 6px 15px;
 }
