@@ -14,7 +14,7 @@ git clone https://github.com/C-GY/Y-Admin.git
 部署本地后访问 [localhost/Y-Admin/index.html](localhost/Y-Admin/index.html)
 
 演示网址
-[https://z-admin.yijianku.com](https://z-admin.yijianku.com)
+[http://y-admin.yijianku.com](https://y-admin.yijianku.com)
 
 ## 项目结构说明
 ```
