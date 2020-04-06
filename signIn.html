@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎登录</title>
+    <style>
+        #login-form {
+            --primary: #4676CD;
+            --primary-dark: #0B121B;
+            --dark: #2B3044;
+            --grey-dark: #404660;
+            --grey: #8A91B4;
+            --grey-light: #A6ACCD;
+            --light: #BBC1E1;
+            --pale: #ECEFFC;
+            --white: #FFFFFF;
+            --red: #F04949;
+            width: 100%;
+            max-width: 210px;
+        }
+
+        #login-form .logo {
+            width: 44px;
+            height: 44px;
+            display: block;
+            margin: 0 auto;
+            fill: #0B121B;
+        }
+
+        #login-form h1 {
+            margin: 24px 0;
+            font-family: inherit;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        #login-form .input {
+            position: relative;
+        }
+
+        #login-form .input label {
+            pointer-events: none;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.5;
+            position: absolute;
+            top: 8px;
+            left: 0;
+            -webkit-transform-origin: 0 50%;
+            transform-origin: 0 50%;
+            -webkit-transform: translateY(var(--label-y, 0)) scale(var(--label-scale, 1)) translateZ(0);
+            transform: translateY(var(--label-y, 0)) scale(var(--label-scale, 1)) translateZ(0);
+            -webkit-transition: color .3s, -webkit-transform .3s;
+            transition: color .3s, -webkit-transform .3s;
+            transition: transform .3s, color .3s;
+            transition: transform .3s, color .3s, -webkit-transform .3s;
+            color: var(--label-color, var(--grey-light));
+        }
+
+        #login-form .input input {
+            width: 100%;
+            border-radius: 0;
+            -webkit-appearance: none;
+        }
+
+        #login-form .input input:not(:placeholder-shown)+label,
+        #login-form .input input:focus+label {
+            --label-y: -17px;
+            --label-scale: .8;
+            --label-color: var(--grey);
+        }
+
+        #login-form .input.email {
+            margin-bottom: 16px;
+        }
+
+        #login-form .input.email input {
+            background: none;
+            outline: none;
+            border: none;
+            color: var(--grey-dark);
+            font-weight: 500;
+            font-family: inherit;
+            font-size: 13px;
+            letter-spacing: .025em;
+            line-height: 22px;
+            caret-color: var(--primary);
+            padding: 7px 0 5px 0;
+            box-shadow: inset 0 -1px 0 0 var(--grey);
+        }
+
+        #login-form .input.password {
+            height: 34px;
+        }
+
+        #login-form .input.password .dots {
+            position: absolute;
+            display: -webkit-box;
+            display: flex;
+            left: 0;
+            top: 50%;
+            -webkit-transform: translateY(-2px);
+            transform: translateY(-2px);
+        }
+
+        #login-form .input.password .dots i {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--grey-dark);
+            display: block;
+            margin-right: 4px;
+            -webkit-animation: var(--name, scale-in) 0.05s linear forwards;
+            animation: var(--name, scale-in) 0.05s linear forwards;
+        }
+
+        #login-form .input.password .dots i.remove {
+            --name: scale-out;
+        }
+
+        #login-form .input.password .dots i:nth-child(1) {
+            --delay: 393.5ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(2) {
+            --delay: 387ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(3) {
+            --delay: 380.5ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(4) {
+            --delay: 374ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(5) {
+            --delay: 367.5ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(6) {
+            --delay: 361ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(7) {
+            --delay: 354.5ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(8) {
+            --delay: 348ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(9) {
+            --delay: 341.5ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(10) {
+            --delay: 335ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(11) {
+            --delay: 328.5ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(12) {
+            --delay: 322ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(13) {
+            --delay: 315.5ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(14) {
+            --delay: 309ms;
+        }
+
+        #login-form .input.password .dots i:nth-child(15) {
+            --delay: 302.5ms;
+        }
+
+    
+        #login-form .input.password .cursor {
+            position: absolute;
+            height: 15px;
+            width: 1px;
+            left: 0;
+            top: 10px;
+            background: var(--primary);
+            opacity: 0;
+            -webkit-transform: translateX(var(--cursor-x, 0));
+            transform: translateX(var(--cursor-x, 0));
+            -webkit-transition: -webkit-transform var(--cursor-duration, 0.1s);
+            transition: -webkit-transform var(--cursor-duration, 0.1s);
+            transition: transform var(--cursor-duration, 0.1s);
+            transition: transform var(--cursor-duration, 0.1s), -webkit-transform var(--cursor-duration, 0.1s);
+        }
+
+        #login-form .input.password input {
+            opacity: 0;
+            padding: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        #login-form .input.password input:focus+label+.cursor {
+            -webkit-animation: cursor 1s ease infinite;
+            animation: cursor 1s ease infinite;
+        }
+
+        #login-form .input .line,
+        #login-form .input .tick {
+            pointer-events: none;
+            position: absolute;
+            left: var(--left, 0);
+            bottom: var(--bottom, -10px);
+            opacity: var(--opacity, 1);
+            -webkit-transition: opacity 0s linear var(--tick-opacity-delay, 0.5s);
+            transition: opacity 0s linear var(--tick-opacity-delay, 0.5s);
+        }
+
+        #login-form .input .line svg,
+        #login-form .input .tick svg {
+            stroke: var(--line-stroke, var(--grey));
+            stroke-width: 1;
+            fill: none;
+            display: block;
+            width: var(--width, 900px);
+            height: var(--height, 22px);
+            -webkit-transform: translateX(var(--x, var(--line-x, 0)));
+            transform: translateX(var(--x, var(--line-x, 0)));
+            -webkit-transition: stroke 0.3s, -webkit-transform var(--line-x-duration, 0s) ease;
+            transition: stroke 0.3s, -webkit-transform var(--line-x-duration, 0s) ease;
+            transition: transform var(--line-x-duration, 0s) ease, stroke 0.3s;
+            transition: transform var(--line-x-duration, 0s) ease, stroke 0.3s, -webkit-transform var(--line-x-duration, 0s) ease;
+        }
+
+        #login-form .input .line {
+            overflow: hidden;
+            width: 100%;
+            -webkit-transform-origin: 0 50%;
+            transform-origin: 0 50%;
+        }
+
+        #login-form .input .tick {
+            --left: 100%;
+            --bottom: -1px;
+            --width: 32px;
+            --height: 28px;
+            --x: -16px;
+            --opacity: 0;
+        }
+
+        #login-form .input .tick svg {
+            stroke: var(--tick-stroke, var(--grey));
+            stroke-dasharray: 17 81;
+            stroke-dashoffset: var(--tick-offset, 34px);
+            -webkit-transition: stroke-dashoffset 0.5s ease var(--tick-delay, 0s), stroke 0.5s ease var(--tick-delay, 0s);
+            transition: stroke-dashoffset 0.5s ease var(--tick-delay, 0s), stroke 0.5s ease var(--tick-delay, 0s);
+        }
+
+        #login-form button {
+            border: none;
+            outline: none;
+            padding: 10px 0;
+            margin: 24px 0 0 0;
+            border-radius: 7px;
+            color: var(--c, #fff);
+            width: 100%;
+            font-size: 14px;
+            line-height: 16px;
+            position: relative;
+            font-family: inherit;
+            font-weight: 500;
+            background: var(--b, var(--primary-dark));
+            -webkit-transition: color .3s, background .3s;
+            transition: color .3s, background .3s;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+        }
+
+        #login-form button:disabled {
+            --b: var(--pale);
+            --c: var(--grey-light);
+            cursor: not-allowed;
+        }
+
+        #login-form button svg {
+            width: 16px;
+            height: 16px;
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-width: 1.5;
+            opacity: var(--svg-o, 0);
+            -webkit-transform: translateY(var(--svg-y, -16px)) rotate(-90deg) scale(var(--svg-s, 0.7)) translateZ(0);
+            transform: translateY(var(--svg-y, -16px)) rotate(-90deg) scale(var(--svg-s, 0.7)) translateZ(0);
+            -webkit-transition: opacity .3s, -webkit-transform .3s;
+            transition: opacity .3s, -webkit-transform .3s;
+            transition: transform .3s, opacity .3s;
+            transition: transform .3s, opacity .3s, -webkit-transform .3s;
+        }
+
+        #login-form button svg circle:first-child {
+            stroke-opacity: .1;
+        }
+
+        #login-form button svg circle:last-child {
+            stroke-dasharray: 38px;
+            stroke-dashoffset: 114px;
+        }
+
+        #login-form button span {
+            display: inline-block;
+            vertical-align: top;
+            line-height: 16px;
+            opacity: var(--span-o, 1);
+            -webkit-transform: translateY(var(--span-y, 0)) scale(var(--span-s, 1)) translateZ(0);
+            transform: translateY(var(--span-y, 0)) scale(var(--span-s, 1)) translateZ(0);
+            -webkit-transition: opacity .3s, -webkit-transform .3s;
+            transition: opacity .3s, -webkit-transform .3s;
+            transition: transform .3s, opacity .3s;
+            transition: transform .3s, opacity .3s, -webkit-transform .3s;
+        }
+
+        #login-form.processing:not(.error):not(.success) button {
+            --svg-y: 0;
+            --svg-s: 1;
+            --svg-o: 1;
+            --span-y: 16px;
+            --span-s: .7;
+            --span-o: 0;
+        }
+
+        #login-form.processing:not(.error):not(.success) button svg circle:last-child {
+            -webkit-animation: load 1.2s linear .3s;
+            animation: load 1.2s linear .3s;
+        }
+
+        #login-form.processing.error {
+            --line-x: -80%;
+            --line-x-duration: 2s;
+            --line-stroke: var(--red);
+            --cursor-duration: 1s;
+        }
+
+        #login-form.processing.error .dots i {
+            -webkit-animation: flip 0.4s linear var(--delay) forwards;
+            animation: flip 0.4s linear var(--delay) forwards;
+        }
+
+        #login-form.processing.success .input .tick {
+            --opacity: 1;
+            --tick-offset: 98px;
+            --tick-delay: .45s;
+            --tick-opacity-delay: 0s;
+            --tick-stroke: var(--primary);
+            -webkit-animation: tick .4s linear forwards;
+            animation: tick .4s linear forwards;
+        }
+
+        #login-form.processing.success .input .line {
+            -webkit-animation: line .5s linear forwards;
+            animation: line .5s linear forwards;
+        }
+
+        @-webkit-keyframes tick {
+
+            70%,
+            80% {
+                -webkit-transform: translateX(-10px);
+                transform: translateX(-10px);
+            }
+        }
+
+        @keyframes tick {
+
+            70%,
+            80% {
+                -webkit-transform: translateX(-10px);
+                transform: translateX(-10px);
+            }
+        }
+
+        @-webkit-keyframes line {
+            70% {
+                -webkit-transform: scaleX(0.8);
+                transform: scaleX(0.8);
+            }
+        }
+
+        @keyframes line {
+            70% {
+                -webkit-transform: scaleX(0.8);
+                transform: scaleX(0.8);
+            }
+        }
+
+        @-webkit-keyframes flip {
+            25% {
+                -webkit-transform: translateY(8px);
+                transform: translateY(8px);
+            }
+
+            35% {
+                -webkit-transform: translateY(12px);
+                transform: translateY(12px);
+            }
+
+            65% {
+                -webkit-transform: translateY(-4px);
+                transform: translateY(-4px);
+            }
+
+            100% {
+                -webkit-transform: translateY(-12px) scale(0);
+                transform: translateY(-12px) scale(0);
+            }
+        }
+
+        @keyframes flip {
+            25% {
+                -webkit-transform: translateY(8px);
+                transform: translateY(8px);
+            }
+
+            35% {
+                -webkit-transform: translateY(12px);
+                transform: translateY(12px);
+            }
+
+            65% {
+                -webkit-transform: translateY(-4px);
+                transform: translateY(-4px);
+            }
+
+            100% {
+                -webkit-transform: translateY(-12px) scale(0);
+                transform: translateY(-12px) scale(0);
+            }
+        }
+
+        @-webkit-keyframes load {
+            from {
+                stroke-dashoffset: 114px;
+            }
+
+            to {
+                stroke-dashoffset: 38px;
+            }
+        }
+
+        @keyframes load {
+            from {
+                stroke-dashoffset: 114px;
+            }
+
+            to {
+                stroke-dashoffset: 38px;
+            }
+        }
+
+        @-webkit-keyframes scale-in {
+            from {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes scale-in {
+            from {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @-webkit-keyframes scale-out {
+            from {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            to {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+        }
+
+        @keyframes scale-out {
+            from {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            to {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+        }
+
+        @-webkit-keyframes cursor {
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes cursor {
+            50% {
+                opacity: 1;
+            }
+        }
+
+        html {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        * {
+            box-sizing: inherit;
+        }
+
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: -webkit-box;
+            display: flex;
+            font-family: 'Inter', 'Inter UI', Arial;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+            background: #F6F8FF;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="login-form">
+
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="50.000000pt" height="37.500000pt"
+            viewBox="0 0 1093.000000 865.000000" preserveAspectRatio="xMidYMid meet" class="logo">
+            <metadata>
+                Created by potrace 1.15, written by Peter Selinger 2001-2017
+            </metadata>
+            <g transform="translate(0.000000,865.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                <path d="M144 8576 c-6 -16 4874 -8475 4895 -8483 7 -3 17 0 22 8 5 8 9 694 9
+       1587 0 1364 -2 1577 -15 1601 -18 36 -2575 4464 -2580 4469 -8 8 -2304 832
+       -2318 832 -4 0 -10 -6 -13 -14z" />
+                <path d="M9628 8177 c-631 -227 -1152 -417 -1158 -423 -5 -5 -590 -1015 -1300
+       -2244 l-1290 -2234 0 -1588 c0 -1140 3 -1589 11 -1594 6 -3 17 0 24 7 27 27
+       4885 8450 4885 8469 0 11 -6 20 -12 20 -7 -1 -529 -186 -1160 -413z" />
+                <path d="M3007 8142 c-191 -191 -347 -350 -347 -355 0 -16 2794 -4197 2801
+       -4190 16 19 2789 4184 2789 4191 0 4 -156 163 -347 354 l-348 346 -868 -521
+       -869 -522 516 -3 c284 -1 516 -6 515 -10 0 -4 -50 -81 -112 -171 l-112 -165
+       -520 -187 c-285 -103 -545 -193 -578 -200 -46 -9 -70 -9 -112 0 -30 7 -285 96
+       -567 198 -282 102 -527 190 -545 196 -26 8 -51 39 -137 168 -58 88 -106 161
+       -106 164 0 3 233 6 517 7 l516 3 -849 509 c-467 280 -858 515 -869 522 -19 13
+       -45 -11 -368 -334z" />
+            </g>
+        </svg>
+
+
+
+        <h1>欢迎登录</h1>
+
+        <div class="input email">
+            <input type="text" value="email@gmail.com" placeholder=" ">
+            <label>用户名</label>
+        </div>
+
+        <div class="input password">
+            <div class="dots"></div>
+            <input type="password" placeholder=" ">
+            <label>密码</label>
+            <div class="cursor"></div>
+            <div class="line">
+                <svg>
+                    <use xlink:href="#line">
+                </svg>
+            </div>
+            <div class="tick">
+                <svg>
+                    <use xlink:href="#tick">
+                </svg>
+            </div>
+        </div>
+
+        <button type="submit" disabled>
+            <svg viewBox="0 0 16 16">
+                <circle stroke-opacity=".1" cx="8" cy="8" r="6"></circle>
+                <circle class="load" cx="8" cy="8" r="6"></circle>
+            </svg>
+            <span>登录</span>
+        </button>
+
+    </form>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" id="logo">
+            <path
+                d="M33.0457936,22 L44,22 C44,34.1502645 34.1912695,44 22.0915872,44 C16.0417461,44 10.5646429,41.5375661 6.6,37.5563492 L14.3462931,29.7786761 C16.3285751,31.7689899 19.0669207,33 22.0915872,33 C25.1013453,33 27.827598,31.7810952 29.8075146,29.8080513 L22,22 L33.0457936,22.001001 C33.0457936,22.0006673 33.0457936,22.0003337 33.0457936,22 Z M21.9084128,0 C27.958756,0 33.4362661,2.4628426 37.400987,6.44464202 L29.6552,14.2228233 C27.6728001,12.2316284 24.9338388,11 21.9084128,11 C15.8585716,11 10.9542064,15.9248678 10.9542064,22 L10.954,22 L0,22 C0,9.8497355 9.8087305,0 21.9084128,0 Z">
+            </path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 22" id="line">
+            <path
+                d="M0,11 L180,11 C240,11.00344 300,13.6718267 360,19.00516 C450,27.00516 450,-4.99483997 540,3.00516003 C600,8.33849336 660,11.00344 720,11 L900,11">
+            </path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 28" id="tick">
+            <path
+                d="M3,12.5026479 L7,16.5026479 L13,9.50264792 C29.6216402,-12.0066881 40.3541164,26.00516 19,26.0026479 L-3.37507799e-13,26.0026479">
+            </path>
+        </symbol>
+    </svg>
+
+</body>
+<script>
+    // correct password is `password` lol
+
+    const $ = (s, o = document) => o.querySelector(s);
+    const $$ = (s, o = document) => o.querySelectorAll(s);
+
+    const login = $('#login-form');
+    const passwordContainer = $('.password', login);
+    const password = $('input', passwordContainer);
+    const passwordList = $('.dots', passwordContainer);
+    const submit = $('button', login);
+
+    password.addEventListener('input', e => {
+        if (password.value.length > $$('i', passwordList).length) {
+            passwordList.appendChild(document.createElement('i'));
+        }
+        submit.disabled = !password.value.length;
+        passwordContainer.style.setProperty('--cursor-x', password.value.length * 10 + 'px');
+    });
+
+    let pressed = false;
+
+    password.addEventListener('keydown', e => {
+
+        if (pressed || login.classList.contains('processing') || (password.value.length > 18 && e.keyCode != 8 && e.keyCode != 13)) {
+            e.preventDefault();
+        }
+        pressed = true;
+
+        setTimeout(() => pressed = false, 20);
+
+        if (e.keyCode == 8) {
+            let last = $('i:last-child', passwordList);
+            if (last !== undefined && last) {
+                last.classList.add('remove');
+                setTimeout(() => last.remove(), 20);
+            }
+        }
+
+    });
+
+    password.addEventListener('select', function () {
+        this.selectionStart = this.selectionEnd;
+    });
+
+    login.addEventListener('submit', e => {
+        e.preventDefault();
+        if (!login.classList.contains('processing')) {
+            login.classList.add('processing');
+            setTimeout(() => {
+
+                let cls = password.value == 'password' ? 'success' : 'error';
+                console.log($(".input.email input").value);
+                console.log(password.value);
+
+                login.classList.add(cls);
+                setTimeout(() => {
+                    login.classList.remove('processing', cls);
+                    if (cls == 'error') {
+                        password.value = '';
+                        passwordList.innerHTML = '';
+                        submit.disabled = true;
+                    }
+                }, 2000);
+                setTimeout(() => {
+                    if (cls == 'error') {
+                        passwordContainer.style.setProperty('--cursor-x', 0 + 'px');
+                    }
+                }, 600);
+
+            }, 1500);
+        }
+
+    });
+
+</script>
+
+</html>
