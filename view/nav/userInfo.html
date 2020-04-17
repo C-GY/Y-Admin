@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- layui样式 -->
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <title>Document</title>
+</head>
+
+<body style="background-color: #ffffff">
+    <form class="layui-form" action="">
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">设置我的资料</div>
+                        <div class="layui-card-body" pad15="">
+                            <div class="layui-form" lay-filter="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户名</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="username" style="color: #999" value="Y-Admin"
+                                            readonly="" class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">不可修改</div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">昵称</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="nickname" value="" lay-verify="nickname"
+                                            autocomplete="off" placeholder="请输入昵称" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">性别</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="sex" value="男" title="男">
+                                        <div class="layui-unselect layui-form-radio">
+                                            <i class="layui-anim layui-icon"></i>
+                                            <div>男</div>
+                                        </div>
+                                        <input type="radio" name="sex" value="女" title="女">
+                                        <div class="layui-unselect layui-form-radio layui-form-radioed">
+                                            <i class="layui-anim layui-icon"></i>
+                                            <div>女</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">手机</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="cellphone" value="12345678910" placeholder="请输入手机号"
+                                            class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">邮箱</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="email" value="12345678@qq.com" placeholder="请输入邮箱"
+                                            class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">备注</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="remarks" placeholder="请输入备注" class="layui-textarea">如果此项目帮到你，希望你能帮我点个星！  谢谢！</textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit=""
+                                            lay-filter="setmyinfo">确认修改</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- layui JS -->
+    <script src="../../layui/layui.js"></script>
+    <script>
+        layui.use(['form', 'jquery', 'layer'], function () {
+            var form = layui.form;
+            var $ = layui.jquery;
+            var layer = layui.layer;
+            //监听提交
+            form.on('submit(setmyinfo)', function (data) {
+                parent.layer.alert(JSON.stringify(data.field));
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                return false;
+
+                $.ajax({
+                    url: '提交URL',
+                    type: "post",
+                    dataType: 'json',
+                    data: {
+                        'data': JSON.stringify(data.field)
+                    },
+                    success: function (data) {
+                        if (data['status'] == 1) {
+                            parent.layer.msg(data['msg'], { icon: 1 });
+                        } else {
+                            parent.layer.msg(data['msg'], { icon: 2 });
+                        }
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭  
+                    }
+                })
+
+                return false;
+            });
+        });
+
+    </script>
+</body>
+
+</html>

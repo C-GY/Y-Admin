@@ -182,7 +182,7 @@
             --delay: 302.5ms;
         }
 
-    
+
         #login-form .input.password .cursor {
             position: absolute;
             height: 15px;
@@ -622,11 +622,6 @@
     </form>
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" id="logo">
-            <path
-                d="M33.0457936,22 L44,22 C44,34.1502645 34.1912695,44 22.0915872,44 C16.0417461,44 10.5646429,41.5375661 6.6,37.5563492 L14.3462931,29.7786761 C16.3285751,31.7689899 19.0669207,33 22.0915872,33 C25.1013453,33 27.827598,31.7810952 29.8075146,29.8080513 L22,22 L33.0457936,22.001001 C33.0457936,22.0006673 33.0457936,22.0003337 33.0457936,22 Z M21.9084128,0 C27.958756,0 33.4362661,2.4628426 37.400987,6.44464202 L29.6552,14.2228233 C27.6728001,12.2316284 24.9338388,11 21.9084128,11 C15.8585716,11 10.9542064,15.9248678 10.9542064,22 L10.954,22 L0,22 C0,9.8497355 9.8087305,0 21.9084128,0 Z">
-            </path>
-        </symbol>
         <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 22" id="line">
             <path
                 d="M0,11 L180,11 C240,11.00344 300,13.6718267 360,19.00516 C450,27.00516 450,-4.99483997 540,3.00516003 C600,8.33849336 660,11.00344 720,11 L900,11">
@@ -653,7 +648,9 @@
     const submit = $('button', login);
 
     password.addEventListener('input', e => {
-        if (password.value.length > $$('i', passwordList).length) {
+        password.value = password.value.slice(0, 18);
+        const count = password.value.length - $$('i', passwordList).length;
+        for (let i = 0; i < count; i++) {
             passwordList.appendChild(document.createElement('i'));
         }
         submit.disabled = !password.value.length;
@@ -690,27 +687,36 @@
         if (!login.classList.contains('processing')) {
             login.classList.add('processing');
             setTimeout(() => {
-
-                let cls = password.value == 'password' ? 'success' : 'error';
+                // 密码：123456
+                let cls = password.value == '123456' ? 'success' : 'error';
                 console.log($(".input.email input").value);
                 console.log(password.value);
 
                 login.classList.add(cls);
-                setTimeout(() => {
-                    login.classList.remove('processing', cls);
-                    if (cls == 'error') {
-                        password.value = '';
-                        passwordList.innerHTML = '';
-                        submit.disabled = true;
-                    }
-                }, 2000);
-                setTimeout(() => {
-                    if (cls == 'error') {
-                        passwordContainer.style.setProperty('--cursor-x', 0 + 'px');
-                    }
-                }, 600);
+                //密码错误
+                if (cls == 'error') {
+                    setTimeout(() => {
+                        login.classList.remove('processing', cls);
+                        if (cls == 'error') {
+                            password.value = '';
+                            passwordList.innerHTML = '';
+                            submit.disabled = true;
+                        }
+                    }, 2000);
+                    setTimeout(() => {
+                        if (cls == 'error') {
+                            passwordContainer.style.setProperty('--cursor-x', 0 + 'px');
+                        }
+                    }, 600);
+                } else {
+                    //登录成功
+                    setTimeout(() => {
+                        alert('登录成功！');
+                    }, 1200);
+                }
 
             }, 1500);
+
         }
 
     });

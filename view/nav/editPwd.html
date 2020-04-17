@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- layui样式 -->
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <title>Document</title>
+    <style>
+        #code {
+            width: calc(100% - 200px);
+            float: left;
+            margin-right: 8px;
+        }
+
+        .layui-col-space15 {
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body style="background-color: #ffffff">
+    <form class="layui-form" action="">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-body" pad15="">
+                        <div class="layui-form" lay-filter="">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">当前密码</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" name="oldPassword" lay-verify="required" lay-vertype="tips"
+                                        class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">新密码</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" name="password" lay-verify="required" lay-verify="pass"
+                                        lay-vertype="tips" autocomplete="off" id="LAY_password" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid layui-word-aux">6到16个字符</div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">确认新密码</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" name="repassword" lay-verify="required" lay-verify="repass"
+                                        lay-vertype="tips" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">验证码</label>
+                                <div class="layui-input-block">
+                                    <input id="code" type="text" name="PhoneCode" required lay-verify="required|number"
+                                        autocomplete="off" class="layui-input yanzhengma">
+                                    <button id="getPhoneCode" type="button"
+                                        class="layui-btn layui-btn-primary">获取验证码</button>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item" style="margin-bottom: 0;text-align: center;">
+                                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="setmypass">确认修改</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- layui JS -->
+    <script src="../../layui/layui.js"></script>
+    <script>
+
+        layui.use(['form', 'jquery', 'layer'], function () {
+            var form = layui.form;
+            var $ = layui.jquery;
+            var layer = layui.layer;
+
+            //获取验证码按钮
+            $('#getPhoneCode').click(function () {
+                parent.layer.msg('短信已发送！~');
+                var countdown = 60;
+                var _generate_code = $("#getPhoneCode");
+                function settime() {
+                    if (countdown == 0) {
+                        _generate_code.removeClass('layui-btn-disabled');
+                        _generate_code.attr("disabled", false);
+                        _generate_code.text("获取验证码");
+                        countdown = 60;
+                        return false;
+                    } else {
+                        _generate_code.addClass('layui-btn-disabled');
+                        _generate_code.attr("disabled", true);
+                        _generate_code.text("重新发送(" + countdown + ")");
+                        countdown--;
+                    }
+                    setTimeout(function () {
+                        settime();
+                    }, 1000);
+                }
+                settime();
+            })
+
+            //提交
+            form.on('submit(setmypass)', function (data) {
+                if (data.field.password != data.field.repassword) {
+                    parent.layer.msg('确认密码输入不一致', { icon: 2 });
+                    return false;
+                }
+
+                parent.layer.alert(JSON.stringify(data.field));
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                return false;
+
+                $.ajax({
+                    url: '提交URL',
+                    type: "post",
+                    dataType: 'json',
+                    data: {
+                        'data': JSON.stringify(data.field)
+                    },
+                    success: function (data) {
+                        if (data['status'] == 1) {
+                            parent.layer.msg(data['msg'], { icon: 1 });
+                        } else {
+                            parent.layer.msg(data['msg'], { icon: 2 });
+                        }
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭  
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

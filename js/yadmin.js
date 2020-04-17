@@ -173,6 +173,32 @@ layui.define(["element", "layer"], function (exports) {
                 content: '../view/nav/messaging.html'
             });
         },
+        //个人中心
+        userInfo: function () {
+            layer.open({
+                type: 2,
+                title: '个人中心',
+                closeBtn: 1,
+                resize:false,
+                scrollbar: false,
+                area: ['480px', '557px'],
+                shadeClose: true,
+                content: '../view/nav/userInfo.html'
+            });
+        },
+        //修改密码
+        editPwd: function () {
+            layer.open({
+                type: 2,
+                title: '修改密码',
+                closeBtn: 1,
+                // resize:false,
+                scrollbar: false,
+                area: ['470px', '338px'],
+                shadeClose: true,
+                content: '../view/nav/editPwd.html'
+            });
+        },
         buildBreadcrumb: function (obj, isLast, html) {
             obj = obj ? obj : $(".layui-side-scroll .layui-this a[lay-url]");
             html = html ? html : "";
