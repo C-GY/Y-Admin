@@ -93,7 +93,7 @@ layui.define(["element", "layer"], function (exports) {
             var X = $(this).offset().top;  //获取当前元素x坐标
             var Y = $(this).offset().left; //获取当前元素y坐标
             layer.open({
-                title: '便签',
+                title: '📒 便签',
                 type: 2,
                 area: ['600px', '400px'],
                 anim: 2,
@@ -111,8 +111,8 @@ layui.define(["element", "layer"], function (exports) {
             var Y = $(this).offset().left; //获取当前元素y坐标
             layer.open({
                 type: 2,
-                title: 'TODO',
-                closeBtn: 0,
+                title: '📝 TODO',
+                closeBtn: 1,
                 area: ['400px', 'calc(100% - 50px)'],
                 offset: [X + 50, Y - 190], 
                 shadeClose: true,
@@ -163,7 +163,7 @@ layui.define(["element", "layer"], function (exports) {
             var Y = $(this).offset().left; //获取当前元素y坐标
             layer.open({
                 type: 2,
-                title: '消息',
+                title: '🔔 消息',
                 closeBtn: 1,
                 resize:false,
                 anim: 2,
@@ -242,13 +242,10 @@ layui.define(["element", "layer"], function (exports) {
         // 如果点击的目录还有子目录就不做任何操作.
         if ($(elem).find("span.layui-nav-more").length === 0) {
             var obj = $(this);
-
             var title = obj.find("cite").html();
             var id = obj.attr("lay-id");
             var url = obj.attr("lay-url");
-
             var tabs = $(".layui-pagetabs .layui-tab-title li[lay-id]");
-
             yadmin.tabAdd({
                 id: id,
                 title: title,

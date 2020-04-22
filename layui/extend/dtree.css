@@ -4,13 +4,13 @@
 .dtree-theme-item-this{background-color: #d2d2d2!important;}
 .dtree-theme-item:hover{background-color: #eaeceb!important;}
 .dtree-theme-item cite{font-size:12px!important;}
-.dtree-theme-item:hover cite{color:#fe7786!important;}
+.dtree-theme-item:hover cite{color:#1E9FFF!important;}
 
 .dtree-theme-dtreefont{font-size: 16px!important;}
 .dtree-theme-ficon{color:#000!important;}
-.dtree-theme-icon{color:orange!important;}
-.dtree-theme-checkbox:hover{color:#fe7786!important;}
-.dtree-theme-choose{color:#fe7786!important;}
+.dtree-theme-icon{color: #0b121b!important;}
+.dtree-theme-checkbox:hover{color:#1E9FFF!important;}
+.dtree-theme-choose{color:#1E9FFF!important;}
 
 /* layui主题风格*/
 .dtree-layui-item-this{background: none!important;}
@@ -45,19 +45,19 @@
 .dtree-toolbar{position: absolute;z-index: 940520;padding: 0;background-color: #eceaeb;}
 .dtree-toolbar .layui-nav-child{position: static;}
 .dtree-toolbar .layui-nav-child dd{cursor: pointer;}
-.dtree-toolbar .layui-nav-child dd a i{font-size:16px;display: inline-block;margin: 0px 1px;color:#fe7786;}
+.dtree-toolbar .layui-nav-child dd a i{font-size:16px;display: inline-block;margin: 0px 1px;color:#1E9FFF;}
 .dtree-toolbar .layui-nav-child dd a i:hover{font-weight: bold;}
 .dtree-toolbar .layui-nav-bar{display: none!important;}
 .dtree-toolbar-tool{padding: 30px;}
 
 .dtree-toolbar-fixed{position: absolute;right: 5px;top: 2px;font-style: normal;transition: all .3s;-webkit-transition: all .3s;}
 /*.dtree-toolbar-fixed a{border:1px solid #fe7786;}*/
-.dtree-toolbar-fixed a i{font-size:14px;display: inline-block;margin: 0px 1px;color:#fe7786;}
+.dtree-toolbar-fixed a i{font-size:14px;display: inline-block;margin: 0px 1px;color:#1E9FFF;}
 .dtree-toolbar-fixed a i:hover{opacity:0.8;filter:Alpha(opacity=80);}
 
 /* 树基本*/
-.dtree{width:260px;}
-.dtree-nav-item{line-height:33px;padding-left:16px;}
+.dtree{width:100% !important;}
+.dtree-nav-item{line-height:33px;padding-left:16px;cursor:pointer;}
 .dtree-nav-ul-sid{display: none;}
 .dtree-none-text{font-size: 12px;text-align: center;color: gray;}
 

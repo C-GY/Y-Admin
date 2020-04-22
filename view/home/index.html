@@ -443,17 +443,11 @@
             justify-content: center;
         }
 
-        .sites a {
-            color: inherit;
-            font-size: 1.3rem;
-            background: black;
+        .sites>div {
             border-radius: 4px;
             width: 188px;
             height: 120px;
             margin: 1rem;
-            line-height: 120px;
-            text-align: center;
-            color: #4584ee;
             box-sizing: border-box;
             display: block;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.28);
@@ -462,56 +456,45 @@
             -webkit-appearance: none;
         }
 
-        .sites a:hover,
-        .sites a:focus,
-        .sites a:active {
+        .sites>div:hover,
+        .sites>div:focus,
+        .sites>div:active {
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .sites a span:nth-child(1) {
-            font-family: Material-Icons;
-            padding-right: 0;
-            font-size: 55px;
-        }
-
-        .sites a span#title {
-            opacity: 0;
-            position: absolute;
-            font-size: 16px;
-            font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            font-weight: 400;
-            text-rendering: optimizeLegibility;
-            -webkit-transition: all ease-in-out 150ms;
-            transition: all ease-in-out 150ms;
-            position: absolute;
-            top: 77px;
-            left: 0;
-            color: #bbb;
-            width: 188px;
-            height: 1rem;
-            text-align: center;
-            text-shadow: none;
-        }
-
-        .sites a:hover span#title {
-            opacity: 1;
-        }
-
-        .sites a img {
-            width: 55px;
-        }
-
-        .sites a:nth-child(3n) {
-            page-break-after: always;
-        }
-
-        .sites a:hover,
-        .sites a:focus,
-        .sites a:active {
             -webkit-transform: translateY(-5px);
             transform: translateY(-5px);
-            text-decoration: none;
-            color: #4584ee;
+            cursor: pointer;
+        }
+
+        .sites>div img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .sites .title-box {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px 10px;
+        }
+
+        .title-box span {
+            color: white;
+            font-size: 16px;
+            transform: translateY(-5px);
+        }
+
+        .title-box .title-text {
+            font-size: 20px;
+            font-weight: 800;
+            height: 24px;
+            margin-top: 10px;
+        }
+        
+
+        .title-box .state {
+            font-size: 12px;
         }
 
         #GitHub {
@@ -576,24 +559,48 @@
         <div class="page-content">
             <div class="header">
                 <div class="sites">
-                    <a id="GitHub" href="https://github.com" target="_blank">
-                        <img src="../../images/home_index/logo--github.svg">
-                    </a>
-                    <a id="Inbox" href="https://inbox.google.com" target="_blank">
-                        <img src="../../images/home_index/logo--inbox.svg">
-                    </a>
-                    <a id="Reddit" href="https://reddit.com" target="_blank">
-                        <img src="../../images/home_index/logo--reddit.svg">
-                    </a>
-                    <a id="Spotify" href="https://open.spotify.com" target="_blank">
-                        <img src="../../images/home_index/logo--spotify.svg">
-                    </a>
-                    <a id="Keep" href="https://keep.google.com" target="_blank">
-                        <img src="../../images/home_index/logo--keep.svg">
-                    </a>
-                    <a id="Messenger" href="https://messenger.com" target="_blank">
-                        <img src="../../images/home_index/logo--messenger.svg">
-                    </a>
+                    <div id="GitHub">
+                        <div class="title-box">
+                            <img src="../../images/home_index/logo--github.svg">
+                            <span class="title-text">6</span>
+                            <span class="state">——GitHub收藏——</span>
+                        </div>
+                    </div>
+                    <div id="Inbox">
+                        <div class="title-box">
+                            <img src="../../images/home_index/logo--inbox.svg">
+                            <span class="title-text">324</span>
+                            <span class="state">——邮件——</span>
+                        </div>
+                    </div>
+                    <div id="Reddit">
+                        <div class="title-box">
+                            <img src="../../images/home_index/logo--reddit.svg">
+                            <span class="title-text">124</span>
+                            <span class="state">——新闻发布——</span>
+                        </div>
+                    </div>
+                    <div id="Spotify">
+                        <div class="title-box">
+                            <img src="../../images/home_index/logo--spotify.svg">
+                            <span class="title-text">224</span>
+                            <span class="state">——媒体音乐——</span>
+                        </div>
+                    </div>
+                    <div id="Keep">
+                        <div class="title-box">
+                            <img src="../../images/home_index/logo--keep.svg">
+                            <span class="title-text">476</span>
+                            <span class="state">——运动社区——</span>
+                        </div>
+                    </div>
+                    <div id="Messenger">
+                        <div class="title-box">
+                            <img src="../../images/home_index/logo--messenger.svg">
+                            <span class="title-text">2324</span>
+                            <span class="state">——消息通知——</span>
+                        </div>
+                    </div>
                 </div>
 
             </div>
