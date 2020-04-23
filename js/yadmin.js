@@ -177,7 +177,7 @@ layui.define(["element", "layer"], function (exports) {
         userInfo: function () {
             layer.open({
                 type: 2,
-                title: '个人中心',
+                title: '🤠 个人中心',
                 closeBtn: 1,
                 resize:false,
                 scrollbar: false,
@@ -190,7 +190,7 @@ layui.define(["element", "layer"], function (exports) {
         editPwd: function () {
             layer.open({
                 type: 2,
-                title: '修改密码',
+                title: '🔑 修改密码',
                 closeBtn: 1,
                 // resize:false,
                 scrollbar: false,
