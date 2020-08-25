@@ -9,6 +9,8 @@ layui.define(["element", "layer"], function (exports) {
     var tabList = [];
     var tabsSelector = ".layui-pagetabs .layui-tab-title li[lay-id]";
 
+
+
     var yadmin = {
         tabAdd: function (o) {
             var id = o.id;
@@ -83,7 +85,7 @@ layui.define(["element", "layer"], function (exports) {
         clear: function () {
             layer.confirm("确认清空标签缓存吗?", { icon: 3, title: "提示" }, function (index) {
                 sessionStorage.setItem("tabs", null);
-                sessionStorage.setItem("currentTabId", "main");
+                sessionStorage.setItem("currentTabId", "home");
                 layer.close(index);
                 layer.msg("清理成功");
             });
@@ -181,7 +183,7 @@ layui.define(["element", "layer"], function (exports) {
                 closeBtn: 1,
                 resize:false,
                 scrollbar: false,
-                area: ['480px', '557px'],
+                area: ['480px', '537px'],
                 shadeClose: true,
                 content: '../view/nav/userInfo.html'
             });
@@ -194,7 +196,7 @@ layui.define(["element", "layer"], function (exports) {
                 closeBtn: 1,
                 // resize:false,
                 scrollbar: false,
-                area: ['470px', '338px'],
+                area: ['470px', '342px'],
                 shadeClose: true,
                 content: '../view/nav/editPwd.html'
             });
@@ -312,6 +314,38 @@ layui.define(["element", "layer"], function (exports) {
     $(".site-mobile-shade").click(function () {
         yadmin.flexible();
     });
+
+    // 点击底部添加文件按钮
+    $('.fileAdd').on('click touch', function (e) {
+        $(this).toggleClass('open');
+        $('.tabbar').toggleClass('open');
+    });
+
+    // 搜索模块
+    $('.search').each(function () {
+        var self = $(this);
+        var div = self.children('div');
+        var placeholder = div.children('input').attr('placeholder');
+        var placeholderArr = placeholder.split(/ +/);
+        if (placeholderArr.length) {
+          var spans = $('<div />');
+          $.each(placeholderArr, function (index, value) {
+            spans.append($('<span />').html(value + '&nbsp;'));
+          });
+          div.append(spans);
+        }
+        self.click(function () {
+          self.addClass('open');
+          setTimeout(function () {
+            self.find('input').focus();
+          }, 750);
+        });
+        $(document).click(function (e) {
+          if (!$(e.target).is(self) && !jQuery.contains(self[0], e.target)) {
+            self.removeClass('open');
+          }
+        });
+      });
 
     exports('yadmin', yadmin);
 });

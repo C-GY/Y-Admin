@@ -17,13 +17,33 @@
         .layui-col-space15 {
             margin: 0px;
         }
+
+        .foot {
+            height: 49px !important;
+            line-height: 49px;
+            text-align: right;
+            background-color: #f5f5f5;
+            border-top: 1px #e5e5e5 solid;
+        }
+
+        .foot button {
+            width: 62px;
+            height: 28px;
+            line-height: 28px;
+            margin-left: 2px;
+            margin-right: 15px;
+        }
+
+        .foot .close:hover {
+            border-color: #1E9FFF;
+        }
     </style>
 </head>
 
 <body style="background-color: #ffffff">
     <form class="layui-form" action="">
         <div class="layui-row layui-col-space15">
-            <div class="layui-col-md12">
+            <div class="layui-col-md12" style="padding-bottom: 0;">
                 <div class="layui-card">
                     <div class="layui-card-body" pad15="">
                         <div class="layui-form" lay-filter="">
@@ -58,15 +78,15 @@
                                         class="layui-btn layui-btn-primary">获取验证码</button>
                                 </div>
                             </div>
-
-                            <div class="layui-form-item" style="margin-bottom: 0;text-align: center;">
-                                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="setmypass">确认修改</button>
-                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="foot">
+            <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" lay-submit=""
+                lay-filter="setmypass">确定</button>
+            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm close" lay-filter="close">取消</button>
         </div>
     </form>
     <!-- layui JS -->
@@ -134,6 +154,14 @@
                 })
                 return false;
             });
+
+            $('.close').click(function(){
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index); //再执行关闭  
+                return false;
+            })
+             
+
         });
     </script>
 

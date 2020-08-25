@@ -26,7 +26,7 @@
         .avatar-add {
             position: relative;
             width: 100%;
-            height: 452px;
+            height: 384px;
         }
 
         .avatar-add p {
@@ -55,6 +55,25 @@
             margin: -50px 0 0 -84px;
             border-radius: 100%;
         }
+
+        .foot {
+            height: 49px !important;
+            line-height: 49px;
+            text-align: right;
+            background-color: #f5f5f5;
+            border-top: 1px #e5e5e5 solid;
+        }
+
+        .foot button {
+            width: 62px;
+            height: 28px;
+            line-height: 28px;
+            margin-left: 2px;
+            margin-right: 15px;
+        }
+        .foot .close:hover{
+            border-color: #1E9FFF;
+        }
     </style>
 </head>
 
@@ -69,7 +88,7 @@
                                 <li class="layui-this"><i class="czs-face-l"></i>设置我的资料</li>
                                 <li>设置头像</li>
                             </ul>
-                            <div class="layui-tab-content" style="height: 444px;">
+                            <div class="layui-tab-content">
                                 <div class="layui-tab-item layui-show">
                                     <div class="layui-card-body" style="padding: 0;padding-top: 4px;padding-left: 4px;">
                                         <div class="layui-form" lay-filter="">
@@ -124,14 +143,6 @@
                                                         class="layui-textarea">如果此项目帮到你，希望你能帮我点个星！  谢谢！</textarea>
                                                 </div>
                                             </div>
-                                            <div class="layui-form-item">
-                                                <div class="layui-input-block">
-                                                    <button class="layui-btn layui-btn-normal" lay-submit=""
-                                                        lay-filter="setmyinfo">确认修改</button>
-                                                    <button type="reset"
-                                                        class="layui-btn layui-btn-primary">重新填写</button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +161,14 @@
                 </div>
             </div>
         </div>
+        <div class="foot">
+            <button type="button" class="layui-btn layui-btn-normal layui-btn-sm"  lay-submit="" lay-filter="setmyinfo">确定</button>
+            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm close" lay-submit="" lay-filter="close">取消</button>
+        </div>
     </form>
+
+
+
     <!-- layui JS -->
     <script src="../../layui/layui.js"></script>
     <script>
@@ -200,6 +218,14 @@
 
                 return false;
             });
+
+
+            $('.close').click(function(){
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index); //再执行关闭  
+                return false;
+            })
+
         });
 
     </script>

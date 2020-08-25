@@ -45,7 +45,7 @@
 }
 
 .notification-box:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .notification-bell {
@@ -128,18 +128,23 @@
     0% {
         transform: rotate(0);
     }
+
     10% {
         transform: rotate(30deg);
     }
+
     20% {
         transform: rotate(0);
     }
+
     80% {
         transform: rotate(0);
     }
+
     90% {
         transform: rotate(-30deg);
     }
+
     100% {
         transform: rotate(0);
     }
@@ -149,18 +154,23 @@
     0% {
         transform: translateX(0);
     }
+
     10% {
         transform: translateX(6px);
     }
+
     20% {
         transform: translateX(0);
     }
+
     80% {
         transform: translateX(0);
     }
+
     90% {
         transform: translateX(-6px);
     }
+
     100% {
         transform: translateX(0);
     }
@@ -171,17 +181,312 @@
         opacity: 0;
         transform: scale(0);
     }
+
     10% {
         opacity: 1;
         transform: scale(1);
     }
+
     50% {
         opacity: 1;
     }
+
     51% {
         opacity: 0;
     }
+
     100% {
         opacity: 0;
     }
+}
+
+/* 底部小文件按钮样式 */
+.layui-footer {
+    overflow: visible;
+    z-index: 999;
+}
+
+.layui-footer .tabbar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.layui-footer .tabbar>li {
+    margin: 0 11px;
+}
+
+
+.layui-footer .tabbar>li>svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    fill: #2F3545;
+    -webkit-transition: opacity .3s ease;
+    transition: opacity .3s ease;
+}
+
+.layui-footer .tabbar>li>svg:hover {
+    cursor: pointer
+}
+
+.layui-footer .tabbar.open>li>svg {
+    opacity: .5;
+}
+
+
+.layui-footer .tabbar .fileAdd {
+    width: 32px;
+    height: 24px;
+    background: #5628EE;
+    border-radius: 0 3px 3px 3px;
+    position: relative;
+    margin: 2px 0 0 0;
+    -webkit-perspective: 160px;
+    perspective: 160px;
+    cursor: pointer;
+}
+
+.layui-footer .tabbar .fileAdd:before {
+    content: '';
+    border-radius: 2px 2px 0 0;
+    background: inherit;
+    height: 2px;
+    width: 20px;
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: 0;
+}
+
+.layui-footer .tabbar .fileAdd div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 20px;
+    background: #8C6FF0;
+    border-radius: 2px 2px 3px 3px;
+    z-index: 2;
+    -webkit-transition: -webkit-transform .25s ease;
+    transition: -webkit-transform .25s ease;
+    transition: transform .25s ease;
+    transition: transform .25s ease, -webkit-transform .25s ease;
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+}
+
+.layui-footer .tabbar .fileAdd div span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -5px 0 0 -5px;
+    -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.4);
+    transition: -webkit-transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.4);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.4);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.4), -webkit-transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.4);
+}
+
+.layui-footer .tabbar .fileAdd div span:before,
+.layui-footer .tabbar .fileAdd div span:after {
+    content: '';
+    height: 10px;
+    width: 2px;
+    border-radius: 1px;
+    background: #fff;
+    display: block;
+    position: absolute;
+    left: 4px;
+    top: 0;
+}
+
+.layui-footer .tabbar .fileAdd div span:before {
+    -webkit-transform: scaleX(0.75);
+    transform: scaleX(0.75);
+}
+
+.layui-footer .tabbar .fileAdd div span:after {
+    -webkit-transform: scaleY(0.75) rotate(90deg);
+    transform: scaleY(0.75) rotate(90deg);
+}
+
+.layui-footer .tabbar .fileAdd ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    -webkit-perspective: 300px;
+    perspective: 300px;
+}
+
+.layui-footer .tabbar .fileAdd ul li {
+    --translateY: 0;
+    --translateX: 0;
+    --scale: .92;
+    bottom: 0;
+    left: 6px;
+    position: absolute;
+    width: 20px;
+    height: 26px;
+    -webkit-transition: -webkit-transform .45s ease;
+    transition: -webkit-transform .45s ease;
+    transition: transform .45s ease;
+    transition: transform .45s ease, -webkit-transform .45s ease;
+    -webkit-transform: translateY(var(--translateY)) translateX(var(--translateX)) scaleX(var(--scale));
+    transform: translateY(var(--translateY)) translateX(var(--translateX)) scaleX(var(--scale));
+}
+
+.layui-footer .tabbar .fileAdd ul li:before,
+.layui-footer .tabbar .fileAdd ul li:after {
+    --rotateY: 0deg;
+    --rotateZ: 90deg;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform .4s ease;
+    transition: -webkit-transform .4s ease;
+    transition: transform .4s ease;
+    transition: transform .4s ease, -webkit-transform .4s ease;
+    -webkit-transform: rotateY(var(--rotateY)) rotateZ(var(--rotateZ));
+    transform: rotateY(var(--rotateY)) rotateZ(var(--rotateZ));
+}
+
+.layui-footer .tabbar.fileAdd ul li:after {
+    --rotateY: -180deg;
+    z-index: 1;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 26px;
+    font-family: 'Mukta Malar';
+}
+
+.layui-footer .tabbar .fileAdd ul li.word:before {
+    background: #8969f3;
+}
+
+.layui-footer .tabbar .fileAdd ul li.word:after {
+    background: #DAEDFE;
+    color: #46A7FE;
+    content: 'W';
+}
+
+.layui-footer .tabbar .fileAdd ul li.powerpoint {
+    --translateY: 1px;
+    --scale: .96;
+}
+
+.layui-footer .tabbar .fileAdd ul li.powerpoint:before {
+    background: #bba9f8;
+}
+
+.layui-footer .tabbar .fileAdd ul li.powerpoint:after {
+    background: #FDE5E1;
+    color: #F57F65;
+    content: 'P';
+}
+
+.layui-footer .tabbar .fileAdd ul li.excel {
+    --translateY: 2px;
+    --scale: 1;
+}
+
+.layui-footer .tabbar .fileAdd ul li.excel:before {
+    background: #fff;
+}
+
+.layui-footer .tabbar .fileAdd ul li.excel:after {
+    background: #D4F5DF;
+    color: #2ACF62;
+    content: 'E';
+}
+
+.layui-footer .tabbar .fileAdd:hover div {
+    -webkit-transform: rotateX(-30deg);
+    transform: rotateX(-30deg);
+}
+
+.layui-footer .tabbar .fileAdd:active span {
+    -webkit-transform: scale(0.84);
+    transform: scale(0.84);
+}
+
+.layui-footer .tabbar .fileAdd.open div {
+    -webkit-transform: rotateX(-30deg);
+    transform: rotateX(-30deg);
+}
+
+.layui-footer .tabbar .fileAdd.open div span {
+    -webkit-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
+}
+
+.layui-footer .tabbar .fileAdd.open:active span {
+    -webkit-transform: scale(0.84) rotateZ(45deg);
+    transform: scale(0.84) rotateZ(45deg);
+}
+
+.layui-footer .tabbar .fileAdd.open ul li {
+    --scale: 1;
+}
+
+.layui-footer .tabbar .fileAdd.open ul li:before {
+    --rotateY: 180deg;
+    --rotateZ: 0deg;
+}
+
+.layui-footer .tabbar .fileAdd.open ul li:after {
+    --rotateY: 0deg;
+    --rotateZ: 0deg;
+    text-align: center;
+    line-height: 26px;
+}
+
+.layui-footer .tabbar .fileAdd.open ul li.word {
+    --translateY: -32px;
+    --translateX: -36px;
+}
+
+.layui-footer .tabbar .fileAdd.open ul li.word:hover {
+    --translateY: -30px;
+}
+
+.layui-footer .tabbar .fileAdd.open ul li.powerpoint {
+    --translateY: -44px;
+    --translateX: 0px;
+}
+
+.layui-footer .tabbar .fileAdd.open ul li.powerpoint:hover {
+    --translateY: -42px;
+}
+
+.layui-footer .tabbar .fileAdd.open ul li.excel {
+    --translateY: -32px;
+    --translateX: 36px;
+}
+
+.layui-footer .tabbar .fileAdd.open ul li.excel:hover {
+    --translateY: -30px;
 }

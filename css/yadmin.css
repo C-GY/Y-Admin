@@ -4,18 +4,18 @@
 .layui-layout-admin .layui-header {
     background-color: #fff;
     height: 50px;
-    box-shadow: 0 1px 0 0 rgba(0,0,0,.05);
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, .05);
 }
 
-.layui-layout-admin .layui-header .layui-nav .layui-this:after{
+.layui-layout-admin .layui-header .layui-nav .layui-this:after {
     height: 0;
-    top: 0!important;
+    top: 0 !important;
 }
 
 .layui-layout-admin .layui-header .layui-nav-bar {
     height: 2px;
     background-color: #03152a;
-    top: 0!important;
+    top: 0 !important;
 }
 
 /* 按钮颜色、间距、悬浮小手 */
@@ -23,6 +23,8 @@
     color: #333333;
     padding: 0 15px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 /* 按钮悬浮时的颜色 */
@@ -36,13 +38,13 @@
     background-color: #0B121B;
     color: #f2f2f2;
     font-size: 18px;
-    font-family: Myriad Pro,Helvetica Neue,Arial,Helvetica,sans-serif;
+    font-family: Myriad Pro, Helvetica Neue, Arial, Helvetica, sans-serif;
     font-weight: bold;
     overflow: hidden;
     line-height: 50px;
     transition: all .3s;
     white-space: nowrap;
-    box-shadow: 1px 0 2px 0 rgba(0,0,0,.05);
+    box-shadow: 1px 0 2px 0 rgba(0, 0, 0, .05);
 }
 
 /* 头部水平居中 */
@@ -69,8 +71,14 @@
 }
 
 .layui-layout-admin .layui-header .layui-nav {
+    height: 50px;
     padding: 0 10px;
+    display: flex;
+    align-items: center;
 }
+
+
+
 
 
 /* ----- 头部样式 ----- */
@@ -104,8 +112,14 @@
     vertical-align: top;
 }
 
+/* 导航最小宽度 */
+.layui-layout-admin .layui-tab .layui-tab-title li i {
+    vertical-align: -0.35em;
+}
+
+
 /* 关闭按钮样式 */
-.layui-layout-admin .layui-tab > .layui-tab-title li .layui-tab-close {
+.layui-layout-admin .layui-tab>.layui-tab-title li .layui-tab-close {
     width: 16px;
     height: 16px;
     line-height: 17px;
@@ -143,12 +157,12 @@
 }
 
 /* 隐藏第一个 tab 的关闭按钮 */
-.layui-layout-admin .layui-tab > .layui-tab-title li:first-child .layui-tab-close {
+.layui-layout-admin .layui-tab>.layui-tab-title li:first-child .layui-tab-close {
     display: none;
 }
 
 /* 标签卡第一个的标签没有关闭按钮, 所以距离右侧的宽度 15px */
-.layui-layout-admin .layui-tab > .layui-tab-title li:first-child {
+.layui-layout-admin .layui-tab>.layui-tab-title li:first-child {
     padding: 0 15px;
 }
 
@@ -170,7 +184,7 @@
     padding: 0 80px 0 0;
     background-color: #fff;
     box-sizing: border-box;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
 }
 
 /* ----- tab 样式 ----- */
@@ -205,6 +219,7 @@
 .layui-layout-admin .layui-body .layui-icon-refresh-3 {
     right: 0
 }
+
 /* ----- tab 左右按钮样式 ----- */
 
 
@@ -254,6 +269,8 @@
     line-height: 50px;
     padding-left: 20px;
     padding-right: 30px;
+    display: flex;
+    align-items: center;
 }
 
 /* 一级导航悬浮字体颜色和背景颜色 */
@@ -264,8 +281,8 @@
 
 /* 一级导航被选中时背景颜色和字体颜色 */
 .layui-nav-tree .layui-this,
-.layui-nav-tree .layui-this > a,
-.layui-nav-tree .layui-this > a:hover {
+.layui-nav-tree .layui-this>a,
+.layui-nav-tree .layui-this>a:hover {
     background-color: #0B121B;
     /* color: rgb(64, 158, 255) */
 }
@@ -278,7 +295,7 @@
 }
 
 /* 二级导航悬浮字体背景颜色 */
-.layui-layout-admin .layui-side .layui-nav .layui-nav-item dl dd >a:hover {
+.layui-layout-admin .layui-side .layui-nav .layui-nav-item dl dd>a:hover {
     background-color: #01101f;
 }
 
@@ -290,9 +307,9 @@
 }
 
 /* this 导航选中时, 颜色不变 */
- .layui-layout-admin .layui-side .layui-nav .layui-nav-item.layui-this>a:hover{ 
+.layui-layout-admin .layui-side .layui-nav .layui-nav-item.layui-this>a:hover {
     /* color: rgb(64, 158, 255) */
- } 
+}
 
 
 /* 去除悬浮时左侧的绿条 */
@@ -301,11 +318,12 @@
 }
 
 /* 导航菜单展开时颜色 */
-.layui-nav-itemed > a{
+.layui-nav-itemed>a {
     color: #BFCBD9 !important;
 }
 
-.layui-nav-tree .layui-nav-child, .layui-nav-tree .layui-nav-child a:hover {
+.layui-nav-tree .layui-nav-child,
+.layui-nav-tree .layui-nav-child a:hover {
     /* color: #BFCBD9; */
     background: #001528 0 0;
 }
@@ -336,6 +354,10 @@
 
 /* ----- 导航收起样式 ----- */
 
+.layui-header>* {
+    transition: 0.3s;
+}
+
 .layui-layout-admin.admin-nav-mini .layui-header .layui-logo {
     width: 60px
 }
@@ -361,7 +383,7 @@
 }
 
 .layui-layout-admin.admin-nav-mini .layui-side .layui-nav .layui-nav-item>a>cite {
-    display: none
+    display: none;
 }
 
 .layui-layout-admin.admin-nav-mini .layui-side .layui-nav .layui-nav-item>a .layui-nav-more {
@@ -378,6 +400,10 @@
 
 .layui-layout-admin.admin-nav-mini .layui-body {
     left: 60px
+}
+
+.layui-layout .layui-body {
+    transition: 0.3s;
 }
 
 .layui-layout-admin.admin-nav-mini .layui-footer {
@@ -540,6 +566,10 @@
     }
 
     .layui-header .layui-nav .feature-items {
+        display: none !important;
+    }
+
+    .layui-footer .tabbar {
         display: none !important;
     }
 

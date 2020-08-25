@@ -14,7 +14,7 @@
     <!-- 公共样式 -->
     <link rel="stylesheet" href="css/common.css">
     <!-- 图标 -->
-    <link rel="stylesheet" href="./static/CaoMei/style.css">
+    <link rel="stylesheet" href="./static/remixicon/fonts/remixicon.css">
     <!-- 首页样式（只为此页面使用） -->
     <link rel="stylesheet" href="./css/index.css">
 </head>
@@ -47,40 +47,41 @@
 
             <!-- 头像区域 -->
             <ul class="layui-nav layui-layout-right">
+
                 <li class="layui-nav-item feature-items">
                     <a lay-event="github" title="Github 地址">
-                        <i class="czs-github"></i>
+                        <i class="ri-github-fill"></i>
                     </a>
                 </li>
 
                 <li class="layui-nav-item feature-items">
                     <a lay-event="website" title="前台">
-                        <i class="czs-earth-l"></i>
+                        <i class="ri-earth-line"></i>
                     </a>
                 </li>
 
                 <li class="layui-nav-item feature-items">
-                    <a lay-event="clear" title="清理标签缓存"><i class="czs-brush-l"></i></a>
+                    <a lay-event="clear" title="清理标签缓存"><i class="ri-brush-3-line"></i></a>
                 </li>
 
                 <li class="layui-nav-item feature-items">
-                    <a lay-event="tag" title="便签"><i class="czs-tag-l"></i></a>
+                    <a lay-event="tag" title="便签"><i class="ri-git-repository-line"></i></a>
                 </li>
 
                 <li class="layui-nav-item feature-items">
-                    <a lay-event="todo" title="待处理任务"><i class="czs-list-clipboard"></i></a>
+                    <a lay-event="todo" title="待处理任务"><i class="ri-calendar-todo-line"></i></a>
                 </li>
 
                 <li class="layui-nav-item feature-items">
                     <a id="screenFull" lay-event="screenFull" title="全屏">
-                        <i style="font-size: 18px;" class="layui-icon layui-icon-screen-full"></i>
+                        <i class="ri-fullscreen-line"></i>
                     </a>
                     <a id="screenRestore" lay-event="screenRestore" title="退出全屏" style="display: none;">
-                        <i style="font-size: 18px;" class="layui-icon layui-icon-screen-restore"></i>
+                        <i class="ri-fullscreen-exit-line"></i>
                     </a>
                 </li>
 
-                <li class="layui-nav-item">
+                <li class="layui-nav-item user-selection">
                     <a>
                         <img src="images/avatar.png" class="layui-nav-img" alt="头像">
                         <cite>管理员</cite>
@@ -88,7 +89,7 @@
                     </a>
                     <dl class="layui-nav-child">
                         <dd lay-unselect>
-                            <a lay-event="userInfo">个人中心</a>
+                            <a lay-event="userInfo">基本资料</a>
                         </dd>
                         <dd lay-unselect>
                             <a lay-event="editPwd">修改密码</a>
@@ -108,13 +109,13 @@
                 <ul class="layui-nav layui-nav-tree" lay-filter="lay-nav" lay-accordion="true">
                     <li class="layui-nav-item">
                         <a lay-url="/view/home/index.html" lay-id="home">
-                            <i class="czs-home-l"></i>&emsp;<cite>首页</cite>
+                            <i class="ri-home-8-line"></i>&emsp;<cite>首页</cite>
                         </a>
                     </li>
 
                     <li class="layui-nav-item">
                         <a lay-id="#" lay-url="#">
-                            <i class="czs-shield-l"></i>&emsp;<cite>权限管理</cite>
+                            <i class="ri-shield-keyhole-line"></i>&emsp;<cite>权限管理</cite>
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
@@ -137,7 +138,7 @@
 
                     <li class="layui-nav-item">
                         <a>
-                            <i class="czs-paper-l"></i>&emsp;<cite>多级菜单</cite>
+                            <i class="ri-menu-add-line"></i>&emsp;<cite>多级菜单</cite>
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
@@ -169,13 +170,18 @@
                         </dl>
                     </li>
                     <li class="layui-nav-item">
-                        <a lay-id="一级菜单" lay-url="https://www.baidu.com">
-                            <i class="czs-servers"></i>&emsp;<cite>一级菜单</cite>
+                        <a lay-id="一级菜单" lay-url="https://www.yijianku.com/">
+                            <i class="ri-menu-line"></i>&emsp;<cite>一级菜单</cite>
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a lay-id="图标" lay-url="http://chuangzaoshi.com/icon/">
-                            <i class="czs-image-l"></i>&emsp;<cite>图标</cite>
+                        <a lay-id="网站设置" lay-url="view/website/index.html">
+                            <i class="ri-settings-4-line"></i>&emsp;<cite>网站设置</cite>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a lay-id="图标" lay-url="https://remixicon.com/">
+                            <i class="ri-remixicon-line"></i>&emsp;<cite>图标</cite>
                         </a>
                     </li>
                 </ul>
@@ -204,8 +210,10 @@
                 <div class="layui-icon admin-tabs-control layui-icon-refresh-3" lay-event="refresh"></div>
                 <div class="layui-tab" lay-unauto lay-allowclose="true" lay-filter="lay-tab">
                     <ul class="layui-tab-title">
-                        <li lay-id="home" lay-url="/view/home/index.html" class="layui-this"><i
-                                class="layui-icon layui-icon-home"></i></li>
+                        <li lay-id="home" lay-url="/view/home/index.html" class="layui-this">
+                            <!-- <i class="ri-home-heart-line ri-xl"></i> -->
+                            <i class="ri-home-8-line ri-xl"></i>
+                        </li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
@@ -219,6 +227,49 @@
         <!-- 底部固定区域 -->
         <div class="layui-footer">
             copyright © 2020 Y-Admin all rights reserved.
+            <ul class="tabbar">
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path
+                            d="M12.414 5H21a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7.414l2 2zM15 13v-1a3 3 0 0 0-6 0v1H8v4h8v-4h-1zm-2 0h-2v-1a1 1 0 0 1 2 0v1z" />
+                    </svg>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path
+                            d="M21 5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7.414l2 2H16v2h2V5h3zm-3 8h-2v2h-2v3h4v-5zm-2-2h-2v2h2v-2zm2-2h-2v2h2V9zm-2-2h-2v2h2V7z" />
+                    </svg>
+                </li>
+                <li>
+                    <div class="fileAdd">
+                        <ul>
+                            <li class="word"></li>
+                            <li class="powerpoint"></li>
+                            <li class="excel"></li>
+                        </ul>
+                        <div>
+                            <span></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path
+                            d="M12.414 5H21a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7.414l2 2zM11 13.05a2.5 2.5 0 1 0 2 2.45V11h3V9h-5v4.05z" />
+                    </svg>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path
+                            d="M12.414 5H21a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7.414l2 2zM12 13a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-4 5h8a4 4 0 1 0-8 0z" />
+                    </svg>
+                </li>
+            </ul>
+
         </div>
 
         <!-- 移动端遮罩 -->

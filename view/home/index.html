@@ -4,836 +4,2886 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/layui/css/layui.css">
-    <title>首页</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
+        /** 初始化 */
+        html #layuicss-easyxin {
+            display: none;
+            width: 1989px
+        }
+
+        [template] {
+            display: none
+        }
+
+        [lay-href] {
+            cursor: pointer
+        }
+
         * {
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        ::-webkit-scrollbar {
-            width: 0px;
-        }
-
-        :root {
-            --bg-color: #f5f8ff;
-            --main-color: #353536;
-            --secondary-color: #8e92a4;
-            --main-text-color: #5d606b;
-            --secondary-dark-color: #9496a5;
-            --tag-color-one: #e0fbf6;
-            --tag-color-text-one: #58c2a9;
-            --tag-color-two: #ece7fe;
-            --tag-color-text-two: #8972f3;
-            --tag-color-three: #fde7ea;
-            --tag-color-text-three: #e77f89;
-            --tag-color-four: #f7f8fc;
-            --tag-color-text-four: #a0a6b5;
-            --checkbox-color: #009e90;
-            --button-color: #49beb7;
-            --box-color: #fff1d6;
-            --box-color-2: #d3e6ff;
-            --box-color-3: #ffd9d9;
-            --box-color-4: #daffe5;
-            --task-color: #777982;
-        }
-
-        body,
-        .item,
-        .top-part,
-        .top-part .count {
-            display: flex;
-            align-items: center;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
         }
 
         body {
-            margin: 0;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 12px;
+            color: #595959;
+            background-color: #f0f2f5;
+
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .layui-body {
+            left: 0;
+
         }
 
-        button {
-            border: none;
-            background: none;
-            cursor: pointer;
+        .layui-layout-body {
+            overflow: auto;
+
         }
 
-        .task-manager {
-            display: flex;
-            justify-content: space-between;
+        .layui-layout-admin {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            -webkit-transition: left .3s ease, right .3s ease;
+            transition: left .3s ease, right .3s ease;
+        }
+
+        /** body */
+        .layui-layout-admin .layui-body {
+            position: absolute;
+            left: 60px;
+            top: 50px;
+            z-index: auto;
+            overflow: auto;
+            -webkit-transition: left .3s;
+            transition: left .3s;
+            -webkit-overflow-scrolling: touch
+        }
+
+        .admin-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             width: 100%;
-            /* max-width: 1200px; */
-            height: 100vh;
-            /* max-height: 900px; */
+            height: 100%
+        }
+
+        .layui-fluid {
+            padding: 14px;
+        }
+
+        /** footer */
+        .layui-layout-admin .layui-footer {
+            position: absolute;
+            left: 60px;
             background: #fff;
+            box-sizing: border-box;
+            border-top: 1px solid #f5f7f9;
+            -webkit-transition: left .3s;
+            transition: left .3s;
+            overflow: hidden
+        }
+
+        .close-footer .layui-layout-admin .layui-footer {
+            display: none
+        }
+
+        .close-footer .layui-layout-admin .layui-body {
+            bottom: 0
+        }
+
+        /** side */
+        .layui-layout-admin .layui-side {
+            position: absolute;
+            top: 50px;
+            width: 60px;
+            background-color: #191a23;
+            box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, .05);
+            -webkit-transition: width .3s;
+            transition: width .3s;
+            -webkit-user-select: none;
+            user-select: none;
+            z-index: 1000
+        }
+
+        .layui-layout-admin .layui-side .layui-side-scroll {
+            width: 255px
+        }
+
+        .layui-layout-admin .layui-side .layui-nav {
+            width: 60px;
+            background-color: transparent
+        }
+
+        .layui-layout-admin .layui-side>.layui-side-scroll>.layui-nav:first-child {
+            margin-top: 10px
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item>a {
+            cursor: pointer;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            overflow: visible
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item a {
+            -webkit-transition: color .3s, background-color .3s;
+            transition: color .3s, background-color .3s
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-more {
+            right: 15px
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item>.layui-nav-child {
+            position: static
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item .layui-nav-child a {
+            padding-left: 50px;
+            cursor: pointer
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item .layui-nav-child .layui-nav-child a {
+            padding-left: 70px
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item .layui-nav-child .layui-nav-child .layui-nav-child a {
+            padding-left: 90px
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item .layui-nav-child .layui-nav-child .layui-nav-child .layui-nav-child a {
+            padding-left: 110px
+        }
+
+        /** 侧导航折叠状态下样式 */
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item>a .layui-nav-more,
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item>a>cite,
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-itemed>.layui-nav-child {
+            display: none !important
+        }
+
+        .layui-layout-admin .layui-side .layui-nav li.layui-nav-itemed>a {
+            background: rgba(0, 0, 0, .8)
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .layui-nav-item>a>.layui-icon {
+            font-size: 16px;
+            -webkit-transition: font-size .3s;
+            transition: font-size .3s
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .admin-nav-hover>.layui-nav-child {
+            position: fixed;
+            top: 60px;
+            left: 60px;
+            padding: 5px;
+            min-width: 150px;
+            display: block !important;
+            background: 0 0 !important
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .admin-nav-hover>.layui-nav-child:before {
+            content: '';
+            position: absolute;
+            right: 5px;
+            left: 5px;
+            bottom: 0;
+            top: 0;
             border-radius: 4px;
-            box-shadow: 0 0.3px 2.2px rgba(0, 0, 0, 0.011), 0 0.7px 5.3px rgba(0, 0, 0, 0.016), 0 1.3px 10px rgba(0, 0, 0, 0.02), 0 2.2px 17.9px rgba(0, 0, 0, 0.024), 0 4.2px 33.4px rgba(0, 0, 0, 0.029), 0 10px 80px rgba(0, 0, 0, 0.04);
+            background: #191a23;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .admin-nav-hover>.layui-nav-child dd:first-child>.layui-nav-child {
+            margin-top: -5px
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .admin-nav-hover>.layui-nav-child dd:last-child>.layui-nav-child.show-top {
+            margin-top: 5px
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .admin-nav-hover>.layui-nav-child>dd>a {
+            padding: 0 20px !important
+        }
+
+        .layui-layout-admin .layui-side .layui-nav .admin-nav-hover>.layui-nav-child>dd>a .layui-nav-more {
+            border-color: transparent transparent transparent rgba(255, 255, 255, .7);
+            right: 7px;
+            margin-top: -6px
+        }
+
+        .layui-layout-admin .layui-side .layui-nav.arrow1 .admin-nav-hover>.layui-nav-child>dd>a .layui-nav-more,
+        .layui-layout-admin .layui-side .layui-nav.arrow2 .admin-nav-hover>.layui-nav-child>dd>a .layui-nav-more {
+            -o-transform: rotate(0);
+            -ms-transform: rotate(0);
+            -moz-transform: rotate(0);
+            -webkit-transform: rotate(0);
+            transform: rotate(0);
+            width: 6px;
+            height: 10px;
+            right: 10px;
+            margin-top: -5px;
+            font-weight: 600
+        }
+
+        .layui-layout-admin .layui-side .layui-nav.arrow1 .admin-nav-hover>.layui-nav-child>dd>a .layui-nav-more:before,
+        .layui-layout-admin .layui-side .layui-nav.arrow2 .admin-nav-hover>.layui-nav-child>dd>a .layui-nav-more:before {
+            content: "\e602";
+            left: -4px;
+            top: -2px
+        }
+
+        .layui-layout-admin .layui-side .layui-nav.arrow2 .admin-nav-hover>.layui-nav-child>dd>a .layui-nav-more:before {
+            -o-transform: rotate(0);
+            -ms-transform: rotate(0);
+            -moz-transform: rotate(0);
+            -webkit-transform: rotate(0);
+            transform: rotate(0)
+        }
+
+        /** side hover 进入动画 */
+        .ew-anim-drop-in {
+            -webkit-animation: ewTransitionDropIn .3s ease-in-out;
+            animation: ewTransitionDropIn .3s ease-in-out;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0
+        }
+
+        @-webkit-keyframes ewTransitionDropIn {
+            from {
+                opacity: 0;
+                -webkit-transform: scale(.8)
+            }
+
+            to {
+                opacity: 1;
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes ewTransitionDropIn {
+            from {
+                opacity: 0;
+                transform: scale(.8)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        /** layui nav tree */
+        .layui-nav-tree .layui-nav-bar {
+            display: none
+        }
+
+        .layui-nav-tree>.layui-nav-item>a:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 100%;
+            width: 3px;
+            background-color: #009688;
+            transition: all .3s ease
+        }
+
+        .layui-nav-tree>.layui-nav-item:hover>a:before {
+            bottom: 0
+        }
+
+        .layui-nav-tree .layui-nav-item a:hover {
+            background-color: transparent
+        }
+
+        .layui-nav-tree .layui-nav-child dd.layui-this,
+        .layui-nav-tree .layui-this {
+            background: 0 0
+        }
+
+        .layui-nav-tree .layui-nav-item .layui-nav-child {
+            padding: 5px 0;
+            background-color: rgba(0, 0, 0, .3) !important
+        }
+
+        .layui-nav-tree .layui-nav-itemed>.layui-nav-child {
+            display: none
+        }
+
+        /** 小三角改箭头 */
+        .layui-nav-tree.arrow1 .layui-nav-more {
+            font-family: layui-icon !important;
+            font-size: 12px;
+            font-weight: 600;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow: hidden;
+            line-height: normal;
+            border: none;
+            margin: -3px 0 0 0;
+            padding: 0;
+            width: 10px;
+            height: 6px;
+            top: 50%;
+            display: inline-block;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease
+        }
+
+        .layui-nav-tree.arrow1 .layui-nav-more:before {
+            content: "\e61a";
+            position: absolute;
+            right: -1px;
+            top: -4px
+        }
+
+        .layui-nav-tree.arrow1 .layui-nav-itemed>a>.layui-nav-more {
+            -ms-transform: rotate(-180deg);
+            -moz-transform: rotate(-180deg);
+            -webkit-transform: rotate(-180deg);
+            -o-transform: rotate(-180deg);
+            transform: rotate(-180deg)
+        }
+
+        /** 小三角改加减号 */
+        .layui-nav-tree.arrow2 .layui-nav-more {
+            font-family: layui-icon !important;
+            font-size: 12px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow: hidden;
+            line-height: normal;
+            border: none;
+            margin: -5px 0 0 0;
+            padding: 0;
+            width: 10px;
+            height: 10px;
+            top: 50%;
+            display: inline-block;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease
+        }
+
+        .layui-nav-tree.arrow2 .layui-nav-more:before {
+            content: "\e654";
+            position: absolute;
+            top: -2px;
+            left: -1px
+        }
+
+        .layui-nav-tree.arrow2 .layui-nav-itemed>a>.layui-nav-more {
+            -ms-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg)
+        }
+
+        .layui-nav-tree.arrow2 .layui-nav-itemed>a>.layui-nav-more:before {
+            content: '';
+            width: 8px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, .7);
+            top: 4px;
+            left: 1px;
+            -ms-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg)
+        }
+
+        /** 单标签标题 */
+        .layui-body-header {
+            color: #262626;
+            font-size: 16px;
+            padding: 0 20px;
+            height: 45px;
+            line-height: 45px;
+            background-color: #fff;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 998;
+            display: block
+        }
+
+        .layui-body-header-title {
+            padding-left: 6px;
+            border-left: 4px solid #009688
+        }
+
+        .layui-body-header+div {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 45px;
+            bottom: 0;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch
+        }
+
+        .layui-breadcrumb {
+            visibility: visible
+        }
+
+        /** 右侧弹窗 */
+        .layui-layer.layui-layer-adminRight {
+            bottom: 0;
+            top: 50px !important;
+            border: none !important;
+            box-shadow: 1px 1px 50px rgba(0, 0, 0, .3) !important;
+            overflow: auto
+        }
+
+        .layui-anim-rl {
+            -webkit-animation-name: layui-rl;
+            animation-name: layui-rl
+        }
+
+        @-webkit-keyframes layui-rl {
+            from {
+                -webkit-transform: translate3d(100%, 0, 0)
+            }
+
+            to {
+                -webkit-transform: translate3d(0, 0, 0)
+            }
+        }
+
+        @keyframes layui-rl {
+            from {
+                transform: translate3d(100%, 0, 0)
+            }
+
+            to {
+                transform: translate3d(0, 0, 0)
+            }
+        }
+
+        .layui-anim-lr,
+        .layui-anim-rl.layer-anim-close {
+            -webkit-animation-name: layui-lr;
+            animation-name: layui-lr
+        }
+
+        @-webkit-keyframes layui-lr {
+            from {
+                -webkit-transform: translate3d(0, 0, 0);
+                opacity: 1
+            }
+
+            to {
+                -webkit-transform: translate3d(100%, 0, 0);
+                opacity: 1
+            }
+        }
+
+        @keyframes layui-lr {
+            from {
+                transform: translate3d(0, 0, 0)
+            }
+
+            to {
+                transform: translate3d(100%, 0, 0)
+            }
+        }
+
+        /** admin风格弹窗 */
+        .layui-layer.layui-layer-admin {
+            border: none !important;
+            box-shadow: 1px 1px 50px rgba(0, 0, 0, .3) !important
+        }
+
+        .layui-layer.layui-layer-admin .layui-layer-title {
+            color: #fff;
+            height: 50px;
+            line-height: 50px;
+            background-color: #191a23;
+            border: none
+        }
+
+        .layui-layer.layui-layer-admin .layui-layer-setwin {
+            top: 17px
+        }
+
+        .layui-layer.layui-layer-admin .layui-layer-setwin a {
+            color: #fff;
+            font-size: 16px;
+            font-style: normal;
+            font-family: layui-icon !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        /** 关闭按钮 */
+        .layui-layer.layui-layer-admin .layui-layer-setwin .layui-layer-close1 {
+            background: 0 0
+        }
+
+        .layui-layer.layui-layer-admin .layui-layer-setwin .layui-layer-close1:before {
+            content: "\1006"
+        }
+
+        /** 最小化按钮 */
+        .layui-layer.layui-layer-admin .layui-layer-setwin .layui-layer-min cite {
+            background-color: #ddd
+        }
+
+        /** 最大化按钮 */
+        .layui-layer.layui-layer-admin .layui-layer-setwin .layui-layer-max {
+            font-size: 14px;
+            padding-top: 1px;
+            background: 0 0
+        }
+
+        .layui-layer.layui-layer-admin .layui-layer-setwin .layui-layer-max:before {
+            content: "\e622"
+        }
+
+        .layui-layer.layui-layer-admin .layui-layer-setwin .layui-layer-maxmin:before {
+            content: "\e758"
+        }
+
+        /** 弹窗按钮 */
+        .layui-layer.layui-layer-admin .layui-layer-btn {
+            padding-bottom: 15px
+        }
+
+        .layui-layer.layui-layer-admin .layui-layer-btn .layui-layer-btn0 {
+            border-color: #009688;
+            background-color: #009688
+        }
+
+        .layui-layer.layui-layer-admin .layui-layer-btn a {
+            height: 34px;
+            line-height: 34px
+        }
+
+        .layui-layer-admin {
+            max-width: 100%
+        }
+
+        .layui-layer-iframe .layui-layer-content {
+            overflow: auto;
+            -webkit-overflow-scrolling: touch
+        }
+
+        /** msg样式 */
+        body .layui-layer-msg {
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
+        }
+
+        body .layui-layer-load {
+            background: 0 0
+        }
+
+        /** loading */
+        .page-loading {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 19891017;
+            background-color: #fff
+        }
+
+        body>.page-loading {
+            position: fixed;
+            background-color: #f5f7f9
+        }
+
+        .layui-layout-admin>.layui-body>.layui-tab>.layui-tab-content>.layui-tab-item>.page-loading,
+        .layui-layout-admin>.layui-body>.page-loading {
+            background-color: #f5f7f9
+        }
+
+        .layui-layout-admin>.layui-body>.layui-body-header.show+div+.page-loading {
+            top: 45px;
+            height: auto
+        }
+
+        .page-no-scroll {
+            overflow-x: hidden;
+            overflow-y: hidden;
+            min-height: 80px
+        }
+
+        .ball-loader,
+        .rubik-loader,
+        .signal-loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%)
+        }
+
+        .ball-loader>span,
+        .signal-loader>span {
+            background-color: #4aca85;
+            display: inline-block
+        }
+
+        .ball-loader.sm>span:nth-child(1),
+        .ball-loader>span:nth-child(1),
+        .signal-loader.sm>span:nth-child(1),
+        .signal-loader>span:nth-child(1) {
+            -webkit-animation-delay: 0s;
+            animation-delay: 0s
+        }
+
+        .ball-loader.sm>span:nth-child(2),
+        .ball-loader>span:nth-child(2),
+        .signal-loader.sm>span:nth-child(2),
+        .signal-loader>span:nth-child(2) {
+            -webkit-animation-delay: .1s;
+            animation-delay: .1s
+        }
+
+        .ball-loader.sm>span:nth-child(3),
+        .ball-loader>span:nth-child(3),
+        .signal-loader.sm>span:nth-child(3),
+        .signal-loader>span:nth-child(3) {
+            -webkit-animation-delay: .15s;
+            animation-delay: .15s
+        }
+
+        .ball-loader.sm>span:nth-child(4),
+        .ball-loader>span:nth-child(4),
+        .signal-loader.sm>span:nth-child(4),
+        .signal-loader>span:nth-child(4) {
+            -webkit-animation-delay: .2s;
+            animation-delay: .2s
+        }
+
+        /** 魔方loading */
+        .rubik-loader {
+            width: 64px;
+            height: 64px;
+            background-image: url(img/ic_loading.gif);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain
+        }
+
+        .rubik-loader.sm {
+            width: 50px;
+            height: 50px
+        }
+
+        /** 球形loading */
+        .ball-loader>span {
+            width: 20px;
+            height: 20px;
+            margin: 0 3px;
+            border-radius: 50%;
+            -webkit-transform: scale(0);
+            -ms-transform: scale(0);
+            transform: scale(0);
+            -webkit-animation: 1s ball-load ease-in-out infinite;
+            animation: ball-load 1s ease-in-out infinite
+        }
+
+        @-webkit-keyframes ball-load {
+            0% {
+                -webkit-transform: scale(0)
+            }
+
+            50% {
+                -webkit-transform: scale(1)
+            }
+
+            100% {
+                -webkit-transform: scale(0)
+            }
+        }
+
+        @keyframes ball-load {
+            0% {
+                transform: scale(0)
+            }
+
+            50% {
+                transform: scale(1)
+            }
+
+            100% {
+                transform: scale(0)
+            }
+        }
+
+        .ball-loader.sm>span {
+            width: 15px;
+            height: 15px;
+            margin: 0 2px
+        }
+
+        /** 信号loading */
+        .signal-loader {
+            width: 50px;
+            height: 22px
+        }
+
+        .signal-loader>span {
+            width: 8px;
+            height: 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+            -webkit-animation: signal-load 1s infinite;
+            animation: signal-load 1s infinite
+        }
+
+        .signal-loader>span:nth-child(2) {
+            left: 14px
+        }
+
+        .signal-loader>span:nth-child(3) {
+            left: 28px
+        }
+
+        .signal-loader>span:nth-child(4) {
+            left: 42px
+        }
+
+        @-webkit-keyframes signal-load {
+            0% {
+                height: 0
+            }
+
+            50% {
+                height: 22px
+            }
+
+            100% {
+                height: 0
+            }
+        }
+
+        @keyframes signal-load {
+            0% {
+                height: 0
+            }
+
+            50% {
+                height: 22px
+            }
+
+            100% {
+                height: 0
+            }
+        }
+
+        /** 信号loading小型 */
+        .signal-loader.sm {
+            width: 32px;
+            height: 15px
+        }
+
+        .signal-loader.sm>span {
+            width: 5px;
+            -webkit-animation: signal-load-sm 1s infinite;
+            animation: signal-load-sm 1s infinite
+        }
+
+        .signal-loader.sm>span:nth-child(2) {
+            left: 9px
+        }
+
+        .signal-loader.sm>span:nth-child(3) {
+            left: 18px
+        }
+
+        .signal-loader.sm>span:nth-child(4) {
+            left: 27px
+        }
+
+        @-webkit-keyframes signal-load-sm {
+            0% {
+                height: 0
+            }
+
+            50% {
+                height: 15px
+            }
+
+            100% {
+                height: 0
+            }
+        }
+
+        @keyframes signal-load-sm {
+            0% {
+                height: 0
+            }
+
+            50% {
+                height: 15px
+            }
+
+            100% {
+                height: 0
+            }
+        }
+
+        /** 组件样式 */
+        /** toolbar */
+        .layui-form.toolbar .layui-form-item {
+            margin-bottom: 0
+        }
+
+        .layui-card-body>.layui-table,
+        .toolbar+.layui-table {
+            margin: 2px 0
+        }
+
+        .layui-card-body>.layui-table-view,
+        .toolbar+table+.ew-tree-table,
+        .toolbar+table+.layui-table-view {
+            margin: 0
+        }
+
+        .mr0 {
+            margin-right: 0 !important
+        }
+
+        .w-auto {
+            width: auto
+        }
+
+        @media screen and (max-width:450px) {
+            .layui-form-item .w-auto+.layui-input-inline {
+                margin-left: 100px
+            }
+
+            .layui-form-item .layui-inline {
+                margin-bottom: 8px
+            }
+        }
+
+        /** form */
+        .model-form {
+            padding: 20px 30px 0 0
+        }
+
+        .model-form.no-padding {
+            padding: 0
+        }
+
+        .model-form .model-form-body {
+            overflow-y: auto;
+            padding: 25px 30px 0 0;
+            max-height: calc(100vh - 180px)
+        }
+
+        .model-form.no-padding .model-form-footer {
+            padding-top: 10px;
+            padding-right: 30px
+        }
+
+        .layui-form.model-form>.layui-form-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 20px
+        }
+
+        .layui-form-required:before {
+            content: "*";
+            display: inline-block;
+            font-family: SimSun;
+            margin-right: 4px;
+            font-size: 14px;
+            line-height: 1;
+            color: #ed4014
+        }
+
+        .layui-input,
+        .layui-textarea {
+            color: #595959
+        }
+
+        .layui-input[type=number] {
+            line-height: 38px
+        }
+
+        .layui-form-select .layui-input {
+            padding-right: 0
+        }
+
+        .layui-form-select-top .layui-form-select>dl {
+            top: auto;
+            bottom: 42px
+        }
+
+        /** button */
+        .layui-btn-primary {
+            color: #595959;
+            border-color: #e6e6e6
+        }
+
+        .layui-btn-group .layui-btn-primary:first-child {
+            border-left: 1px solid #e6e6e6
+        }
+
+        .layui-btn-group .layui-btn-primary:hover,
+        .layui-btn-primary:hover {
+            color: #262626;
+            border-color: #c9c9c9
+        }
+
+        .layui-btn {
+            -webkit-transition: background-color .2s;
+            transition: background-color .2s
+        }
+
+        /** 圆形按钮 */
+        .btn-circle {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            background: #009688;
+            position: fixed;
+            right: 15px;
+            bottom: 15px;
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+            cursor: pointer
+        }
+
+        .btn-circle:hover {
+            color: #fff;
+            opacity: .8
+        }
+
+        .btn-circle .layui-icon {
+            font-size: 24px
+        }
+
+        /** 组件加图标 */
+        .date-icon,
+        .icon-date {
+            background-image: url(img/icon_date.png);
+            background-repeat: no-repeat;
+            background-position: right center;
+            padding-right: 28px
+        }
+
+        .icon-search {
+            background-image: url(img/icon_search.png);
+            background-repeat: no-repeat;
+            background-position: right center;
+            padding-right: 26px
+        }
+
+        a.icon-text>.layui-icon,
+        span.icon-text>.layui-icon {
+            font-size: 14px;
+            margin-left: 2px
+        }
+
+        .icon-btn {
+            padding: 0 10px
+        }
+
+        /** 辅助样式 */
+        .bg-white,
+        html.bg-white>body {
+            background-color: #fff
+        }
+
+        [ew-href],
+        [lay-tips] {
+            cursor: pointer
+        }
+
+        .inline-block {
+            display: inline-block
+        }
+
+        .pull-right {
+            float: right
+        }
+
+        .pull-left {
+            float: left
+        }
+
+        .text-left {
+            text-align: left
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .text-right {
+            text-align: right
+        }
+
+        .layui-link,
+        .text-primary {
+            color: #009688 !important
+        }
+
+        .text-success {
+            color: #5fb878 !important
+        }
+
+        .text-warning {
+            color: #ffb800 !important
+        }
+
+        .text-danger {
+            color: #ff5722 !important
+        }
+
+        .text-info {
+            color: #01aaed !important
+        }
+
+        .text-muted {
+            color: #c2c2c2 !important
+        }
+
+        .layui-text a:not(.layui-btn) {
+            color: #2d8cf0;
+            cursor: pointer
+        }
+
+        .layui-text a:not(.layui-btn):hover {
+            text-decoration: none
+        }
+
+        .ew-console-wrapper .layui-card {
+            box-shadow: none;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        .layui-card-header {
+            color: #595959;
+            border-bottom: none;
+        }
+
+        .lay-big-font {
+            font-size: 30px;
+            line-height: 36px;
+            padding: 10px 0px 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            color: rgba(0, 0, 0, .85);
+        }
+
+        /** 隐藏滚动条 */
+        .no-scrollbar {
+            overflow-x: hidden !important;
+            overflow-y: hidden !important
+        }
+
+        /** 输入框禁用样式 */
+        input.layui-disabled,
+        input.layui-disabled:hover,
+        textarea.layui-disabled,
+        textarea.layui-disabled:hover {
+            color: #595959 !important;
+            background-color: #f6f6f6
+        }
+
+        /** 下拉菜单 */
+        .dropdown-menu {
+            display: inline-block
+        }
+
+        .dropdown-menu .dropdown-menu-nav {
+            display: none
+        }
+
+        .dropdown-menu+.dropdown-menu,
+        .dropdown-menu+.layui-btn,
+        .layui-btn+.dropdown-menu {
+            margin-left: 10px
+        }
+
+        /** 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+            background: 0 0
+        }
+
+        ::-webkit-scrollbar-track {
+            background: 0 0
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: #c1c1c1
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #a8a8a8
+        }
+
+        .mini-bar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px
+        }
+
+        .mini-bar::-webkit-scrollbar-thumb {
+            border-radius: 3px
+        }
+
+        @media screen and (max-width:768px) {
+            ::-webkit-scrollbar {
+                width: 4px;
+                height: 4px
+            }
+
+            ::-webkit-scrollbar-thumb {
+                border-radius: 2px
+            }
+        }
+
+        /** 地图选择位置弹窗 */
+        #ew-map-select-map {
+            height: 450px
+        }
+
+        #ew-map-select-pois {
+            height: 450px;
+            overflow-x: hidden;
+            overflow-y: auto
+        }
+
+        .ew-map-select-search-list-item {
+            padding: 10px 30px 10px 15px;
+            border-bottom: 1px solid #e8e8e8;
+            cursor: pointer;
+            position: relative
+        }
+
+        .ew-map-select-search-list-item:hover {
+            background: #f2f2f2
+        }
+
+        .ew-map-select-search-list-item:last-child {
+            border-bottom: none
+        }
+
+        .ew-map-select-search-list-item .ew-map-select-search-list-item-title {
+            font-size: 14px;
+            color: #262626
+        }
+
+        .ew-map-select-search-list-item .ew-map-select-search-list-item-address {
+            font-size: 12px;
+            color: #595959;
+            padding-top: 5px
+        }
+
+        .ew-map-select-search-list-item-icon-ok {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%)
+        }
+
+        .ew-map-select-search-list-item-icon-ok .layui-icon {
+            color: #3b74ff
+        }
+
+        .ew-map-select-tool {
+            padding: 5px 15px;
+            box-shadow: 0 1px 0 0 rgba(0, 0, 0, .05)
+        }
+
+        #ew-map-select-center-img {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            width: 26px;
+            margin-left: -13px
+        }
+
+        #ew-map-select-center-img2 {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-size: 12px;
+            display: inline-block;
+            margin-left: -6px;
+            margin-top: -7px;
+            color: #3b74ff
+        }
+
+        .bounceInDown {
+            animation: bounceInDown .5s;
+            animation-direction: alternate;
+            -webkit-animation: bounceInDown .5s;
+            -webkit-animation-direction: alternate
+        }
+
+        @-webkit-keyframes bounceInDown {
+
+            0%,
+            60%,
+            75%,
+            90%,
+            to {
+                -webkit-transition-timing-function: cubic-bezier(.215, .61, .355, 1)
+            }
+
+            0%,
+            to {
+                -webkit-transform: translate3d(0, 0, 0)
+            }
+
+            25% {
+                -webkit-transform: translate3d(0, -30px, 0)
+            }
+
+            50% {
+                -webkit-transform: translate3d(0, -15px, 0)
+            }
+
+            75% {
+                -webkit-transform: translate3d(0, -4px, 0)
+            }
+        }
+
+        @keyframes bounceInDown {
+
+            0%,
+            60%,
+            75%,
+            90%,
+            to {
+                transition-timing-function: cubic-bezier(.215, .61, .355, 1)
+            }
+
+            0%,
+            to {
+                transform: translate3d(0, 0, 0)
+            }
+
+            25% {
+                transform: translate3d(0, -10px, 0)
+            }
+
+            50% {
+                transform: translate3d(0, -20px, 0)
+            }
+
+            75% {
+                transform: translate3d(0, -10px, 0)
+            }
+        }
+
+        #ew-map-select-tips {
+            position: absolute;
+            z-index: 999;
+            background: #fff;
+            max-height: 430px;
+            overflow: auto;
+            top: 48px;
+            left: 56px;
+            width: 280px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+            border: 1px solid #d2d2d2
+        }
+
+        #ew-map-select-tips .ew-map-select-search-list-item {
+            padding: 10px 15px 10px 35px
+        }
+
+        .ew-map-select-search-list-item-icon-search {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%)
+        }
+
+        .ew-map-select-search-list-item-icon-search .layui-icon {
+            color: #8c8c8c
+        }
+
+        /** 表格头部工具栏迷你样式 */
+        .table-tool-mini .layui-table-view {
+            position: relative
+        }
+
+        .table-tool-mini .layui-table-tool {
+            position: absolute;
+            min-height: unset;
+            height: auto;
+            padding: 3px 10px;
+            width: auto;
+            top: -38px;
+            right: -1px;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+            border: 1px solid #e6e6e6;
+            border-bottom: none
+        }
+
+        .table-tool-mini .layui-table-tool .layui-table-tool-temp {
+            padding-right: 0;
+            display: inline-block
+        }
+
+        .table-tool-mini .layui-table-tool .layui-table-tool-self {
+            position: static;
+            display: inline-block
+        }
+
+        .table-tool-mini .layui-table-tool .layui-table-tool-self .layui-inline[lay-event]:first-child {
+            margin: 0
+        }
+
+        .table-tool-mini.full-table .layui-table-tool {
+            top: -35px;
+            height: 1px;
+            padding: 0 10px;
+            background: 0 0;
+            border: none
+        }
+
+        .table-tool-mini.full-table .layui-table-tool:before {
+            content: "";
+            position: absolute;
+            top: -3px;
+            right: 0;
+            left: 0;
+            height: 36px;
+            background-color: #f2f2f2;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+            border: 1px solid #e6e6e6;
+            border-bottom: none
+        }
+
+        /** laydate自适应 */
+        @media screen and (max-width: 768px) {
+            .layui-laydate-range {
+                left: 0 !important;
+                top: 0 !important;
+                right: 0 !important;
+                margin: 10px auto !important;
+                max-width: 95%
+            }
+
+            .layui-laydate-range .layui-laydate-content table,
+            .layui-laydate-range .layui-laydate-main {
+                width: 100%
+            }
+
+            .layui-laydate-range .laydate-main-list-0 .laydate-next-m,
+            .layui-laydate-range .laydate-main-list-0 .laydate-next-y,
+            .layui-laydate-range .laydate-main-list-1 .laydate-prev-m,
+            .layui-laydate-range .laydate-main-list-1 .laydate-prev-y {
+                display: inline-block !important
+            }
+
+            .layui-laydate-range .laydate-main-list-1 .layui-laydate-header {
+                border-top: 1px solid #e2e2e2
+            }
+
+            .layui-laydate-range .laydate-main-list-1 .layui-laydate-content {
+                border-left: none !important
+            }
+
+            .layui-laydate-range .laydate-time-list ol li {
+                padding-left: 0 !important;
+                text-align: center
+            }
+
+            .layui-laydate-range .laydate-time-list ol {
+                overflow: auto !important
+            }
+        }
+
+        /** tree展开箭头朝下 */
+        .layui-tree-spread>div>div>span>.layui-tree-iconArrow:after {
+            border-color: #c0c4cc transparent transparent transparent;
+            top: 6px;
+            left: 0
+        }
+
+        .layui-tree .layui-tree-iconArrow:after {
+            transition: none
+        }
+
+        /** 数据表格内checkbox */
+        .ew-tb-cell-ck .layui-form-checkbox[lay-skin=primary] {
+            padding-left: 22px
+        }
+
+        .ew-tb-cell-ck .layui-form-checkbox[lay-skin=primary] span {
+            padding-right: 5px
+        }
+
+        /** 字段集嵌套数据表格 */
+        .ew-field-group>.layui-elem-field {
+            border-bottom: none;
+            margin: 0
+        }
+
+        .ew-field-group>.ew-field-box {
+            border: 1px solid #e6e6e6;
+            padding: 10px 15px;
+            border-top: none
+        }
+
+        /** 垂直选项卡 */
+        .layui-tab.layui-tab-vertical {
+            position: relative
+        }
+
+        .layui-tab.layui-tab-vertical:after {
+            content: "";
+            clear: both;
+            display: block
+        }
+
+        .layui-tab.layui-tab-vertical>.layui-tab-title {
+            width: 130px;
+            height: auto;
+            border: none;
+            border-right: 1px solid #e9e9e9;
+            box-sizing: border-box;
+            padding: 10px 0;
+            float: left
+        }
+
+        .layui-tab.layui-tab-vertical>.layui-tab-title>li {
+            display: block;
+            margin-right: -1px;
+            border-right: 2px solid transparent;
+            white-space: normal;
+            line-height: normal;
+            padding: 10px 20px;
+            text-align: right
+        }
+
+        .layui-tab.layui-tab-vertical>.layui-tab-title>li.layui-this {
+            border-right: 2px solid #5fb878;
+            color: #5fb878
+        }
+
+        .layui-tab.layui-tab-vertical>.layui-tab-title>li.layui-this:after {
+            display: none
+        }
+
+        .layui-tab.layui-tab-vertical>.layui-tab-title>li>.layui-icon {
+            font-size: 14px;
+            margin-right: 5px
+        }
+
+        .layui-tab.layui-tab-vertical>.layui-tab-content {
+            margin-left: 130px
+        }
+
+        .layui-tab.layui-tab-vertical.layui-tab-vertical-right>.layui-tab-title {
+            float: right;
+            border-right: none;
+            border-left: 1px solid #e9e9e9
+        }
+
+        .layui-tab.layui-tab-vertical.layui-tab-vertical-right>.layui-tab-content {
+            margin-left: 0;
+            margin-right: 130px
+        }
+
+        .layui-tab.layui-tab-vertical.layui-tab-vertical-right>.layui-tab-title>li {
+            text-align: left;
+            border-left: 2px solid transparent;
+            border-right: none
+        }
+
+        .layui-tab.layui-tab-vertical.layui-tab-vertical-right>.layui-tab-title>li.layui-this {
+            border-left: 2px solid #5fb878
+        }
+
+        .layui-tab.layui-tab-vertical.layui-tab-vertical-full>.layui-tab-title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: auto;
+            min-height: 100%
+        }
+
+        .layui-tab.layui-tab-vertical.layui-tab-vertical-right.layui-tab-vertical-full>.layui-tab-title {
+            right: 0;
+            left: auto
+        }
+
+        /** 按钮加载中状态 */
+        .ew-btn-loading {
+            opacity: .8;
+            pointer-events: none;
+            font-size: 0 !important
+        }
+
+        .ew-btn-loading * {
+            display: none !important
+        }
+
+        .ew-btn-loading>.ew-btn-loading-text {
+            font-size: 14px !important;
+            display: inline-block !important
+        }
+
+        .ew-btn-loading.layui-btn-sm>.ew-btn-loading-text,
+        .ew-btn-loading.layui-btn-xs>.ew-btn-loading-text {
+            font-size: 12px !important
+        }
+
+        .ew-btn-loading>.ew-btn-loading-text * {
+            display: inline-block !important
+        }
+
+        /** 搜索展开更多 */
+        .form-search-expand,
+        .form-search-expand:hover {
+            padding: 0;
+            border: none;
+            color: #2d8cf0;
+            box-shadow: none !important
+        }
+
+        .form-search-expand .layui-icon {
+            font-size: 12px;
+            font-weight: 600
+        }
+
+        .form-search-show-expand {
+            display: none !important
+        }
+
+        /** 徽章扩展样式 */
+        .layui-badge-green {
+            color: #52c41a;
+            background: #f6ffed;
+            border: 1px solid #b7eb8f
+        }
+
+        .layui-badge-blue {
+            color: #1890ff;
+            background: #e6f7ff;
+            border: 1px solid #91d5ff
+        }
+
+        .layui-badge-red {
+            color: #f5222d;
+            background: #fff1f0;
+            border: 1px solid #ffa39e
+        }
+
+        .layui-badge-yellow {
+            color: #faad14;
+            background: #fffbe6;
+            border: 1px solid #ffe58f
+        }
+
+        .layui-badge-gray {
+            color: #8c8c8c;
+            background: #fafafa;
+            border: 1px solid #ccc
+        }
+
+        .layui-badge {
+            height: 20px;
+            line-height: 19px;
+            box-sizing: border-box
+        }
+
+        .layui-badge-list .layui-badge {
+            height: 23px;
+            line-height: 22px;
+            margin-bottom: 8px
+        }
+
+        .layui-badge-list .layui-badge+.layui-badge {
+            margin-left: 6px
+        }
+
+        .layui-badge-list .layui-badge.layui-bg-gray {
+            border: 1px solid #ccc;
+            background-color: #fafafa !important
+        }
+
+        .layui-card .layui-card-header .layui-badge.pull-right {
+            top: 50%;
+            margin-top: -10px
+        }
+
+        /** 锁屏 */
+        .ew-lock-screen-group {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 19891099
+        }
+
+        /** ios下iframe兼容 */
+        .ios-iframe-body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0
+        }
+
+        /** 应用快捷块样式 */
+        .console-app-group {
+            padding: 16px;
+            border-radius: 4px;
+            text-align: center;
+            background-color: #fff;
+            cursor: pointer
+        }
+
+        .console-app-group .console-app-icon,
+        .console-user-group .console-user-group-head .console-app-icon {
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            margin-bottom: 6px;
+            display: inline-block;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            font-size: 32px;
+            color: #69c0ff
+        }
+
+        .console-app-group:hover {
+            box-shadow: 0 0 15px rgba(0, 0, 0, .08)
+        }
+
+        /** 小组成员 */
+        .console-user-group {
+            position: relative;
+            padding: 10px 0 10px 60px
+        }
+
+        .console-user-group .console-user-group-head {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            margin-top: -16px
+        }
+
+        .console-user-group .layui-badge {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            margin-top: -10px
+        }
+
+        .console-user-group .console-user-group-name {
+            line-height: 1.2
+        }
+
+        .console-user-group .console-user-group-desc {
+            color: #8c8c8c;
+            line-height: 1;
+            font-size: 12px;
+            margin-top: 5px
+        }
+
+        /** 卡片轮播图样式 */
+        .admin-carousel .layui-carousel-ind {
+            position: absolute;
+            top: -41px;
+            text-align: right
+        }
+
+        .admin-carousel .layui-carousel-ind ul {
+            background: 0 0
+        }
+
+        .admin-carousel .layui-carousel-ind li {
+            background-color: #e2e2e2
+        }
+
+        .admin-carousel .layui-carousel-ind li.layui-this {
+            background-color: #999
+        }
+
+        /** 广告位轮播图 */
+        .admin-news .layui-carousel-ind {
+            height: 45px
+        }
+
+        .admin-news a {
+            display: block;
+            line-height: 60px;
+            text-align: center;
+            border-radius: 4px
+        }
+
+        /** 消息列表样式 */
+        .message-tab {
+            padding: 5px 0 0 0;
+            margin: 0
+        }
+
+        .message-tab .layui-tab-title {
+            text-align: center
+        }
+
+        .message-tab .layui-tab-content {
+            padding: 5px 0 0 0
+        }
+
+        .message-list {
+            overflow: auto
+        }
+
+        .message-list-item {
+            padding: 10px 24px;
+            border-bottom: 1px solid #e8e8e8;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            display: flex;
+            -ms-flex: 1 1;
+            flex: 1 1
+        }
+
+        .message-btn-clear:hover,
+        .message-btn-more:hover,
+        .message-list-item:hover {
+            background: #f2f2f2
+        }
+
+        .message-item-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+            display: block;
+            margin-top: 4px
+        }
+
+        .message-item-right {
+            display: block;
+            flex: 1 0;
+            line-height: 24px
+        }
+
+        .message-item-title {
+            font-size: 14px;
+            color: rgba(0, 0, 0, .65)
+        }
+
+        .message-item-text {
+            color: rgba(0, 0, 0, .45);
+            font-size: 12px
+        }
+
+        .message-btn-clear,
+        .message-btn-more {
+            display: block;
+            padding: 10px 5px;
+            text-align: center;
+            line-height: 24px;
+            color: #333
+        }
+
+        .message-btn-clear {
+            background: #fff;
+            border-top: 1px solid #e8e8e8
+        }
+
+        .message-btn-more {
+            color: #666;
+            font-size: 13px
+        }
+
+        .message-list-empty {
+            text-align: center;
+            color: rgba(0, 0, 0, .45);
+            padding: 73px 0 88px;
+            display: none;
+        }
+
+        .message-list-empty img {
+            height: 76px;
+            margin-bottom: 16px
+        }
+
+        /** 便签样式 */
+        .note-wrapper {
+            padding-left: 15px;
+            margin-bottom: 10px;
+            padding-top: 15px;
+        }
+
+        .note-item {
+            width: 113px;
+            height: 100px;
+            display: inline-block;
+            margin: 0 6px 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            position: relative;
+            cursor: pointer
+        }
+
+        .note-item:hover {
+            background-color: #f1f1f1
+        }
+
+        .note-item .note-item-content {
+            font-size: 14px;
+            color: #666;
+            height: 78px;
+            overflow: hidden;
+            word-wrap: break-word
+        }
+
+        .note-item .note-item-time {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px
+        }
+
+        .note-empty {
+            text-align: center;
+            color: rgba(0, 0, 0, .45);
+            padding: 73px 0 88px;
+            display: none
+        }
+
+        .note-empty .layui-icon {
+            margin-bottom: 10px;
+            display: inline-block;
+            font-size: 60px
+        }
+
+        .note-item-del {
+            position: absolute;
+            right: 3px;
+            top: 3px;
+            display: none;
+            color: #ff5722
+        }
+
+        .note-item-del.show {
+            display: inline-block
+        }
+
+        .note-item-del .layui-icon {
+            font-size: 22px
+        }
+
+        .layui-layer-admin textarea {
+            width: 260px;
+            height: 112px;
+            color: #666666;
+            word-wrap: break-word;
+            resize: none;
+            margin: 20px 5px;
+            margin-bottom: 0;
+            border: none;
+            padding: 0 10px;
             overflow: hidden;
         }
 
-        .left-bar {
-            background-color: var(--bg-color);
-            width: 230px;
-            border-right: 1px solid #e3e7f7;
-            position: relative;
+        /** 单色导航图标 */
+        @font-face {
+            font-family: easyxin-icon-nav;
+            src: url(/font/nav/iconfont.eot);
+            src: url(/font/nav/iconfont.eot?#iefix) format('embedded-opentype'), url(/font/nav/iconfont.woff2) format('woff2'), url(/font/nav/iconfont.woff) format('woff'), url(/font/nav/iconfont.ttf) format('truetype'), url(/font/nav/iconfont.svg#easyxin-icon-nav) format('svg')
         }
 
-        .left-content {
-            padding: 40px;
-        }
-
-        .item {
-            color: var(--main-color);
-            margin-bottom: 14px;
-            font-weight: 500;
-        }
-
-        .item svg {
-            width: 14px;
-            height: 14px;
-            color: currentcolor;
-            margin-right: 10px;
-        }
-
-        .category-list {
-            margin-top: 50px;
-        }
-
-        .category-list .item {
-            color: var(--secondary-color);
-        }
-
-        .actions {
-            padding: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .circle {
-            border-radius: 50%;
-            width: 10px;
-            height: 10px;
-            background-color: #fe4d46;
-            box-shadow: 14px 0 0 0 #fbc023, 28px 0 0 0 #7dd21f;
-        }
-
-        .circle-2 {
-            border-radius: 50%;
-            width: 4px;
-            height: 4px;
-            background-color: #d5d7e3;
-            box-shadow: -6px 0 0 0 #d5d7e3, 6px 0 0 0 #d5d7e3;
-        }
-
-        .right-bar {
-            width: 320px;
-            border-left: 1px solid #e3e7f7;
-            display: flex;
-            flex-direction: column;
-            padding-top: 30px;
-        }
-
-        .right-bar .header {
-            font-size: 20px;
-            color: var(--main-text-color);
-            margin-left: 30px;
-            box-shadow: 0 1px 0 0 rgba(0, 0, 0, .05);
-            height: 40px;
-            margin-right: 30px;
-        }
-
-        .top-part {
-            padding: 30px;
-            align-self: flex-end;
-        }
-
-        .top-part svg {
-            width: 14px;
-            height: 14px;
-            color: var(--main-color);
-            margin-right: 14px;
-        }
-
-        .top-part .count {
-            font-size: 12px;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            background-color: #623ce8;
-            color: #fff;
-            justify-content: center;
-        }
-
-        .right-content {
-            padding: 10px 40px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .task-box {
-            position: relative;
-            border-radius: 12px;
-            width: 100%;
-            margin: 20px 0;
-            padding: 16px;
-            cursor: pointer;
-            box-shadow: 2px 2px 4px 0px #ebebeb;
-        }
-
-        .task-box:hover {
-            transform: scale(1.02);
-        }
-
-        .time {
-            margin-bottom: 6px;
-            opacity: 0.4;
-            font-size: 10px;
-        }
-
-        .task-name {
-            font-size: 14px;
-            font-weight: 500;
-            opacity: 0.6;
-        }
-
-        .yellow {
-            background-color: var(--box-color);
-        }
-
-        .blue {
-            background-color: var(--box-color-2);
-        }
-
-        .red {
-            background-color: var(--box-color-3);
-        }
-
-        .green {
-            background-color: var(--box-color-4);
-        }
-
-        .more-button {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            background-color: #8e92a4;
-            box-shadow: 0 -4px 0 0 #8e92a4, 0 4px 0 0 #8e92a4;
-            opacity: 0.4;
-            right: 20px;
-            top: 30px;
-            cursor: pointer;
-        }
-
-        .members {
-            display: flex;
-            margin-top: 14px;
-        }
-
-        .members img {
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            margin-right: 4px;
-            object-fit: cover;
-        }
-
-        .page-content {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            padding: 20px 20px 0 20px;
-        }
-
-        .page-content .header {
-            font-size: 26px;
-            color: var(--main-color);
-            box-shadow: 0 1px 0 0 rgba(0, 0, 0, .05);
-        }
-
-        .content-categories {
-            display: flex;
-            justify-content: space-evenly;
-            width: 100%;
-            border-bottom: 1px solid #ddd;
-            padding: 20px 0;
-        }
-
-        .nav-item {
-            display: none;
-        }
-
-        .category {
-            font-weight: 500;
-            color: var(--secondary-color);
-            border-bottom: 1px solid #ddd;
-            transition: .4s ease-in;
-            padding: 20px 30px;
-            cursor: pointer;
-        }
-
-        #opt-1:checked+label,
-        #opt-2:checked+label,
-        #opt-3:checked+label,
-        #opt-4:checked+label {
-            color: var(--checkbox-color);
-            border-bottom: 2px solid var(--checkbox-color);
-        }
-
-        .task-item {
-            display: none;
-        }
-
-        .tasks-wrapper {
-            padding: 30px 0;
-            flex: 1;
-            overflow-y: auto;
-            height: 100%;
-            padding-right: 8px;
-        }
-
-        .task {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-bottom: 16px;
-            color: var(--task-color);
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .task:hover {
-            /* transform: translatex(2px); */
-        }
-
-        .task label {
-            cursor: pointer;
-        }
-
-        label .label-text {
-            position: relative;
-        }
-
-        label .label-text:before {
-            content: '';
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            border: 1px solid #ddd;
-            border-radius: 2px;
-            left: -24px;
-            transition: .2s ease;
-        }
-
-        .task-item:checked+label .label-text:before {
-            background-color: var(--checkbox-color);
-            border: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-size: 10px;
-            background-position: center;
-            border: 1px solid var(--checkbox-color);
-        }
-
-        .tag {
-            font-size: 10px;
-            padding: 4px 8px;
-            border-radius: 20px;
-        }
-
-        .tag.approved {
-            background-color: var(--tag-color-one);
-            color: var(--tag-color-text-one);
-        }
-
-        .tag.progress {
-            background-color: var(--tag-color-two);
-            color: var(--tag-color-text-two);
-        }
-
-        .tag.review {
-            background-color: var(--tag-color-three);
-            color: var(--tag-color-text-three);
-        }
-
-        .tag.waiting {
-            background-color: var(--tag-color-four);
-            color: var(--tag-color-text-four);
-        }
-
-        .upcoming {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
-            padding-top: 20px;
-            margin-bottom: 30px;
-        }
-
-        @media screen and (max-width: 900px) {
-            .left-bar {
-                display: none;
-            }
-        }
-
-        @media screen and (max-width: 700px) {
-            .task-manager {
-                flex-direction: column;
-                overflow-y: auto;
-            }
-
-            .right-bar,
-            .page-content {
-                width: 100%;
-                display: block;
-            }
-
-            .tasks-wrapper {
-                height: auto;
-            }
-        }
-
-        @media screen and (max-width: 520px) {
-            .page-content {
-                padding: 40px 10px 0 10px;
-            }
-
-            .right-content {
-                padding: 10px 16px;
-            }
-
-            .category {
-                padding: 20px;
-            }
-        }
-
-        .site-title {
-            margin: 30px 0 20px;
-        }
-
-        .site-title fieldset {
-            border: none;
-            padding: 0;
-            border-top: 1px solid #eee;
-        }
-
-        .site-title fieldset legend {
-            margin-left: 20px;
-            padding: 0 10px;
-            font-size: 22px;
-            font-weight: 300;
-        }
-
-
-        .sites {
-            color: inherit;
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            flex-flow: row wrap;
-            align-content: space-between;
-            -webkit-box-pack: center;
-            justify-content: center;
-        }
-
-        .sites>div {
-            border-radius: 4px;
-            width: 188px;
-            height: 120px;
-            margin: 1rem;
-            box-sizing: border-box;
-            display: block;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.28);
-            -webkit-transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-            -webkit-appearance: none;
-        }
-
-        .sites>div:hover,
-        .sites>div:focus,
-        .sites>div:active {
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
-            -webkit-transform: translateY(-5px);
-            transform: translateY(-5px);
-            cursor: pointer;
-        }
-
-        .sites>div img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .sites .title-box {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 25px 10px;
-        }
-
-        .title-box span {
-            color: white;
+        .easyxin-icon-nav {
+            font-family: easyxin-icon-nav !important;
             font-size: 16px;
-            transform: translateY(-5px);
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
         }
 
-        .title-box .title-text {
-            font-size: 20px;
-            font-weight: 800;
-            height: 24px;
-            margin-top: 10px;
-        }
-        
-
-        .title-box .state {
-            font-size: 12px;
+        .easyxin-icon-nav-anpaipaiche:before {
+            content: "\e60a"
         }
 
-        #GitHub {
-            background: #25292e;
+        .easyxin-icon-nav-gongchengguanli:before {
+            content: "\e609"
         }
 
-        #GitHub img {
-            -webkit-filter: invert(1);
-            filter: invert(1);
+        .easyxin-icon-nav-zichanguanli:before {
+            content: "\e608"
         }
 
-        #Inbox {
-            background: #4285F4;
+        .easyxin-icon-nav-caigouguanli:before {
+            content: "\e607"
         }
 
-        #Inbox img {
-            -webkit-filter: invert(0);
-            filter: invert(0);
+        .easyxin-icon-nav-cangkuguanli:before {
+            content: "\e606"
         }
 
-        #Reddit {
-            background: #ff4500;
+        .easyxin-icon-nav-yuangongguanli:before {
+            content: "\e605"
         }
 
-        #Reddit img {
-            -webkit-filter: invert(1);
-            filter: invert(1);
+        .easyxin-icon-nav-dingdanguanli:before {
+            content: "\e604"
         }
 
-        #Spotify {
-            background: #2ebd59;
+        .easyxin-icon-nav-wuliaoguanli:before {
+            content: "\e603"
         }
 
-        #Spotify img {
-            -webkit-filter: invert(1);
-            filter: invert(1);
+        .easyxin-icon-nav-waixieguanli:before {
+            content: "\e602"
         }
 
-        #Keep {
-            background: #ffbb00;
+        /** 单色前三名 */
+        @font-face {
+            font-family: currency-icon-ranking;
+            src: url(/font/ranking/iconfont.eot);
+            src: url(/font/ranking/iconfont.eot?#iefix) format('embedded-opentype'), url(/font/ranking/iconfont.woff2) format('woff2'), url(/font/ranking/iconfont.woff) format('woff'), url(/font/ranking/iconfont.ttf) format('truetype'), url(/font/ranking/iconfont.svg#currency-icon-ranking) format('svg')
         }
 
-        #Keep img {
-            -webkit-filter: invert(0);
-            filter: invert(0);
+        .currency-icon-ranking {
+            font-family: currency-icon-ranking !important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
         }
 
-        #Messenger {
-            background: #0084ff;
+        .currency-icon-ranking-fuben3:before {
+            content: "\e60d"
         }
 
-        #Messenger img {
-            -webkit-filter: invert(0);
-            filter: invert(0);
+        .currency-icon-ranking-fuben2:before {
+            content: "\e60c"
+        }
+
+        .currency-icon-ranking-fuben1:before {
+            content: "\e60b"
+        }
+
+        .currency-icon-ranking-huangguan:before {
+            content: "\e601"
+
         }
     </style>
 </head>
 
 <body>
+    <div class="layui-body">
+        <div class="layui-fluid ew-console-wrapper">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <p style="font-size:14px;color: rgba(0,0,0,.45);">总订单金额
+                                <span class="pull-right">
+                                    <i class="ri-exchange-cny-fill ri-xl" style="vertical-align: -0.3em;"></i>
+                                </span>
+                            </p>
+                            <p class="lay-big-font"><span style="font-size: 26px;line-height: 1;">¥&nbsp;</span>85,84787
+                            </p>
+                            <div style="height: 40px;">
+                                <p>
+                                    <span style="margin-right: 30px;">周同比 17% &nbsp;
+                                        <svg style="vertical-align: -0.5em;" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" width="24" height="24">
+                                            <path fill="none" d="M0 0h24v24H0z" />
+                                            <path d="M12 8l6 6H6z" fill="rgba(231,76,60,1)" /></svg>
+                                    </span>
+                                    <span>日同比 11% &nbsp;
+                                        <svg style="vertical-align: -0.5em;" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" width="24" height="24">
+                                            <path fill="none" d="M0 0h24v24H0z" />
+                                            <path d="M12 16l-6-6h12z" fill="rgba(47,204,113,1)" /></svg>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <p style="padding: 10px 15px 0px 15px;border-top: 1px solid #f0f0f0;">日销售金额<span
+                                style="padding: 0 12px;">¥&nbsp;63 万元</span></p>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <p style="font-size:14px;color: rgba(0,0,0,.45);">访问量
+                                <span class="pull-right">
+                                    <i class="ri-funds-line ri-xl" style="vertical-align: -0.3em;"></i>
+                                </span>
+                            </p>
+                            <p class="lay-big-font"><span style="font-size: 26px;line-height: 1;"></span>92,648
+                            </p>
+                            <div style="height: 40px;" id="ECharts01">
 
-    <div class="task-manager">
-        <div class="page-content">
-            <div class="header">
-                <div class="sites">
-                    <div id="GitHub">
-                        <div class="title-box">
-                            <img src="../../images/home_index/logo--github.svg">
-                            <span class="title-text">6</span>
-                            <span class="state">——GitHub收藏——</span>
+                            </div>
                         </div>
-                    </div>
-                    <div id="Inbox">
-                        <div class="title-box">
-                            <img src="../../images/home_index/logo--inbox.svg">
-                            <span class="title-text">324</span>
-                            <span class="state">——邮件——</span>
-                        </div>
-                    </div>
-                    <div id="Reddit">
-                        <div class="title-box">
-                            <img src="../../images/home_index/logo--reddit.svg">
-                            <span class="title-text">124</span>
-                            <span class="state">——新闻发布——</span>
-                        </div>
-                    </div>
-                    <div id="Spotify">
-                        <div class="title-box">
-                            <img src="../../images/home_index/logo--spotify.svg">
-                            <span class="title-text">224</span>
-                            <span class="state">——媒体音乐——</span>
-                        </div>
-                    </div>
-                    <div id="Keep">
-                        <div class="title-box">
-                            <img src="../../images/home_index/logo--keep.svg">
-                            <span class="title-text">476</span>
-                            <span class="state">——运动社区——</span>
-                        </div>
-                    </div>
-                    <div id="Messenger">
-                        <div class="title-box">
-                            <img src="../../images/home_index/logo--messenger.svg">
-                            <span class="title-text">2324</span>
-                            <span class="state">——消息通知——</span>
-                        </div>
-                    </div>
-                </div>
+                        <p style="padding: 10px 15px 0px 15px;border-top: 1px solid #f0f0f0;">
+                            日访问量<span style="padding: 0 10px;">1675</span>
+                            <span style="margin-left: 20px;">日同比 26% &nbsp;
+                                <svg style="vertical-align: -0.5em;" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path d="M12 8l6 6H6z" fill="rgba(231,76,60,1)" /></svg>
+                            </span>
+                        </p>
 
+                    </div>
+                </div>
+                <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <p style="font-size:14px;color: rgba(0,0,0,.45);">活跃用户
+                                <span class="pull-right">
+                                    <i class="ri-ghost-2-line ri-xl" style="vertical-align: -0.3em;"></i>
+                                </span>
+                            </p>
+                            <p class="lay-big-font"><span style="font-size: 26px;line-height: 1;"></span>12684
+                            </p>
+                            <div style="height: 40px;" id="ECharts02">
+
+                            </div>
+                        </div>
+                        <p style="padding: 10px 15px 0px 15px;border-top: 1px solid #f0f0f0;">
+                            今日活跃用户<span style="padding: 0 10px;">782</span>
+                            <span style="margin-left: 20px;">日同比 6% &nbsp;
+                                <svg style="vertical-align: -0.5em;" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path d="M12 16l-6-6h12z" fill="rgba(47,204,113,1)" /></svg>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <p style="font-size:14px;color: rgba(0,0,0,.45);">总支出金额
+                                <span class="pull-right">
+                                    <i class="ri-hand-coin-line ri-xl" style="vertical-align: -0.3em;"></i>
+                                </span>
+                            </p>
+                            <div class="layui-row" style="height: 96px;">
+                                <div style="width: 40%;height: 100%;float: left;">
+                                    <p class="lay-big-font"><span
+                                            style="font-size: 26px;line-height: 1;">¥&nbsp;</span>4675217
+                                    </p>
+                                    <p>
+                                        <span>周同比12% &nbsp;
+                                            <svg style="vertical-align: -0.5em;" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24" width="24" height="24">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path d="M12 8l6 6H6z" fill="rgba(231,76,60,1)" /></svg>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div style="width:60%;height: 100%;float: left;" id="ECharts03">
+
+                                </div>
+                            </div>
+                        </div>
+                        <p style="padding: 10px 15px 0px 15px;border-top: 1px solid #f0f0f0;">今日总支出<span
+                                style="padding: 0 10px;">68541</span></p>
+                    </div>
+                </div>
             </div>
-            <div class="tasks-wrapper">
-                <div class="task">
-                    <div id="echarts" style="width: 100%;height:400px;"></div>
+
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-sm8">
+                    <div class="layui-row">
+                        <div class="layui-card">
+                            <div class="layui-card-header">全国用户分布</div>
+                            <div class="layui-card-body">
+                                <div id="ECharts04" style="min-height: 420px;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="site-title">
-                    <fieldset>
-                        <legend><a name="card">登录日志</a></legend>
-                    </fieldset>
-                </div>
-                <div class="task">
-                    <table class="layui-table"
-                        lay-data="{height:460, url:'/data/user/loginlog.json', page:true, id:'loginlogTable'}"
-                        lay-filter="test">
-                        <thead>
-                            <tr>
-                                <th lay-data="{field:'userName', minWidth:180}">用户名</th>
-                                <th lay-data="{field:'IP', minWidth:180}">IP</th>
-                                <th lay-data="{field:'status', minWidth:180}">状态</th>
-                                <th lay-data="{field:'creationTime', minWidth:160, sort: true}">登陆时间</th>
-                            </tr>
-                        </thead>
-                    </table>
+                <div class="layui-col-sm4">
+                    <div class="layui-row ">
+                        <div class="layui-card">
+                            <div class="layui-card-header">科目通过人数比例</div>
+                            <div class="layui-card-body">
+                                <div id="ECharts05" style="min-height: 420px;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="right-bar">
-            <div class="header">📘 时间安排</div>
-            <div class="right-content">
-                <div class="task-box yellow">
-                    <div class="description-task">
-                        <div class="time">08:00 - 09:00 AM</div>
-                        <div class="task-name">产品评论</div>
+
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-lg8 layui-col-md7">
+                    <div class="layui-card">
+                        <div class="layui-card-header">2018年 - 2019年 | 销售趋势</div>
+                        <div class="layui-card-body">
+                            <div class="layui-row">
+                                <div class="layui-card">
+                                    <div class="layui-card-body">
+                                        <div id="ECharts06" style="min-height: 220px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="more-button"></div>
-                    <div class="members">
-                        <img src="../../images/home_index/13229601055312870.jpeg" alt="member">
-                        <img src="../../images/home_index/13229601083232827.jpeg" alt="member-2">
-                        <img src="../../images/home_index/13229601090599982.jpeg" alt="member-3">
-                        <img src="../../images/home_index/13229601096150399.jpeg" alt="member-4">
-                    </div>
-                </div>
-                <div class="task-box blue">
-                    <div class="description-task">
-                        <div class="time">10:00 - 11:00 AM</div>
-                        <div class="task-name">设计会议</div>
-                    </div>
-                    <div class="more-button"></div>
-                    <div class="members">
-                        <img src="../../images/home_index/13229601100940884.jpeg" alt="member">
-                        <img src="../../images/home_index/13229601106030438.jpeg" alt="member-2">
-                        <img src="../../images/home_index/13229601110561620.jpeg" alt="member-3">
-                    </div>
-                </div>
-                <div class="task-box red">
-                    <div class="description-task">
-                        <div class="time">01:00 - 02:00 PM</div>
-                        <div class="task-name">团队会议</div>
-                    </div>
-                    <div class="more-button"></div>
-                    <div class="members">
-                        <img src="../../images/home_index/13229601116740342.jpeg" alt="member">
-                        <img src="../../images/home_index/13229601121691898.jpeg" alt="member-2">
-                        <img src="../../images/home_index/13229601126541856.jpeg" alt="member-3">
-                        <img src="../../images/home_index/13229601131469331.jpeg" alt="member-4">
+
+                    <div class="layui-card">
+                        <div class="layui-card-header">登录日志</div>
+                        <div class="layui-card-body">
+                            <table class="layui-table"
+                                lay-data="{height:384, url:'/data/user/loginlog.json', page:true, limit: 10 ,skin: 'line', even: true,size: 'sm'}"
+                                lay-filter="test">
+                                <thead>
+                                    <tr>
+                                        <th lay-data="{field:'userName'}">用户名</th>
+                                        <th lay-data="{field:'IP'}">IP</th>
+                                        <th lay-data="{field:'status'}">状态</th>
+                                        <th lay-data="{field:'creationTime', sort: true}">登陆时间</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div class="task-box green">
-                    <div class="description-task">
-                        <div class="time">03:00 - 04:00 PM</div>
-                        <div class="task-name">提交审核</div>
+                <div class="layui-col-lg4 layui-col-md5">
+                    <div class="layui-card">
+                        <div class="layui-card-header">安全情况</div>
+                        <div class="layui-card-body">
+                            <div id="ECharts07" style="min-height: 260px;"></div>
+                        </div>
                     </div>
-                    <div class="more-button"></div>
-                    <div class="members">
-                        <img src="../../images/home_index/13229601136640072.jpeg" alt="member">
-                        <img src="../../images/home_index/13229601141576473.jpeg" alt="member-2">
-                        <img src="../../images/home_index/13229601146097705.jpeg" alt="member-3">
-                        <img src="../../images/home_index/13229601150827945.jpeg" alt="member-4">
-                        <img src="../../images/home_index/13229601155784851.jpeg" alt="member-5">
+                    <div class="layui-card">
+                        <div class="layui-card-header">最新订单</div>
+                        <div class="layui-card-body">
+                            <table class="layui-table layui-text">
+                                <colgroup>
+                                    <col width="80">
+                                    <col>
+                                    <col width="90">
+                                    <col>
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>订货单</td>
+                                        <td>Y20200824</td>
+                                        <td>下单客户</td>
+                                        <td><span class="layui-badge layui-badge-red">张三</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>订货单</td>
+                                        <td>Y20200824</td>
+                                        <td>下单客户</td>
+                                        <td><span class="layui-badge layui-badge-yellow">李四</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>订货单</td>
+                                        <td>Y20200824</td>
+                                        <td>下单客户</td>
+                                        <td><span class="layui-badge layui-badge-green">王五</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="task-box blue">
-                    <div class="description-task">
-                        <div class="time">08:00 - 09:00 PM</div>
-                        <div class="task-name">任务分发</div>
+                    <div class="layui-card">
+                        <div class="layui-card-header">星级客户</div>
+                        <div class="layui-card-body">
+                            <div class="console-user-group">
+                                <div class="console-user-group-head">
+                                    <i class="ri-trophy-line ri-2x" style="color: #1890ff;"></i>
+                                </div>
+                                <div class="console-user-group-name">王五</div>
+                                <div class="console-user-group-desc">13800000000</div>
+                                <span class="layui-badge layui-badge-blue">￥684104.00</span>
+                            </div>
+                            <div class="console-user-group">
+                                <div class="console-user-group-head">
+                                    <i class="ri-medal-line ri-2x" style="color: #faad14;"></i>
+                                </div>
+                                <div class="console-user-group-name">张三</div>
+                                <div class="console-user-group-desc">13800000000</div>
+                                <span class="layui-badge layui-badge-yellow">￥475211.00</span>
+                            </div>
+                            <div class="console-user-group">
+                                <div class="console-user-group-head">
+                                    <i class="ri-award-line ri-2x" style="color: #52c41a;"></i>
+                                </div>
+                                <div class="console-user-group-name">李四</div>
+                                <div class="console-user-group-desc">13800000000</div>
+                                <span class="layui-badge layui-badge-green">￥207457.00</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="more-button"></div>
-                    <div class="members">
-                        <img src="../../images/home_index/13229601160186764.jpeg" alt="member">
-                        <img src="../../images/home_index/13229601165433684.jpeg" alt="member-2">
-                        <img src="../../images/home_index/13229601170013443.jpeg" alt="member-3">
-                        <img src="../../images/home_index/13229601174745662.jpeg" alt="member-4">
-                        <img src="../../images/home_index/13229601179371919.jpeg" alt="member-5">
-                    </div>
-                </div>
-                <div class="task-box yellow">
-                    <div class="description-task">
-                        <div class="time">11:00 - 12:00 PM</div>
-                        <div class="task-name">实施</div>
-                    </div>
-                    <div class="more-button"></div>
-                    <div class="members">
-                        <img src="../../images/home_index/13229601183928270.jpeg" alt="member">
-                        <img src="../../images/home_index/13229601160186764.jpeg" alt="member-2">
-                        <img src="../../images/home_index/13229601090599982.jpeg" alt="member-3">
-                        <img src="../../images/home_index/13229601136640072.jpeg" alt="member-4">
-                    </div>
-                </div>
-                <div class="task-box red">
-                    <div class="description-task">
-                        <div class="time">11:00 - 12:00 PM</div>
-                        <div class="task-name">运营</div>
-                    </div>
-                    <div class="more-button"></div>
-                    <div class="members">
-                        <img src="../../images/home_index/13229601055312870.jpeg" alt="member">
-                        <img src="../../images/home_index/13229601083232827.jpeg" alt="member-2">
-                        <img src="../../images/home_index/13229601096150399.jpeg" alt="member-3">
-                        <img src="../../images/home_index/13229601100940884.jpeg" alt="member-4">
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</body>
-<script src="/js/jquery.js"></script>
-<script src="/layui/layui.js"></script>
-<script src="/js/common.js"></script>
-<script src="/static/echarts/echarts.min.js"></script>
-<script src="/static/echarts/echartsTheme.js"></script>
-<script>
-    option = {
-        // title: {
-        //     text: '折线图堆叠'
-        // },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['邮件营销', '联盟广告', '视频广告', '直接访问']
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                magicType: { type: ['line', 'bar'] },
-                restore: {},
-                saveAsImage: {}
-            }
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                name: '邮件营销',
-                type: 'line',
-                stack: '总量',
-                data: [120, 132, 23, 134, 90, 230, 210],
-                markPoint: {
-                    data: [
-                        { type: 'max', name: '最大值' },
-                        { type: 'min', name: '最小值' }
-                    ]
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-alpha.1/echarts.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+
+
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+        })
+    </script>
+
+    <script>
+        var ECharts01 = echarts.init(document.getElementById('ECharts01'));
+        var option01 = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
                 }
             },
-            {
-                name: '联盟广告',
+            grid: {
+                top: 2,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                containLabel: true
+            },
+            xAxis: [{
+                show: false,
+                data: ['0:00', '2:00', '4:00', '6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
+            }],
+            yAxis: [{
+                show: false,
+                type: 'value',
+                data: ['13:00', '13:00', '13:00', '13:05', '13:10', '13:00', '13:05', '13:10', '13:00', '13:05', '13:10', '13:15', '13:20', '13:25', '13:30', '13:35', '13:00', '13:05', '13:10', '13:15', '13:20', '13:25', '13:30', '13:35',]
+
+            }],
+            series: [{
+                name: 'PV',
                 type: 'line',
-                stack: '总量',
-                data: [220, 182, 191, 234, 20, 330, 310],
-                markPoint: {
-                    data: [
-                        { type: 'max', name: '最大值' },
-                        { type: 'min', name: '最小值' }
-                    ]
+                smooth: true,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        color: "#16D9F0"
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: {
+                            type: 'linear',
+                            x: 0,
+                            y: 0,
+                            x2: 0,
+                            y2: 1,
+                            colorStops: [{
+                                offset: 0,
+                                color: 'rgba(22,217,240, 1)' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: 'rgba(22,217,240, 0)' // 100% 处的颜色
+                            }],
+                            global: false // 缺省为 false
+                        },
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#16D9F0',
+                    },
+                    emphasis: {
+                        show: true,
+                        borderWidth: 1,
+                    },
+                },
+                data: ['2', '156', '129', '3', '126', '7', '99', '143', '50', '180', '67', '142',],
+            }]
+        };
+        ECharts01.setOption(option01);
+
+
+        var ECharts02 = echarts.init(document.getElementById('ECharts02'));
+        var option02 = {
+            color: ['#60ABFC',],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
                 }
             },
-            {
-                name: '视频广告',
-                type: 'line',
-                stack: '总量',
-                data: [150, 232, 41, 154, 190, 410, 330],
-                markPoint: {
-                    data: [
-                        { type: 'max', name: '最大值' },
-                        { type: 'min', name: '最小值' }
-                    ]
+            legend: {
+                orient: 'horizontal',
+                data: ['2020-8-13', '2020-8-14', '2020-8-15', '2020-8-16', '2020-8-17', '2020-8-18', '2020-8-19', '2020-8-20', '2020-8-21', '2020-8-22'],
+                textStyle: {
+                    color: '#858FA6',
+                    fontFamily: 'Microsoft YAHei,serf'
                 }
             },
-            {
-                name: '直接访问',
-                type: 'line',
-                stack: '总量',
-                data: [320, 332, 301, 334, 70, 330, 320],
-                markPoint: {
-                    data: [
-                        { type: 'max', name: '最大值' },
-                        { type: 'min', name: '最小值' }
-                    ]
+            grid: {
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                containLabel: true
+            },
+            xAxis: {
+                data: ['2020-8-13', '2020-8-14', '2020-8-15', '2020-8-16', '2020-8-17', '2020-8-18', '2020-8-19', '2020-8-20', '2020-8-21', '2020-8-22'],
+                axisLabel: {
+                    show: false,
+                    color: '#858fa6'
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    lineStyle: {
+                        width: 1,
+                        color: '#E2E2E2'
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        width: 1,
+                        color: '#E2E2E2'
+                    }
                 }
-            }
-        ]
-    };
-    var myChart = echarts.init(document.getElementById('echarts'), 'macarons');
-    myChart.setOption(option);
-    setTimeout(function () {
-        window.onresize = function () {
-            myChart.resize();
+            },
+            yAxis: {
+                data: [],
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    lineStyle: {
+                        width: 1,
+                        color: '#E2E2E2'
+                    }
+                },
+                axisLabel: {
+                    color: '#858fa6'
+                },
+                axisLine: {
+                    lineStyle: {
+                        width: 0,
+                        color: '#E2E2E2',
+                        show: false
+                    }
+                }
+            },
+            series: [{
+                name: '数量',
+                type: 'bar',
+                data: [119, 102, 126, 118, 107, 100, 104, 80, 140, 100],
+                barGap: 0,
+                barWidth: '60%'
+            }]
+        };
+        ECharts02.setOption(option02);
+
+
+        var ECharts03 = echarts.init(document.getElementById('ECharts03'));
+        var option03 = {
+            color: ['#4956ff', '#2d82ff', '#2dc6ff', '#2fca95', '#f4d040'],
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            series: [{
+                name: '2020年度',
+                type: 'pie',
+                radius: ['10%', '90%'],
+                center: ['50%', '50%'],
+                roseType: 'radius',
+                label: {
+                    show: false
+                },
+                emphasis: {
+                    label: {
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(0, 103, 255, 0.2)',
+                    shadowOffsetX: -5,
+                    shadowOffsetY: 5,
+                },
+                data: [{
+                    value: 10000,
+                    name: '其他'
+                },
+                {
+                    value: 15000,
+                    name: '漏款'
+                },
+                {
+                    value: 20000,
+                    name: '补贴'
+                },
+                {
+                    value: 25000,
+                    name: '聚餐'
+                },
+                {
+                    value: 30000,
+                    name: '活动'
+                },
+                {
+                    value: 35000,
+                    name: '投资'
+                },
+                {
+                    value: 40000,
+                    name: '工资'
+                },
+                {
+                    value: 45,
+                    name: 'rose8'
+                }
+                ]
+            },
+
+            ]
+        };
+        ECharts03.setOption(option03);
+
+
+        var outname = ["南海诸岛", '北京', '天津', '上海', '重庆', '河北', '河南', '云南', '辽宁', '黑龙江', '湖南', '安徽', '山东', '新疆', '江苏', '浙江', '江西', '湖北', '广西', '甘肃', '山西', '内蒙古', '陕西', '吉林', '福建', '贵州', '广东', '青海', '西藏', '四川', '宁夏', '海南', '台湾', '香港', '澳门'];
+        var outvalue = [0, 524, 13, 140, 75, 13, 83, 11, 19, 15, 69, 260, 39, 4, 31, 104, 36, 1052, 33, 347, 9, 157, 22, 4, 18, 5, 6398, 41, 0, 484, 404, 22, 3, 5, 225];
+        var outdata = [];
+        for (var i = 0; i < outname.length; i++) {
+            outdata.push({
+                name: outname[i],
+                value: outvalue[i]
+            })
         }
-    }, 200)
-</script>
-<script>
-    layui.use(['table', 'jquery'], function () {
-        var table = layui.table;
-        var $ = layui.$;
+        var option04 = {
+            tooltip: {
+                show: true,
+                formatter: function (params) {
+                    return '&nbsp;&nbsp;' + params.name + '&nbsp;&nbsp;&nbsp;' + params.value + '人&nbsp;&nbsp;';
+                }
+            },
+            visualMap: {
+                type: 'piecewise',
+                left: '15',
+                bottom: '15',
+                itemWidth: 27,
+                itemHeight: 15,
+                textStyle: {
+                    color: '#333333',
+                    fontSize: 14,
+                },
+                pieces: [{
+                    min: 500,
+                    label: '>500',
+                }, {
+                    max: 500,
+                    min: 200,
+                    label: '200-500',
+                }, {
+                    max: 200,
+                    min: 0,
+                    label: '<200',
+                }, {
+                    value: 0,
+                    label: '无数据',
+                },],
+                inRange: {
+                    color: ['#B2CAE0', '#D2EAFF', '#8AC6FD', '#45A5F8']
+                },
+                outOfRange: {
+                    color: ['#999999']
+                }
+            },
+            geo: {
+                map: 'china',
+                show: true,
+                roam: false,
+                label: {
+                    emphasis: {
+                        show: false
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        borderColor: 'rgba(0,63,140,0.2)',
+                        shadowColor: 'rgba(0,63,140,0.2)',
+                        shadowOffsetY: 20,
+                        shadowBlur: 30
+                    }
+                }
+            },
+            series: [{
+                type: 'map',
+                map: 'china',
+                aspectScale: 0.75,
+                //zoom:1.1,
+                label: {
+                    normal: {
+                        show: false,
+                    },
+                    emphasis: {
+                        show: false,
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        areaColor: '#B2CAE0',
+                        borderColor: '#fff',
+                        borderWidth: 1,
+                    },
+                    emphasis: {
+                        areaColor: '#FFAE00',
+                    }
+                },
+                data: outdata
+            }]
+        };
+        var ECharts04 = echarts.init(document.getElementById('ECharts04'));
+        ECharts04.setOption(option04);
 
 
+        let legendData = ['科目七', '科目六', '科目五', '科目四', '科目三', '科目二', '科目一']
+        // 预约数
+        let seriesData1 = [434, 231, 112, 140, 256, 341, 97]
+        // 已考试数
+        let seriesData2 = [200, 150, 100, 40, 210, 82, 62]
+        // 计算百分比
+        let seriesData3 = []
+        let seriesData4 = []
+        for (let i in seriesData1) {
+            seriesData3.push(Math.round(seriesData2[i] / seriesData1[i] * 10000) / 100)
+            seriesData4.push(100)
+        }
+        var option05 = {
+            grid: {
+                left: 120,
+                top: 0,
+                bottom: 0,
+                right: 60
+            },
+            yAxis: [{
+                type: 'category',
+                data: legendData,
+                axisPointer: {
+                    type: 'line'
+                },
+                axisLine: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    margin: 20,
+                    textStyle: {
+                        fontSize: 14,
+                    },
+                    formatter: function (value, index) {
+                        let res = '{grey|' + value + '}{blue|' + seriesData3[index] + '%}';
+                        return res;
+                    },
+                    rich: {
+                        blue: {
+                            color: '#6bb6fd',
+                            width: 60,
+                            align: 'right',
+                        },
+                        grey: {
+                            color: '#adb1b3'
+                        }
+                    }
+                },
+            }],
+            xAxis: [{
+                min: 0,
+                max: 100,
+                axisLabel: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                }
+            }],
+            series: [{
+                type: 'bar',
+                data: seriesData3,
+                barWidth: '12px',
+                z: 100,
+                itemStyle: {
+                    normal: {
+                        color: '#2c96f8',
+                        barBorderRadius: [10, 10, 10, 10],
+                    }
+                }
+            },
+            {
+                name: '进度条背景',
+                type: 'bar',
+                barGap: '-100%',
+                data: seriesData4,
+                barWidth: 12,
+                itemStyle: {
+                    barBorderRadius: [10, 10, 10, 10],
+                    color: '#f7b534'
+                },
+                z: 90,
+                yAxisIndex: 0,
+                xAxisIndex: 0,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'right',
+                        distance: 10,
+                        color: '#6bb6fd',
+                        formatter: function (params) {
+                            let res = '{blue|' + seriesData2[params.dataIndex] + '/}{orange|' + seriesData1[params.dataIndex] + '}';
+                            return res;
+                        },
+                        rich: {
+                            blue: {
+                                color: '#6bb6fd'
+                            },
+                            orange: {
+                                color: '#f7b534'
+                            }
+                        }
+                    }
+                }
+            }
+            ]
+        };
+        var ECharts05 = echarts.init(document.getElementById('ECharts05'));
+        ECharts05.setOption(option05);
 
-    });
-</script>
 
+        var option06 = {
+            backgroundColor: "#fff",
+            legend: {
+                show: true
+            },
+            grid: {
+                left: '30',
+                right: '0',
+                top: '64',
+                bottom: '30'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: "item",
+                    crossStyle: {
+                        color: '#999'
+                    }
+                },
+                confine: true,
+                formatter: function (params) {
+                    var html = params[0].name + '月';
+                    for (var i = 0; i < params.length; i++) {
+                        html += '<br />' + params[i].marker + params[i].seriesName + '年：' + params[i].value;
+                    }
+
+                    return html;
+                }
+            },
+            xAxis: [{
+                type: 'category',
+                name: '月',
+                data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                axisPointer: {
+                    type: 'shadow'
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: '#eee'
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                    color: '#333'
+                },
+                axisTick: {
+                    show: false
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                splitNumber: 5,
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: '#eee'
+                    }
+                },
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                }
+            }],
+            series: [
+                {
+                    name: '2018',
+                    type: 'bar',
+                    symbol: 'bar',
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(49,150,250,0.4)'
+                        }
+                    },
+                    data: [3, 34, 47, 10, 20, 53, 65, 77, 40, 20, 73, 45]
+                },
+                {
+                    name: '2019',
+                    type: 'bar',
+                    symbol: 'circle',
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(49,150,250,1)'
+                        }
+                    },
+                    data: [3, 34, 47, 10, 20, 53, 65, 77, 40, 20, 73, 45]
+                }
+            ]
+        };
+        var ECharts06 = echarts.init(document.getElementById('ECharts06'));
+        ECharts06.setOption(option06);
+
+
+        var option07 = {
+            color: ['#327bfa', '#35b1fa', '#62d56b', '#ffb84f', '#ff7a32'],
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a}:{b} <br/>占比:{d}%<br/>点击查看详情->"
+            },
+            legend: {
+                show: true,
+                orient: 'horizontal',
+                x: 'center',
+                y: 'bottom',
+                data: ['优秀', '安全', '良好', '警示', '严重警示'],
+
+            },
+            grid: {
+                top: 'bottom',
+                left: '90',
+                width: '90%',
+                height: '80%',
+
+            },
+            series: [
+                {
+                    name: '健康度22等级',
+                    type: 'pie',
+                    selectedMode: 'single',
+                    radius: ['30%', '55%'],
+                    label: {
+                        normal: {
+                            formatter: '{b|{b}}',
+                            rich: {
+                                b: {
+                                    fontSize: 16,
+                                    lineHeight: 30
+                                }
+
+                            }
+                        }
+                    },
+                    data: [
+
+                        { value: 310, name: '优秀' },
+                        { value: 310, name: '安全' },
+                        { value: 251, name: '良好' },
+                        { value: 147, name: '警示' },
+                        { value: 102, name: '严重警示' }
+                    ]
+                }
+            ]
+        };
+        var ECharts07 = echarts.init(document.getElementById('ECharts07'));
+        ECharts07.setOption(option07);
+
+        
+
+        // 宽度改变后350ms 进行刷新图表的大小
+        // 为了解决点击侧边伸缩造成卡顿情况
+        let time = performance.now();
+        const timeout = 350;
+        window.addEventListener('resize', function () {
+            const now = performance.now()
+            if (now - time > timeout) {
+               setTimeout(() => {
+                    ECharts01.resize();
+                    ECharts02.resize();
+                    ECharts03.resize();
+                    ECharts04.resize();
+                    ECharts05.resize();
+                    ECharts06.resize();
+                    ECharts07.resize();
+                }, timeout);
+            }
+            time = now;
+        });
+
+
+    </script>
+</body>
 
 </html>
