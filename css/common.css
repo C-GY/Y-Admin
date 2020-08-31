@@ -50,7 +50,7 @@
 }
 
 .yadmin-blue {
-    color: #02a7f0;
+    color: #1E9FFF;
 }
 
 .yadmin-red {
@@ -66,29 +66,33 @@
 }
 
 .layui-form-select dl dd.layui-this {
-    background-color: #02a7f0;
+    background-color: #1E9FFF;
     color: white;
 }
 
-.layui-form-onswitch {
+/* .layui-form-onswitch {
     background-color: #02a7f0;
     border-color: #02a7f0;
+} */
+
+.layui-laypage a:hover {
+    color: #1E9FFF;
 }
 
 .layui-laypage .layui-laypage-curr .layui-laypage-em {
-    background-color: #02a7f0;
+    background-color: #1E9FFF;
 }
 
 .layui-input:focus, .layui-textarea:focus {
-    border-color: #02a7f0 !important;
+    border-color: #1E9FFF !important;
 }
 
 .layui-btn-primary:hover {
-    border-color: #02a7f0;
+    border-color: #1E9FFF;
 }
 
 .layui-laypage input:focus, .layui-laypage select:focus {
-    border-color: #02a7f0 !important;
+    border-color: #1E9FFF !important;
 }
 
 .layui-laypage em {
@@ -96,17 +100,17 @@
 }
 
 .layui-form-checked[lay-skin=primary] i {
-    border-color: #02a7f0 !important;
-    background-color: #02a7f0;
+    border-color: #1E9FFF !important;
+    background-color: #1E9FFF;
 }
 
 
 .layui-form-radio>i:hover, .layui-form-radioed>i {
-    color: #02a7f0;
+    color: #1E9FFF;
 }
 
 .layui-breadcrumb a:hover {
-    color: #02a7f0 !important;
+    color: #1E9FFF !important;
 }
 
 .layui-btn .layui-icon {
