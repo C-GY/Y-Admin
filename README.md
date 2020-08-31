@@ -39,7 +39,7 @@ git clone https://github.com/C-GY/Y-Admin.git
       |-- layui                 //Layui框架
       |   |-- extend            //Layui扩展组件（原Layui包中不存在）
       |   |-- ...
-      |-- static                //第三方库（如:所用带的草莓图标库、Echarts等）
+      |-- static                //第三方库（如:所用带的remixicon标库、Echarts等）
       |   |-- ...
       |-- view                  //参考展示页面
       |   |-- home              //首页
@@ -47,6 +47,7 @@ git clone https://github.com/C-GY/Y-Admin.git
       |   |-- nav               //消息通知、便签、TODO等页面
       |   |-- role              //角色管理
       |   |-- user              //用户管理
+      |   |-- website           //网站设置
 
     
 ```
@@ -55,10 +56,13 @@ git clone https://github.com/C-GY/Y-Admin.git
 	2. jQuery
 	3. Echarts
 	4. TinyMCE
+	5. remixicon
 
 		
 ## 成果展示
-![展示-首页](http://pic.yijianku.com/FiGRpV03kG7_A0mcsWrsuzceBhZO)
-![展示-TODO页](http://pic.yijianku.com/Fhak3pQ0N8Yor7hU--bhSzBL1Jae)
-![展示-消息通知页](http://pic.yijianku.com/FvudRwUF_jTsPXJ4LQGXkPaWGOGh)
+![展示-首页](http://pic.yijianku.com/Fppp_HJndd2Li0WRfxCJbpgLTrlv)
+![展示-TODO页](http://pic.yijianku.com/Fh52UXHqq7skvYeVEl9JheLhRo0H)
+![展示-消息通知页](http://pic.yijianku.com/FgRASLkp-4r58Jy2hF0oxg3NJmyi)
+![展示-常用编辑窗](http://pic.yijianku.com/FtjLMvHlPsY9cENLAw4565XW63cp)
+![展示-菜单权限](http://pic.yijianku.com/FvPA-FwA62FO0B7-laY2oR6qThNt)
 更新中...
